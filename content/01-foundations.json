@@ -1,0 +1,23 @@
+{
+  "slug": "foundations",
+  "number": "01",
+  "title": "Chains with character",
+  "subtitle": "What a peptide is—and what Peppy's bead body leaves out.",
+  "objective": "Identify amino acids, peptide bonds and sequence without mistaking a cartoon for a chemical structure.",
+  "panels": [
+    {"image": "peppy-classroom-001.webp", "alt": "Peppy stands by an easel showing a symbolic four-bead chain", "label": "THE CAST", "dialogue": "I’m Peppy. Each bead stands in for an amino acid.", "note": "Beads are a visual metaphor, not atomic structures."},
+    {"image": "peppy-bond-002.webp", "alt": "Peppy gestures to two short symbolic bead chains on a table", "label": "THE LINK", "dialogue": "The chain gets longer when residues are joined.", "note": "Pegs symbolize peptide bonds; the chemistry does not work by snapping pegs together."},
+    {"image": "peppy-sequence-003-revised.webp", "alt": "Peppy compares red-green-yellow and yellow-red-green symbolic bead chains", "label": "THE TWIST", "dialogue": "My personality is sequence-dependent!", "note": "Same symbolic beads, different order. Chemistry and context matter too."}
+  ],
+  "depths": {
+    "curious": "<p>A peptide is a short chain of amino acids joined by peptide bonds. Peppy’s colored beads are a way to remember the chain, not a picture of its atoms. The order of beads is called its sequence.</p>",
+    "college": "<p>A chain has a defined order from its amino (N) terminus toward its carboxyl (C) terminus. A peptide bond links neighboring amino-acid residues. Short chains are commonly called peptides; the exact peptide-versus-polypeptide size boundary varies by context. The same residue composition in another order is a different primary sequence.</p>",
+    "mechanism": "<p>Primary sequence constrains chemical behavior but is not a stand-alone activity prediction. Side-chain chemistry, stereochemistry, conformation, modifications, solution environment and the biological target all matter. The cartoon neither encodes peptide-bond geometry nor N/C-terminal chemistry, so use an actual molecular diagram for mechanistic analysis.</p>"
+  },
+  "metaphor": "Peppy's sphere-and-peg body is not a molecular diagram. Amino-acid side chains differ chemically; peptide bonds are covalent amide links, not detachable connectors. Sequence can influence activity but does not guarantee a particular effect.",
+  "check_question": "If two chains contain the same three amino acids in a different order, are their sequences identical?",
+  "check_answer": "No. Composition is the same; the ordered sequence is different. That alone does not tell us what either chain does in a cell.",
+  "sources": [
+    {"title": "NHGRI Talking Glossary — Peptide", "url": "https://www.genome.gov/genetics-glossary/Peptide", "note": "Definition, peptide bonds and chain analogy"}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "signal-cast",
+  "number": "02",
+  "title": "The signal cast",
+  "subtitle": "Insulin and glucagon are different peptide messengers—not heroes and villains.",
+  "objective": "Distinguish insulin and glucagon by their source and general role in blood-glucose regulation without treating the cartoon as a control diagram.",
+  "panels": [
+    {"image":"lesson-02-panel-a.webp","alt":"Peppy presents two matching cartoon cell silhouettes and two same-sized blue and red sealed envelopes","label":"TWO MESSENGERS","dialogue":"Two islet cell types send different peptide signals.","note":"Blue stands for insulin from beta cells; red stands for glucagon from alpha cells. Colors are editorial, not chemical."},
+    {"image":"lesson-02-panel-b.webp","alt":"Peppy stands between a stylized liver and a generic cell doorway, with separate red and blue symbolic envelopes","label":"DIFFERENT CONTEXTS","dialogue":"Insulin and glucagon take different parts in glucose regulation.","note":"The routes are symbolic; the drawing does not show timing, transport direction or the complete network."}
+  ],
+  "depths": {
+    "curious":"<p>In the pancreas, beta cells release insulin and alpha cells release glucagon. Insulin helps the body use glucose; glucagon signals the liver to release glucose when blood glucose is low. They are partners in regulation, not a good peptide and a bad peptide. <a href=\"#sources\">[1]</a></p>",
+    "college":"<p>Both are peptide hormones released by different cells in the pancreatic islets. Rising glucose stimulates insulin release from beta cells; low glucose is a stimulus for glucagon release from alpha cells. Insulin helps many cells take up or store fuel, while glucagon acts prominently on the liver to support glucose output. Their signals interact rather than forming a simple on/off switch. <a href=\"#sources\">[1][2]</a></p>",
+    "mechanism":"<p>The islet and liver are not one linear pathway. Hormone secretion depends on nutrient state and islet-cell signaling, while downstream responses depend on tissue receptors and metabolism. Glucagon supports hepatic glycogen breakdown and glucose production; insulin has multiple tissue-specific actions. Peppy’s envelopes omit concentrations, timing, receptor kinetics and feedback, so this panel cannot predict an individual response. <a href=\"#sources\">[1][2]</a></p>"
+  },
+  "metaphor":"Envelopes do not enter cells like mail. The liver is not the only relevant tissue, and the colors do not encode molecular structure, safety, importance or clinical use. The trajectories in panel two are decorative; no direction or time scale can be inferred.",
+  "check_question":"Which is accurate: insulin and glucagon are the same message in two colors, or different signals made by different islet cells?",
+  "check_answer":"Different signals. Beta cells release insulin; alpha cells release glucagon. Their effects depend on biological context, so neither is simply good or bad.",
+  "sources":[
+    {"title":"NIDDK — Discovery of glucagon and GLP-1 medicines","url":"https://www.niddk.nih.gov/news/archive/2021/story-discovery-medications-diabetes-obesity-emerged-research-pancreatic-hormone","note":"Islet beta/alpha cells, insulin and glucagon roles"},
+    {"title":"Endotext (NCBI Bookshelf) — Glucagon Physiology","url":"https://www.ncbi.nlm.nih.gov/books/NBK279127/","note":"Low glucose, liver glucose output and islet regulation"}
+  ]
+}

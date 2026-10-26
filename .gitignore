@@ -8,4 +8,5 @@ node_modules/
 __pycache__/
 *.pyc
 .art-drafts/
+content-drafts/
 .swa/
