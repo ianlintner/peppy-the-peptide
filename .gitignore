@@ -1,0 +1,11 @@
+.worktrees/
+.env
+.env.*
+*.key
+*.pem
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+.art-drafts/
+.swa/
