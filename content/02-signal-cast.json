@@ -6,7 +6,7 @@
   "objective": "Distinguish insulin and glucagon by their source and general role in blood-glucose regulation without treating the cartoon as a control diagram.",
   "panels": [
     {"image":"lesson-02-panel-a.webp","alt":"Peppy presents two matching cartoon cell silhouettes and two same-sized blue and red sealed envelopes","label":"TWO MESSENGERS","dialogue":"Two islet cell types send different peptide signals.","note":"Blue stands for insulin from beta cells; red stands for glucagon from alpha cells. Colors are editorial, not chemical."},
-    {"image":"lesson-02-panel-b.webp","alt":"Peppy stands between a stylized liver and a generic cell doorway, with separate red and blue symbolic envelopes","label":"DIFFERENT CONTEXTS","dialogue":"Insulin and glucagon take different parts in glucose regulation.","note":"The routes are symbolic; the drawing does not show timing, transport direction or the complete network."}
+    {"image":"lesson-02-panel-b.webp","alt":"Peppy stands between a stylized liver and a generic cell doorway, with separate red and blue symbolic envelopes","label":"DIFFERENT CONTEXTS","dialogue":"Insulin and glucagon take different parts in glucose regulation.","note":"The door is a cartoon cue for a responding cell, not a doorway a hormone crosses. Motion lines show no measured direction, timing or complete pathway."}
   ],
   "depths": {
     "curious":"<p>In the pancreas, beta cells release insulin and alpha cells release glucagon. Insulin helps the body use glucose; glucagon signals the liver to release glucose when blood glucose is low. They are partners in regulation, not a good peptide and a bad peptide. <a href=\"#sources\">[1]</a></p>",

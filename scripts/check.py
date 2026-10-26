@@ -24,7 +24,8 @@ for page in htmls:
         target=(page.parent/url.split('#')[0]).resolve()
         assert target.is_relative_to(site.resolve()),(page,url)
         assert target.is_file(),(page,url)
-    assert all(i.get('alt') is not None for i in parser.images),page
+    assert all(len(i.get('alt','').strip()) >= 25 for i in parser.images),page
+    assert 'href="#main"' in text and 'id="main"' in text,page
     assert 'FAL_KEY' not in text and 'sk-' not in text,page
     assert '<meta name="viewport"' in text,page
 for lesson in lessons:

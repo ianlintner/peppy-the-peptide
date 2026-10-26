@@ -18,7 +18,7 @@ Open http://localhost:8000/. The site is static HTML/CSS/JS; no client API calls
 
 Plan, course scope, fal output counts and source-checked estimates: [PLAN.md](PLAN.md). For every new scene, write the claim and exact controlled visual variable first; generate one reference-conditioned 1K image, QA character and science, permit at most one targeted correction, then use an HTML/SVG diagram or defer rather than looping. The current release selected nine panels total from eleven generation attempts across the prototype and new lessons; this is an **output count**, not a billed-cost measurement. The fal key is local and is not in this repository or the web app.
 
-Pushes to `main` build/check and deploy via GitHub Actions. Feature changes go through a reviewed PR; the Azure deployment token lives only in the repository's Actions secret, not in source. The default Azure hostname is used for the MVP; custom domain later.
+GitHub Actions runs the deterministic course check on PRs and `main`. Deployment is deliberately manual for the MVP: after the reviewed feature PR is merged, run `bash scripts/deploy.sh production` from a clean, exact `origin/main` checkout. The script reads the Azure deployment token at runtime from Azure CLI and never stores it in the public repo. The IkitClaw App can push workflow files but currently receives HTTP 403 for repository Actions-secret access, so a token-dependent auto-deploy job would fail. The default Azure hostname is used now; custom domain and automatic deploy can be added later with appropriate App permissions.
 
 ## Rights and safety
 

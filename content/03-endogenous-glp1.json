@@ -5,7 +5,7 @@
   "subtitle":"A gut-made signal meets a receptor—and it does not stay around forever.",
   "objective":"Trace an introductory GLP-1 message from intestinal L cells to a cell-surface receptor, and separate its brief lifetime from its glucose-dependent insulin effect.",
   "panels":[
-    {"image":"lesson-03-panel-a.webp","alt":"Peppy points to one green symbolic message beside a simple intestinal loop and associated round cell","label":"A GUT SIGNAL","dialogue":"An intestinal L cell sends a GLP-1 message.","note":"The tube is a sketch of context, not a map of intestinal anatomy."},
+    {"image":"lesson-03-panel-a.webp","alt":"Peppy points to one green symbolic envelope beside an abstract loop and a round cell, representing gut context rather than anatomy","label":"A GUT SIGNAL","dialogue":"An intestinal L cell sends a GLP-1 message.","note":"The loop is an abstract cue for gut origin, not a recognizable anatomical drawing."},
     {"image":"lesson-03-panel-b.webp","alt":"Peppy points to a green symbolic envelope touching one receptor at the outside of a cartoon cell boundary","label":"A RECEPTOR READS","dialogue":"The message meets a reader at the cell surface.","note":"A receptor is not a mail slot; the drawing does not show a molecule crossing into the cell."}
   ],
   "depths":{
