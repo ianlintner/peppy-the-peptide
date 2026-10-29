@@ -1,0 +1,23 @@
+{
+  "slug":"endogenous-glp1",
+  "number":"03",
+  "title":"The GLP-1 message",
+  "subtitle":"A gut-made signal meets a receptor—and it does not stay around forever.",
+  "objective":"Trace an introductory GLP-1 message from intestinal L cells to a cell-surface receptor, and separate its brief lifetime from its glucose-dependent insulin effect.",
+  "panels":[
+    {"image":"lesson-03-panel-a.webp","alt":"Peppy points to one green symbolic envelope beside an abstract loop and a round cell, representing gut context rather than anatomy","label":"A GUT SIGNAL","dialogue":"An intestinal L cell sends a GLP-1 message.","note":"The loop is an abstract cue for gut origin, not a recognizable anatomical drawing."},
+    {"image":"lesson-03-panel-b.webp","alt":"Peppy points to a green symbolic envelope touching one receptor at the outside of a cartoon cell boundary","label":"A RECEPTOR READS","dialogue":"The message meets a reader at the cell surface.","note":"A receptor is not a mail slot; the drawing does not show a molecule crossing into the cell."}
+  ],
+  "depths":{
+    "curious":"<p>After a meal, cells in the gut release GLP-1. It is a peptide hormone whose signal can help insulin-producing beta cells respond when glucose is elevated. The body-made signal is short-lived. This describes a hormone, not a medicine. <a href=\"#sources\">[1][2]</a></p>",
+    "college":"<p>Intestinal enteroendocrine L cells release GLP-1, an incretin derived from proglucagon. It acts through the GLP-1 receptor, including on pancreatic beta cells, and its insulin-enhancing effect is glucose-dependent. Native GLP-1 is rapidly degraded in part by DPP-4, with clearance further limiting its time in circulation. Those are separate facts: rapid clearance does not cause the glucose-dependence. <a href=\"#sources\">[1][2]</a></p>",
+    "mechanism":"<p>Mechanism entry point: proglucagon processing differs by tissue, and GLP-1R is a cell-surface G-protein-coupled receptor. Receptor activation and insulin secretion must be interpreted in the context of glucose concentration, cell state and other signals. DPP-4 cleavage changes the native peptide's activity, while clearance limits exposure. The images do not encode receptor structure, ligand sequence, signaling kinetics or a quantitative response curve. <a href=\"#sources\">[2]</a></p>"
+  },
+  "metaphor":"Peppy is a generic mascot, not the molecular structure of GLP-1. The green envelope is an invented symbol, not the actual ligand. Receptors are distributed in multiple tissues, and one cartoon cell cannot represent the complete physiology. Native GLP-1 and a manufactured receptor-agonist drug are not interchangeable categories.",
+  "check_question":"If GLP-1 is cleared quickly, does that fact by itself explain why its insulin effect depends on glucose?",
+  "check_answer":"No. Its short lifetime and glucose-dependent insulin effect are distinct observations. One does not establish the mechanism of the other.",
+  "sources":[
+    {"title":"NIDDK — How GLP-1 research led to medicines","url":"https://www.niddk.nih.gov/news/archive/2021/story-discovery-medications-diabetes-obesity-emerged-research-pancreatic-hormone","note":"Gut origin, glucose-related insulin response and brief native signal"},
+    {"title":"Müller et al., Molecular Metabolism — Glucagon-like peptide 1 (GLP-1)","url":"https://pmc.ncbi.nlm.nih.gov/articles/PMC6812410/","note":"Incretin biology, GLP-1R, DPP-4 degradation and clearance"}
+  ]
+}

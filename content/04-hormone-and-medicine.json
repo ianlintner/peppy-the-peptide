@@ -1,0 +1,24 @@
+{
+  "slug":"hormone-and-medicine",
+  "number":"04",
+  "title":"Hormone ≠ medicine",
+  "subtitle":"A shared receptor does not make two things identical.",
+  "objective":"Distinguish the body's GLP-1 hormone from a manufactured GLP-1 receptor-agonist medicine, and recognize approval status as a separate product-level question.",
+  "panels":[
+    {"image":"lesson-04-panel-a-revised.webp","alt":"Peppy compares two different symbolic envelopes below a single central receptor symbol with dotted lines to both","label":"ONE TARGET, DIFFERENT MESSAGES","dialogue":"Same receptor. Not the same molecule.","note":"The colors and dotted paths are a comparison aid, not chemical structures or a claim that the two have equal effects."},
+    {"image":"lesson-04-panel-b.webp","alt":"Peppy examines two similar plain parcels, one next to a stack of blank papers and one next to an empty tray","label":"REVIEW IS ANOTHER QUESTION","dialogue":"What was actually reviewed? That is a different question.","note":"Paperwork is a metaphor. Identical-looking boxes do not imply interchangeable contents or equivalent safety."}
+  ],
+  "depths":{
+    "curious":"<p>Your body makes GLP-1 as a short-lived signal. A GLP-1 receptor agonist is a manufactured medicine designed to act at the GLP-1 receptor. Sharing a receptor does not make them the same molecule or the same experience in the body. Whether a particular drug product was reviewed and approved is a separate question. <a href=\"#sources\">[1][2]</a></p>",
+    "college":"<p>Endogenous GLP-1 is made by intestinal cells and cleared rapidly. GLP-1 receptor agonists are designed ligands that act at the same receptor, with chemistry and exposure that differ from the native hormone. Receptor target, molecular identity and regulatory status are three different axes. FDA-approved drug products undergo review for their specified uses; compounded drugs are not FDA-approved and are not reviewed by FDA for safety, effectiveness or quality before marketing. This is a description of categories, not advice about any product. <a href=\"#sources\">[1][2][3]</a></p>",
+    "mechanism":"<p>Mechanism entry point: a ligand's interaction with GLP-1R does not define its entire pharmacology. Molecular structure, stability and exposure affect what the receptor encounters over time. A claim that two products act at the same receptor is not evidence of identical formulation, tested indication or regulatory review. This page deliberately provides no dosing, comparisons, efficacy statistics, adverse-event rankings or prescribing guidance; those require separate qualified clinical review. <a href=\"#sources\">[1][2][3]</a></p>"
+  },
+  "metaphor":"A mailbox is passive, but receptors signal within cells. A reinforced envelope is not automatically better, and the art does not encode half-life or potency. Blank papers are not a real FDA review record; approval applies to a specific product and use. This lesson gives no recommendation about any medicine or person.",
+  "check_question":"If two substances can act at the same receptor, have we learned that they are the same molecule and equally reviewed products?",
+  "check_answer":"No. Sharing a receptor target does not settle molecular identity, exposure or whether a specific product was reviewed and approved. These are separate questions.",
+  "sources":[
+    {"title":"NIDDK — How GLP-1 research led to medicines","url":"https://www.niddk.nih.gov/news/archive/2021/story-discovery-medications-diabetes-obesity-emerged-research-pancreatic-hormone","note":"Distinction between native hormone and engineered longer-lived medicines"},
+    {"title":"FDA — Concerns with unapproved GLP-1 drugs","url":"https://www.fda.gov/drugs/drug-alerts-and-statements/fdas-concerns-unapproved-glp-1-drugs-used-weight-loss","note":"Unapproved products do not receive FDA premarket review"},
+    {"title":"FDA — Compounding and the FDA: Questions and Answers","url":"https://www.fda.gov/drugs/human-drug-compounding/compounding-and-fda-questions-and-answers","note":"Compounded drugs are not FDA-approved"}
+  ]
+}
