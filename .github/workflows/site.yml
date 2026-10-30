@@ -20,7 +20,7 @@ jobs:
       - name: Validator unit tests
         run: python -m unittest discover -s tests -v
       - name: Engine unit tests
-        run: node --test site/games/engine/__tests__/
+        run: node --test "site/games/**/__tests__/*.test.js"
       - name: Build and validate course
         run: |
           python scripts/build.py

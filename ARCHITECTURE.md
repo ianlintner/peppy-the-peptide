@@ -54,7 +54,7 @@ Modules use relative imports with the `.js` / `.mjs` extension (browsers and nod
 ```sh
 python scripts/build.py && python scripts/check.py && git diff --exit-code -- site/
 python -m unittest discover -s tests   # validator + gating
-node --test site/games/engine/__tests__/   # engine + vendor hash tests (Node 22+, no package.json)
+node --test "site/games/**/__tests__/*.test.js"   # engine + vendor hash tests (Node 22+, no package.json)
 ```
 
 CI (`.github/workflows/site.yml`) runs all of the above with `actions/setup-node` (Node 22).
