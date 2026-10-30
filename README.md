@@ -9,6 +9,8 @@ A comic-first, source-linked course about peptides and molecular signaling. Four
 ```sh
 python scripts/build.py
 python scripts/check.py
+python -m unittest discover -s tests          # game-item validator tests
+node --test site/games/engine/__tests__/      # engine tests (Node 22+, no package.json)
 python -m http.server 8000 --directory site
 ```
 
