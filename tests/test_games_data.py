@@ -103,6 +103,11 @@ class RejectsViolations(unittest.TestCase):
         game = copy.deepcopy(EXAMPLE)
         game['lesson'] = 'nope'
         self.assertRejects(game, 'not a lesson slug')
+        for bad in ([], {}, None, 3):
+            with self.subTest(lesson=bad):
+                game = copy.deepcopy(EXAMPLE)
+                game['lesson'] = bad
+                self.assertRejects(game, 'not a lesson slug')
         game = copy.deepcopy(EXAMPLE)
         game['game'] = 'other'
         self.assertRejects(game, 'must match the filename')
@@ -132,8 +137,13 @@ class DirectoryValidation(unittest.TestCase):
             del bad['items'][0]['tier']
             (Path(tmp) / 'broken.json').write_text(json.dumps(bad))
             (Path(tmp) / 'garbled.json').write_text('{nope')
+            odd = copy.deepcopy(EXAMPLE)
+            odd['game'] = 'odd-lesson'
+            odd['lesson'] = []  # unhashable: must be a diagnostic, not a crash
+            (Path(tmp) / 'odd-lesson.json').write_text(json.dumps(odd))
             problems = gd.validate_dir(Path(tmp), LESSONS)
-            self.assertEqual(sorted(problems), ['broken.json', 'garbled.json'])
+            self.assertEqual(sorted(problems), ['broken.json', 'garbled.json', 'odd-lesson.json'])
+            self.assertTrue(any('not a lesson slug' in e for e in problems['odd-lesson.json']))
             with self.assertRaises(ValueError):
                 gd.public_games(Path(tmp), LESSONS)
 

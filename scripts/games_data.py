@@ -129,7 +129,9 @@ def validate_game(game, lessons_by_slug: dict, stem: str | None = None) -> list[
     for key in ('title', 'summary'):
         if not _nonblank(game.get(key)):
             errs.append(f'{key}: must be non-empty text')
-    lesson = lessons_by_slug.get(game.get('lesson'))
+    lesson_slug = game.get('lesson')
+    # Only strings can be slugs; an unhashable value ([] / {}) must not raise.
+    lesson = lessons_by_slug.get(lesson_slug) if isinstance(lesson_slug, str) else None
     if lesson is None:
         errs.append(f'lesson: {game.get("lesson")!r} is not a lesson slug ({", ".join(sorted(lessons_by_slug))})')
     items = game.get('items')
