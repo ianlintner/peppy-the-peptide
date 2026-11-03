@@ -1,0 +1,62 @@
+{
+  "game": "example",
+  "lesson": "foundations",
+  "title": "Example game (test fixture)",
+  "summary": "Tiny fixture used by validator and engine tests. Never built into the public site.",
+  "items": [
+    {
+      "id": "same-beads-new-order",
+      "concept": "sequence-vs-composition",
+      "tier": 1,
+      "misconception": "Same ingredients means the same chain",
+      "prompt": "Two bead chains use the same three colors, but in a different order. Are their sequences the same?",
+      "choices": [
+        {"id": "same", "text": "Yes, same colors means same sequence", "correct": false,
+         "feedback": "Composition is the same, but sequence is the order. A different order is a different sequence."},
+        {"id": "different", "text": "No, the order is different", "correct": true},
+        {"id": "cannot-tell", "text": "Nobody can tell from colors alone", "correct": false,
+         "feedback": "We can tell: the order of the beads is visible, and it differs."}
+      ],
+      "explanation": "Sequence is the ordered list of residues, so the same composition in another order is a different sequence.",
+      "hint_ladder": ["Look at which bead comes first in each chain.", "Sequence is about order, not just which colors are present."],
+      "source_ids": [1],
+      "needs_review": false
+    },
+    {
+      "id": "terminal-direction",
+      "concept": "chain-direction",
+      "tier": 2,
+      "misconception": "A chain reads the same from either end",
+      "prompt": "A peptide chain has a defined direction. Which statement fits that?",
+      "choices": [
+        {"id": "n-to-c", "text": "It runs from the amino (N) terminus toward the carboxyl (C) terminus", "correct": true},
+        {"id": "either-way", "text": "Either end can be called the start; the chain is symmetric", "correct": false,
+         "feedback": "The two ends are chemically different (amino vs carboxyl), so the chain has a direction."},
+        {"id": "random", "text": "Direction is only a drawing convention with no chemical basis", "correct": false,
+         "feedback": "Reading N to C is a convention, but it follows a real chemical difference between the ends."}
+      ],
+      "explanation": "The N and C termini differ chemically, which is why sequences are written N to C.",
+      "hint_ladder": ["Think about the two named ends of the chain.", "The ends are not chemically identical."],
+      "source_ids": [1],
+      "needs_review": false
+    },
+    {
+      "id": "sequence-is-not-activity",
+      "concept": "sequence-vs-activity",
+      "tier": 3,
+      "misconception": "Sequence alone predicts what a peptide does",
+      "prompt": "Why is primary sequence not a stand-alone prediction of biological activity?",
+      "choices": [
+        {"id": "context", "text": "Side-chain chemistry, conformation, modifications, environment and target all matter", "correct": true},
+        {"id": "nothing", "text": "Sequence has no influence on activity", "correct": false,
+         "feedback": "Sequence does constrain chemistry; it is just not sufficient on its own."},
+        {"id": "sufficient", "text": "It is a full prediction once the order is known", "correct": false,
+         "feedback": "Order is necessary information but not sufficient; context and target also matter."}
+      ],
+      "explanation": "Sequence constrains behavior but activity also depends on conformation, modifications, environment and the target.",
+      "hint_ladder": [],
+      "source_ids": [1],
+      "needs_review": false
+    }
+  ]
+}
