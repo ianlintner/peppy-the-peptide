@@ -1,0 +1,99 @@
+/* Peppy the Peptide — layered vector mascot styles.
+ *
+ * State contract: any ancestor carrying data-state="idle|wink|thinking|oops|cheer|point"
+ * selects the matching pose group and the matching eye/mouth variant. The standalone
+ * site/assets/peppy.svg puts data-state on its own root element; the inlined component in
+ * peppy.js puts it on the wrapper, so one stylesheet serves both.
+ *
+ * Only CSS transitions are used — there is no JS animation loop and no keyframe animation.
+ */
+
+.peppy { display: block; width: 100%; height: auto; max-width: 100%; }
+.peppy-frame { display: inline-block; width: var(--peppy-size, 180px); max-width: 100%; line-height: 0; }
+.peppy-frame .peppy-visual { display: block; }
+
+/* --- paint tokens ------------------------------------------------------- */
+.peppy-fill-ink { fill: #1b2126; }
+.peppy-fill-paper { fill: #fffdf5; stroke: #1b2126; stroke-width: 1.8; stroke-linejoin: round; }
+.peppy-fill-red { fill: #d94f3d; stroke: #1b2126; stroke-width: 1.8; }
+.peppy-fill-gold { fill: #f5c85b; stroke: #1b2126; stroke-width: 1.2; }
+.peppy-ink-line { fill: none; stroke: #1b2126; stroke-width: 4; stroke-linecap: round; }
+.peppy-glove { fill: #fffdf5; stroke: #1b2126; stroke-width: 1.8; }
+.peppy-link { fill: none; stroke: #1b2126; stroke-width: 9; stroke-linecap: round; }
+.peppy-figure { stroke: #1b2126; }
+
+/* --- seven spheres and their optional bead letters ---------------------- */
+.peppy-sphere circle { fill: var(--sphere, #7cc7ea); stroke: #1b2126; stroke-width: 2.5; }
+.peppy-sphere[data-sphere="1"] { --sphere: #7cc7ea; }
+.peppy-sphere[data-sphere="2"] { --sphere: #f5c85b; }
+.peppy-sphere[data-sphere="3"] { --sphere: #e8846f; }
+.peppy-sphere[data-sphere="4"] { --sphere: #9fd39b; }
+.peppy-sphere[data-sphere="5"] { --sphere: #b6a4e0; }
+.peppy-sphere[data-sphere="6"] { --sphere: #7fd0c6; }
+.peppy-sphere[data-sphere="7"] { --sphere: #f0a96b; }
+.peppy-letter {
+  font-family: 'Fredoka', 'DM Sans', system-ui, sans-serif;
+  font-weight: 700;
+  fill: var(--peppy-letter, #1b2126);
+  stroke: none;
+}
+
+/* --- shared transition list (motion is disabled, not the state change) --- */
+.peppy-pose,
+.peppy-eye,
+.peppy-mouth,
+.peppy-arms,
+.peppy-arm,
+.peppy-glove,
+.peppy-bob {
+  transition: opacity 240ms ease-in-out, transform 240ms ease-in-out;
+}
+
+/* --- pose groups: one per state, all hidden until selected --------------- */
+.peppy-pose { opacity: 0; transform: translateY(4px); }
+[data-state="idle"] .peppy-pose[data-state="idle"],
+[data-state="wink"] .peppy-pose[data-state="wink"],
+[data-state="thinking"] .peppy-pose[data-state="thinking"],
+[data-state="oops"] .peppy-pose[data-state="oops"],
+[data-state="cheer"] .peppy-pose[data-state="cheer"],
+[data-state="point"] .peppy-pose[data-state="point"] { opacity: 1; transform: none; }
+
+/* --- eyes: open or winking ---------------------------------------------- */
+.peppy-eye--open { opacity: 1; }
+.peppy-eye--wink { opacity: 0; }
+[data-state="wink"] .peppy-eye--open { opacity: 0; }
+[data-state="wink"] .peppy-eye--wink { opacity: 1; }
+[data-state="oops"] .peppy-eye--open { opacity: 0; }
+[data-state="oops"] .peppy-eye--wink { opacity: 1; }
+
+/* --- mouths: smile, flat line, open ------------------------------------- */
+.peppy-mouth--smile { opacity: 1; }
+.peppy-mouth--flat { opacity: 0; }
+.peppy-mouth--open { opacity: 0; }
+[data-state="thinking"] .peppy-mouth--smile { opacity: 0; }
+[data-state="thinking"] .peppy-mouth--flat { opacity: 1; }
+[data-state="cheer"] .peppy-mouth--smile,
+[data-state="oops"] .peppy-mouth--smile { opacity: 0; }
+[data-state="cheer"] .peppy-mouth--open,
+[data-state="oops"] .peppy-mouth--open { opacity: 1; }
+
+/* --- arms and gloves: rest, or replaced by the pose's own arms ----------- */
+[data-state="cheer"] .peppy-arms { opacity: 0; }
+[data-state="point"] .peppy-arm--right,
+[data-state="point"] .peppy-glove--right { opacity: 0; }
+
+/* --- a whole-figure lift so each state reads differently at a glance ----- */
+[data-state="cheer"] .peppy-bob { transform: translateY(-5px); }
+[data-state="oops"] .peppy-bob { transform: translateY(4px); }
+[data-state="thinking"] .peppy-bob { transform: translateY(2px); }
+
+/* --- reduced motion keeps every state change, drops the animation -------- */
+@media (prefers-reduced-motion: reduce) {
+  .peppy-pose,
+  .peppy-eye,
+  .peppy-mouth,
+  .peppy-arms,
+  .peppy-arm,
+  .peppy-glove,
+  .peppy-bob { transition-duration: 0ms; }
+}
