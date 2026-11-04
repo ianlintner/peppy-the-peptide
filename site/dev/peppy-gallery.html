@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Peppy state gallery (dev only)</title>
+<link rel="stylesheet" href="../games/ui/peppy.css">
+<style>
+body{margin:0;padding:16px;font:16px/1.4 system-ui,sans-serif;background:#fffdf5;color:#1b2126}
+h1{font-size:1.25rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;list-style:none;padding:0;margin:0}
+figure{margin:0;padding:8px;border:2px solid #1b2126;border-radius:8px;background:#fff}
+figcaption{font-weight:700;margin-top:4px}
+.peppy-frame{--peppy-size:100%}
+</style></head>
+<body>
+<h1>Peppy state gallery</h1>
+<p>Developer review page. Not linked from the site, not in any sitemap, not checked as a public page.</p>
+<h2>Expression states</h2>
+<ul class="grid" id="states"></ul>
+<h2>Bead variant (amino-acid letters)</h2>
+<ul class="grid" id="beads"></ul>
+<script type="module">
+import { STATES, STATE_LABELS, renderPeppySvg } from '../games/ui/peppy-svg.js';
+const cell = (parent, state, id, opts = {}) => {
+  const li = document.createElement('li');
+  li.innerHTML = `<figure><span class="peppy-frame" data-state="${state}" data-gallery="${id}">${renderPeppySvg({ id, ...opts })}</span><figcaption>${id}</figcaption></figure>`;
+  parent.appendChild(li);
+};
+for (const s of STATES) cell(document.getElementById('states'), s, s);
+const beads = ['M', 'A', 'G', 'L', 'K', 'S', 'W'].map((letter, i) => ({ letter, color: ['#7cc7ea', '#f5c85b', '#e8846f', '#9fd39b', '#b6a4e0', '#2a5d8f', '#7a2e2e'][i] }));
+cell(document.getElementById('beads'), 'idle', 'beads-idle', { beads });
+cell(document.getElementById('beads'), 'cheer', 'beads-cheer', { beads });
+</script>
+</body></html>

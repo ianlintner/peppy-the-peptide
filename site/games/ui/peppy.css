@@ -5,7 +5,7 @@
  * site/assets/peppy.svg puts data-state on its own root element; the inlined component in
  * peppy.js puts it on the wrapper, so one stylesheet serves both.
  *
- * Only CSS transitions are used — there is no JS animation loop and no @keyframes.
+ * Only CSS transitions are used — there is no JS animation loop and no keyframe animation.
  */
 
 .peppy { display: block; width: 100%; height: auto; max-width: 100%; }

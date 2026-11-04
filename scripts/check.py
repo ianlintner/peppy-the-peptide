@@ -68,4 +68,16 @@ assert all((site/'vendor'/d/'LICENSE').is_file() for d in ('preact','htm'))
 for p in (site/'games').rglob('*'):
     if p.suffix in ('.js','.mjs','.css') and p.relative_to(site/'games').parts[0]!='data':
         assert len(p.read_text().splitlines())<=400,f'{p.relative_to(root)} exceeds the 400-line ceiling'
+# --- Peppy SVG: seven spheres, six states, size budget; dev gallery stays unlinked ---
+peppy=(site/'assets'/'peppy.svg').read_text()
+assert peppy.count('<g class="peppy-sphere"')==7,'peppy.svg must have exactly seven spheres'
+for state in ('idle','wink','thinking','oops','cheer','point'):
+    assert f'<g class="peppy-pose" data-state="{state}"' in peppy,f'peppy.svg missing state {state}'
+assert len(peppy.encode())<12*1024,'peppy.svg must stay under 12 KB'
+assert 'http' not in peppy.replace('http://www.w3.org/2000/svg',''),'peppy.svg must not reference the network'
+gallery=site/'dev'/'peppy-gallery.html'
+assert gallery.is_file()
+for page in site.rglob('*.html'):
+    if page!=gallery:assert 'peppy-gallery' not in page.read_text(),f'{page} links the dev gallery'
+assert not list(site.glob('sitemap*')),'dev gallery must not appear in a sitemap'
 print(f'PASS: {len(htmls)} pages, {len(lessons)} lesson(s), {len(public)} public game(s), all local links/assets and editorial checks')
