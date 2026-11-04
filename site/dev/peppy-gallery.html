@@ -24,7 +24,8 @@ const cell = (parent, state, id, opts = {}) => {
   li.innerHTML = `<figure><span class="peppy-frame" data-state="${state}" data-gallery="${id}">${renderPeppySvg({ id, ...opts })}</span><figcaption>${id}</figcaption></figure>`;
   parent.appendChild(li);
 };
-for (const s of STATES) cell(document.getElementById('states'), s, s);
+const only = new URLSearchParams(location.search).get('only');
+for (const s of STATES) if (!only || only === s) cell(document.getElementById('states'), s, s);
 const beads = ['M', 'A', 'G', 'L', 'K', 'S', 'W'].map((letter, i) => ({ letter, color: ['#7cc7ea', '#f5c85b', '#e8846f', '#9fd39b', '#b6a4e0', '#2a5d8f', '#7a2e2e'][i] }));
 cell(document.getElementById('beads'), 'idle', 'beads-idle', { beads });
 cell(document.getElementById('beads'), 'cheer', 'beads-cheer', { beads });
