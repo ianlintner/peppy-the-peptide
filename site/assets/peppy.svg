@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 320" class="peppy" data-state="idle" role="img" aria-labelledby="peppy-title peppy-desc"><title id="peppy-title">Peppy, standing at rest with a small smile</title><desc id="peppy-desc">Hand-built layered SVG: seven linked spheres, an open wink eye, a white lab coat, white gloves and red sneakers, plus one pose group per expression state.</desc><style>/* Peppy the Peptide — layered vector mascot styles.
+ *
+ * State contract: any ancestor carrying data-state="idle|wink|thinking|oops|cheer|point"
+ * selects the matching pose group and the matching eye/mouth variant. The standalone
+ * site/assets/peppy.svg puts data-state on its own root element; the inlined component in
+ * peppy.js puts it on the wrapper, so one stylesheet serves both.
+ *
+ * Only CSS transitions are used — there is no JS animation loop and no @keyframes.
+ */
+
+.peppy { display: block; width: 100%; height: auto; max-width: 100%; }
+.peppy-frame { display: inline-block; width: var(--peppy-size, 180px); max-width: 100%; line-height: 0; }
+.peppy-frame .peppy-visual { display: block; }
+
+/* --- paint tokens ------------------------------------------------------- */
+.peppy-fill-ink { fill: #1b2126; }
+.peppy-fill-paper { fill: #fffdf5; stroke: #1b2126; stroke-width: 1.8; stroke-linejoin: round; }
+.peppy-fill-red { fill: #d94f3d; stroke: #1b2126; stroke-width: 1.8; }
+.peppy-fill-gold { fill: #f5c85b; stroke: #1b2126; stroke-width: 1.2; }
+.peppy-ink-line { fill: none; stroke: #1b2126; stroke-width: 4; stroke-linecap: round; }
+.peppy-glove { fill: #fffdf5; stroke: #1b2126; stroke-width: 1.8; }
+.peppy-link { fill: none; stroke: #1b2126; stroke-width: 9; stroke-linecap: round; }
+.peppy-figure { stroke: #1b2126; }
+
+/* --- seven spheres and their optional bead letters ---------------------- */
+.peppy-sphere circle { fill: var(--sphere, #7cc7ea); stroke: #1b2126; stroke-width: 2.5; }
+.peppy-sphere[data-sphere="1"] { --sphere: #7cc7ea; }
+.peppy-sphere[data-sphere="2"] { --sphere: #f5c85b; }
+.peppy-sphere[data-sphere="3"] { --sphere: #e8846f; }
+.peppy-sphere[data-sphere="4"] { --sphere: #9fd39b; }
+.peppy-sphere[data-sphere="5"] { --sphere: #b6a4e0; }
+.peppy-sphere[data-sphere="6"] { --sphere: #7fd0c6; }
+.peppy-sphere[data-sphere="7"] { --sphere: #f0a96b; }
+.peppy-letter {
+  font-family: 'Fredoka', 'DM Sans', system-ui, sans-serif;
+  font-weight: 700;
+  fill: var(--peppy-letter, #1b2126);
+  stroke: none;
+}
+
+/* --- shared transition list (motion is disabled, not the state change) --- */
+.peppy-pose,
+.peppy-eye,
+.peppy-mouth,
+.peppy-arms,
+.peppy-arm,
+.peppy-glove,
+.peppy-bob {
+  transition: opacity 240ms ease-in-out, transform 240ms ease-in-out;
+}
+
+/* --- pose groups: one per state, all hidden until selected --------------- */
+.peppy-pose { opacity: 0; transform: translateY(4px); }
+[data-state="idle"] .peppy-pose[data-state="idle"],
+[data-state="wink"] .peppy-pose[data-state="wink"],
+[data-state="thinking"] .peppy-pose[data-state="thinking"],
+[data-state="oops"] .peppy-pose[data-state="oops"],
+[data-state="cheer"] .peppy-pose[data-state="cheer"],
+[data-state="point"] .peppy-pose[data-state="point"] { opacity: 1; transform: none; }
+
+/* --- eyes: open or winking ---------------------------------------------- */
+.peppy-eye--open { opacity: 1; }
+.peppy-eye--wink { opacity: 0; }
+[data-state="wink"] .peppy-eye--open { opacity: 0; }
+[data-state="wink"] .peppy-eye--wink { opacity: 1; }
+[data-state="oops"] .peppy-eye--open { opacity: 0; }
+[data-state="oops"] .peppy-eye--wink { opacity: 1; }
+
+/* --- mouths: smile, flat line, open ------------------------------------- */
+.peppy-mouth--smile { opacity: 1; }
+.peppy-mouth--flat { opacity: 0; }
+.peppy-mouth--open { opacity: 0; }
+[data-state="thinking"] .peppy-mouth--smile { opacity: 0; }
+[data-state="thinking"] .peppy-mouth--flat { opacity: 1; }
+[data-state="cheer"] .peppy-mouth--smile,
+[data-state="oops"] .peppy-mouth--smile { opacity: 0; }
+[data-state="cheer"] .peppy-mouth--open,
+[data-state="oops"] .peppy-mouth--open { opacity: 1; }
+
+/* --- arms and gloves: rest, or replaced by the pose's own arms ----------- */
+[data-state="cheer"] .peppy-arms { opacity: 0; }
+[data-state="point"] .peppy-arm--right,
+[data-state="point"] .peppy-glove--right { opacity: 0; }
+
+/* --- a whole-figure lift so each state reads differently at a glance ----- */
+[data-state="cheer"] .peppy-bob { transform: translateY(-5px); }
+[data-state="oops"] .peppy-bob { transform: translateY(4px); }
+[data-state="thinking"] .peppy-bob { transform: translateY(2px); }
+
+/* --- reduced motion keeps every state change, drops the animation -------- */
+@media (prefers-reduced-motion: reduce) {
+  .peppy-pose,
+  .peppy-eye,
+  .peppy-mouth,
+  .peppy-arms,
+  .peppy-arm,
+  .peppy-glove,
+  .peppy-bob { transition-duration: 0ms; }
+}
+</style><g class="peppy-figure peppy-bob"><g class="peppy-coat"><path class="peppy-fill-paper" d="M78 132 Q58 196 64 262 Q120 274 176 262 Q182 196 162 132 Q120 120 78 132 Z"/><path class="peppy-fill-paper" d="M76 132 Q120 152 164 132 L168 144 Q120 166 72 144 Z"/></g><g class="peppy-arms"><g class="peppy-arm peppy-arm--left"><path class="peppy-fill-paper" d="M80 140 Q52 162 44 198 L64 208 Q72 176 96 158 Z"/></g><g class="peppy-arm peppy-arm--right"><path class="peppy-fill-paper" d="M160 140 Q188 162 196 198 L176 208 Q168 176 144 158 Z"/></g><g class="peppy-gloves"><circle class="peppy-glove peppy-glove--left" cx="44" cy="206" r="14"/><circle class="peppy-glove peppy-glove--right" cx="196" cy="206" r="14"/></g></g><g class="peppy-shoes"><rect class="peppy-fill-red" x="80" y="258" width="44" height="28" rx="14"/><rect class="peppy-fill-red" x="116" y="258" width="44" height="28" rx="14"/></g><g class="peppy-links"><path class="peppy-link" d="M120 58 L94 116"/><path class="peppy-link" d="M94 116 L146 116"/><path class="peppy-link" d="M146 116 L94 162"/><path class="peppy-link" d="M94 162 L146 162"/><path class="peppy-link" d="M146 162 L94 208"/><path class="peppy-link" d="M94 208 L146 208"/></g><g class="peppy-chain"><g class="peppy-sphere" data-sphere="1" style="--peppy-letter:#000000"><circle cx="120" cy="58" r="34"/><text class="peppy-letter" x="120" y="58" font-size="29" text-anchor="middle" dominant-baseline="central"></text></g><g class="peppy-sphere" data-sphere="2" style="--peppy-letter:#000000"><circle cx="94" cy="116" r="22"/><text class="peppy-letter" x="94" y="116" font-size="19" text-anchor="middle" dominant-baseline="central"></text></g><g class="peppy-sphere" data-sphere="3" style="--peppy-letter:#000000"><circle cx="146" cy="116" r="22"/><text class="peppy-letter" x="146" y="116" font-size="19" text-anchor="middle" dominant-baseline="central"></text></g><g class="peppy-sphere" data-sphere="4" style="--peppy-letter:#000000"><circle cx="94" cy="162" r="22"/><text class="peppy-letter" x="94" y="162" font-size="19" text-anchor="middle" dominant-baseline="central"></text></g><g class="peppy-sphere" data-sphere="5" style="--peppy-letter:#000000"><circle cx="146" cy="162" r="22"/><text class="peppy-letter" x="146" y="162" font-size="19" text-anchor="middle" dominant-baseline="central"></text></g><g class="peppy-sphere" data-sphere="6" style="--peppy-letter:#000000"><circle cx="94" cy="208" r="22"/><text class="peppy-letter" x="94" y="208" font-size="19" text-anchor="middle" dominant-baseline="central"></text></g><g class="peppy-sphere" data-sphere="7" style="--peppy-letter:#000000"><circle cx="146" cy="208" r="22"/><text class="peppy-letter" x="146" y="208" font-size="19" text-anchor="middle" dominant-baseline="central"></text></g></g><g class="peppy-face"><g class="peppy-eye peppy-eye--open"><circle class="peppy-fill-ink" cx="108" cy="52" r="5.5"/></g><g class="peppy-eye peppy-eye--wink"><path class="peppy-ink-line" d="M126 54 q8 -10 16 0"/></g><g class="peppy-mouth peppy-mouth--smile"><path class="peppy-ink-line" d="M104 72 q16 12 32 0"/></g><g class="peppy-mouth peppy-mouth--flat"><path class="peppy-ink-line" d="M108 76 h24"/></g><g class="peppy-mouth peppy-mouth--open"><ellipse class="peppy-fill-ink" cx="120" cy="78" rx="9" ry="10"/></g></g><g class="peppy-poses"><g class="peppy-pose" data-state="idle" role="group" aria-label="Peppy, standing at rest with a small smile"><title>Peppy, standing at rest with a small smile</title></g><g class="peppy-pose" data-state="wink" role="group" aria-label="Peppy, winking one eye"><title>Peppy, winking one eye</title><circle class="peppy-fill-gold" cx="150" cy="34" r="3.5"/><circle class="peppy-fill-gold" cx="161" cy="24" r="2.5"/></g><g class="peppy-pose" data-state="thinking" role="group" aria-label="Peppy, thinking, with three thought dots beside the head"><title>Peppy, thinking, with three thought dots beside the head</title><circle class="peppy-fill-paper" cx="176" cy="36" r="7"/><circle class="peppy-fill-paper" cx="196" cy="24" r="5"/><circle class="peppy-fill-paper" cx="211" cy="15" r="3.5"/></g><g class="peppy-pose" data-state="oops" role="group" aria-label="Peppy, surprised, with a sweat drop and a cross above the head"><title>Peppy, surprised, with a sweat drop and a cross above the head</title><path class="peppy-fill-paper" d="M46 32 q10 13 0 20 q-10 -7 0 -20 z"/><path class="peppy-ink-line" d="M28 22 l10 10 M28 32 l10 -10"/></g><g class="peppy-pose" data-state="cheer" role="group" aria-label="Peppy, cheering with both arms raised and sparkles around the head"><title>Peppy, cheering with both arms raised and sparkles around the head</title><path class="peppy-fill-paper" d="M84 140 Q58 118 42 92 L62 80 Q80 106 102 132 Z"/><path class="peppy-fill-paper" d="M156 140 Q182 118 198 92 L178 80 Q160 106 138 132 Z"/><circle class="peppy-glove" cx="38" cy="80" r="14"/><circle class="peppy-glove" cx="202" cy="80" r="14"/><circle class="peppy-fill-gold" cx="112" cy="20" r="4"/><circle class="peppy-fill-gold" cx="128" cy="14" r="3"/><circle class="peppy-fill-gold" cx="144" cy="20" r="4"/><circle class="peppy-fill-gold" cx="24" cy="52" r="3"/><circle class="peppy-fill-gold" cx="216" cy="52" r="3"/></g><g class="peppy-pose" data-state="point" role="group" aria-label="Peppy, pointing to the right with one arm"><title>Peppy, pointing to the right with one arm</title><path class="peppy-fill-paper" d="M158 142 Q190 150 216 148 L216 162 Q188 166 154 158 Z"/><circle class="peppy-glove" cx="222" cy="155" r="9"/></g></g></g></svg>
