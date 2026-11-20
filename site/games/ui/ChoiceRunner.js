@@ -12,11 +12,14 @@
 //   optional static: runner.answer(item) -> {correct:true, choiceId?} used by "Show answer".
 import { h } from '../../vendor/preact/preact.mjs';
 import htm from '../../vendor/htm/htm.mjs';
-import { useState, useEffect } from '../../vendor/preact/hooks.mjs';
+import { useState, useEffect, useRef } from '../../vendor/preact/hooks.mjs';
 const html = htm.bind(h);
+let runnerSeq = 0; // radio group names must be unique per mounted runner (item ids repeat across games)
 
 export function ChoiceRunner({ item, locked, revealed, onSelect }) {
   const [picked, setPicked] = useState(null);
+  const group = useRef(null);
+  if (group.current === null) group.current = 'choice-' + (++runnerSeq);
   useEffect(() => { setPicked(revealed && revealed.choiceId ? revealed.choiceId : null); }, [item.id, revealed && revealed.choiceId]);
   const pick = (c) => {
     if (locked) return;
@@ -28,7 +31,7 @@ export function ChoiceRunner({ item, locked, revealed, onSelect }) {
     ${item.choices.map((c) => {
       const mark = revealed && picked === c.id ? (c.correct ? ' (correct)' : ' (not quite)') : revealed && c.correct ? ' (the correct answer)' : '';
       return html`<label class=${'pg-choice' + (picked === c.id ? ' is-picked' : '') + (revealed && c.correct ? ' is-correct' : '')}>
-        <input type="radio" name=${'choice-' + item.id} value=${c.id} checked=${picked === c.id} onChange=${() => pick(c)} />
+        <input type="radio" name=${group.current} value=${c.id} checked=${picked === c.id} onChange=${() => pick(c)} />
         <span>${c.text}${mark}</span>
       </label>`;
     })}

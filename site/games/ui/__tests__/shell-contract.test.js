@@ -28,3 +28,14 @@ test('shell has no timers, no network, no direct storage or randomness', () => {
   }
   assert.match(readFileSync(dir + 'shell.css', 'utf8'), /prefers-reduced-motion:reduce/);
 });
+
+test('review fixes: per-instance radio groups/ids, remount per load, fresh pass after finish, hint button stays mounted', () => {
+  const shell = readFileSync(dir + 'GameShell.js', 'utf8');
+  const runner = readFileSync(dir + 'ChoiceRunner.js', 'utf8');
+  assert.doesNotMatch(shell, /name="pg-conf"|id="pg-src"/);
+  assert.doesNotMatch(runner, /name=\$\{'choice-' \+ item\.id\}/);
+  assert.match(runner, /runnerSeq/);
+  assert.match(shell, /<\$\{Runner\} key=\$\{loadId\}/);
+  assert.match(shell, /done >= total \? \{ \.\.\.session, seen: \[\] \}/);
+  assert.match(shell, /ladder\.hints\.length > 0[^\n]*aria-disabled=\$\{!label\}/);
+});

@@ -11,6 +11,7 @@ import { pickNext } from '../engine/select.js';
 import { createLadder, nextHint, hintLabel, shownHints } from '../engine/hints.js';
 import { record, startTier } from '../engine/mastery.js';
 const html = htm.bind(h);
+let shellSeq = 0; // unique radio group names per shell instance (lessons can mount several games)
 
 export const TIER_NAMES = { 1: 'Curious', 2: 'College', 3: 'Mechanism' };
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -31,6 +32,9 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
   const [ladder, setLadder] = useState(() => createLadder(item && item.hint_ladder));
   const [showSrc, setShowSrc] = useState(false);
   const [note, setNote] = useState(''); // polite announcement for hints / tier changes
+  const [loadId, setLoadId] = useState(0); // bumped on every load so the runner remounts with a fresh attempt
+  const uid = useRef(null);
+  if (uid.current === null) uid.current = 'pg-conf-' + (++shellSeq);
   const feedbackRef = useRef(null);
   const itemRef = useRef(null);
   const total = items.length;
@@ -41,7 +45,7 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
 
   const load = (s, seen = s.seen) => {
     const next = pickNext(items, { tier: s.tier, seen, seed: seed + ':' + seen.length });
-    setItem(next); setTentative(null); setConfident(null); setRevealed(null); setShowSrc(false);
+    setItem(next); setLoadId((n) => n + 1); setTentative(null); setConfident(null); setRevealed(null); setShowSrc(false);
     setLadder(createLadder(next && next.hint_ladder));
   };
   // Focus the prompt group of the new item once it renders (after "Next question" unmounts the button).
@@ -56,7 +60,8 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
   const check = () => tentative && confident !== null && finish({ ...tentative, shownAnswer: false }, confident);
   const showAnswer = () => finish({ ...(Runner.answer ? Runner.answer(item) : { correct: true }), correct: false, shownAnswer: true }, undefined);
   const hint = () => { const l = nextHint(ladder); setLadder(l); setNote(`Hint ${l.used}: ${l.hints[l.used - 1]}`); };
-  const pickTier = (t) => { const s = chooseTier(session, t); setSession(s); setNote(`Now practicing ${TIER_NAMES[s.tier]} questions.`); load(s); };
+  const pickTier = (t) => { const s = chooseTier(done >= total ? { ...session, seen: [] } : session, t); // a finished set starts a fresh pass
+    setSession(s); setNote(`Now practicing ${TIER_NAMES[s.tier]} questions.`); load(s); };
   const offer = session.offer;
   const target = offerTarget(offer);
   const ot = offerText(offer, target);
@@ -90,27 +95,27 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
       <button type="button" class="pg-btn" onClick=${restart}>Practice again</button>
     </div>` : item && html`<div class="pg-item">
       <div class="pg-run" tabindex="-1" ref=${itemRef}>
-        <${Runner} item=${item} locked=${!!revealed} revealed=${revealed} onSelect=${(r) => setTentative(r)} />
+        <${Runner} key=${loadId} item=${item} locked=${!!revealed} revealed=${revealed} onSelect=${(r) => setTentative(r)} />
       </div>
 
       ${!revealed && html`<fieldset class="pg-confidence">
         <legend>How sure are you? (choose before checking)</legend>
-        <label><input type="radio" name="pg-conf" checked=${confident === true} onChange=${() => setConfident(true)} /> Sure</label>
-        <label><input type="radio" name="pg-conf" checked=${confident === false} onChange=${() => setConfident(false)} /> Unsure</label>
+        <label><input type="radio" name=${uid.current} checked=${confident === true} onChange=${() => setConfident(true)} /> Sure</label>
+        <label><input type="radio" name=${uid.current} checked=${confident === false} onChange=${() => setConfident(false)} /> Unsure</label>
       </fieldset>`}
 
       <div class="pg-actions">
         ${!revealed && html`<button type="button" class="pg-btn pg-primary" aria-disabled=${!(tentative && confident !== null)} onClick=${check}>Check answer</button>`}
-        ${!revealed && label && html`<button type="button" class="pg-btn" onClick=${hint}>${label}</button>`}
+        ${!revealed && ladder.hints.length > 0 && html`<button type="button" class="pg-btn" aria-disabled=${!label} onClick=${() => label && hint()}>${label || 'No more hints'}</button>`}
         ${!revealed && html`<button type="button" class="pg-btn" onClick=${showAnswer}>Show answer</button>`}
-        <button type="button" class="pg-btn" aria-expanded=${showSrc} aria-controls="pg-src" onClick=${() => setShowSrc(!showSrc)}>${showSrc ? 'Hide source' : 'Show source'}</button>
+        <button type="button" class="pg-btn" aria-expanded=${showSrc} aria-controls=${uid.current + "-src"} onClick=${() => setShowSrc(!showSrc)}>${showSrc ? 'Hide source' : 'Show source'}</button>
       </div>
       ${!revealed && tentative === null && html`<p class="pg-small">Pick an answer, say how sure you are, then check. Or use Show answer any time.</p>`}
       ${!revealed && tentative && confident === null && html`<p class="pg-small">Choose Sure or Unsure to enable Check answer.</p>`}
 
       ${shownHints(ladder).length > 0 && !revealed && html`<ol class="pg-hints" aria-label="Hints so far">${shownHints(ladder).map((x) => html`<li>${x}</li>`)}</ol>`}
 
-      <div id="pg-src" class="pg-src" hidden=${!showSrc}>
+      <div id=${uid.current + "-src"} class="pg-src" hidden=${!showSrc}>
         <p>Source${srcIds.length > 1 ? 's' : ''} for this question:</p>
         <ul>${srcIds.map((n) => { const s = sources[n - 1]; return html`<li>${s ? html`<a href=${s.url} target="_blank" rel="noopener">${s.title}</a>` : `Source ${n} (see the source shelf below)`}</li>`; })}</ul>
         <p class="pg-small">Misconception practiced: ${item.misconception}</p>
