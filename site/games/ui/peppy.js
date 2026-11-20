@@ -21,10 +21,11 @@ import { h } from '../../vendor/preact/preact.mjs';
 import { useMemo, useRef } from '../../vendor/preact/hooks.mjs';
 import htm from '../../vendor/htm/htm.mjs';
 import { STATES, STATE_LABELS, renderPeppySvg } from './peppy-svg.js';
+import { setPeppyState } from './peppy-state.js';
 
 const html = htm.bind(h);
 
-export { STATES, STATE_LABELS, renderPeppySvg };
+export { STATES, STATE_LABELS, renderPeppySvg, setPeppyState };
 
 /** Stylesheet URL resolved next to this module, so no bundler or build step is required. */
 export const PEPPY_CSS_URL = new URL('./peppy.css', import.meta.url).href;
@@ -39,12 +40,6 @@ export function ensurePeppyStyles(doc = typeof document === 'undefined' ? null :
   link.href = PEPPY_CSS_URL;
   link.setAttribute('data-peppy-styles', '');
   doc.head.appendChild(link);
-}
-
-/** Imperatively switch a mounted figure (or any ancestor of one) to `state`. */
-export function setPeppyState(el, state) {
-  if (el && STATES.includes(state)) el.dataset.state = state;
-  return el;
 }
 
 /** Next state in review order, wrapping; lets a control cycle expressions deterministically. */
@@ -73,7 +68,12 @@ export function Peppy({ state = 'idle', beads = null, label, decorative = false,
   const markup = useMemo(() => renderPeppySvg({ id: idRef.current, beads: beads || [] }), [idRef.current, beadKey]);
   const a11y = decorative
     ? { 'aria-hidden': 'true' }
-    : { role: 'img', 'aria-label': label || STATE_LABELS[active] };
+    : {
+        role: 'img',
+        'aria-label': label || STATE_LABELS[active],
+        // Marks an explicit label so setPeppyState() never overwrites it.
+        ...(label ? { 'data-peppy-custom-label': '' } : {}),
+      };
   const style = size ? `--peppy-size:${Number(size)}px` : null;
   return html`<span class="peppy-frame" data-state=${active} style=${style} ...${a11y}>
     <span class="peppy-visual" dangerouslySetInnerHTML=${{ __html: markup }}></span>

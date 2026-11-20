@@ -51,9 +51,13 @@ const decimal = (n) => (Number.isInteger(n) ? String(n) : String(Number(n.toFixe
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-/** Only accept plain hex colours or a bare keyword, so a bead token can never inject attributes. */
+/**
+ * Only accept opaque `#rgb` / `#rrggbb` colours, so a bead token can never inject attributes and
+ * every accepted colour is one `relativeLuminance` can parse (keywords and alpha hex are refused,
+ * which keeps the 4.5:1 letter-contrast guarantee honest).
+ */
 export function safeColor(value) {
-  return typeof value === 'string' && /^(#[0-9a-f]{3,8}|[a-z]{3,20})$/i.test(value.trim()) ? value.trim() : null;
+  return typeof value === 'string' && /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(value.trim()) ? value.trim() : null;
 }
 
 function channelToLinear(byte) {
@@ -141,6 +145,7 @@ const SHOES_MARKUP =
 const FACE_MARKUP =
   '<g class="peppy-face">' +
   '<g class="peppy-eye peppy-eye--open"><circle class="peppy-fill-ink" cx="108" cy="52" r="5.5"/></g>' +
+  '<g class="peppy-eye peppy-eye--open-right"><circle class="peppy-fill-ink" cx="134" cy="52" r="5.5"/></g>' +
   '<g class="peppy-eye peppy-eye--wink"><path class="peppy-ink-line" d="M126 54 q8 -10 16 0"/></g>' +
   '<g class="peppy-mouth peppy-mouth--smile"><path class="peppy-ink-line" d="M104 72 q16 12 32 0"/></g>' +
   '<g class="peppy-mouth peppy-mouth--flat"><path class="peppy-ink-line" d="M108 76 h24"/></g>' +
@@ -215,7 +220,7 @@ export function renderPeppySvg({ id = 'peppy', beads = [], state = null, css = '
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${VIEWBOX}" class="peppy"${rootState} role="img" ` +
     `aria-labelledby="${esc(id)}-title ${esc(id)}-desc">` +
     `<title id="${esc(id)}-title">${esc(label)}</title>` +
-    `<desc id="${esc(id)}-desc">Hand-built layered SVG: seven linked spheres, an open wink eye, a white ` +
+    `<desc id="${esc(id)}-desc">Hand-built layered SVG: seven linked spheres, two eyes that can wink, a white ` +
     `lab coat, white gloves and red sneakers, plus one pose group per expression state.</desc>` +
     (sheet ? `<style>${sheet}</style>` : '') +
     `<g class="peppy-figure peppy-bob">` +

@@ -59,11 +59,13 @@
 [data-state="point"] .peppy-pose[data-state="point"] { opacity: 1; transform: none; }
 
 /* --- eyes: open or winking ---------------------------------------------- */
-.peppy-eye--open { opacity: 1; }
+/* The left eye is never hidden. The right eye is swapped for the closed arc in wink/oops. */
+.peppy-eye--open,
+.peppy-eye--open-right { opacity: 1; }
 .peppy-eye--wink { opacity: 0; }
-[data-state="wink"] .peppy-eye--open { opacity: 0; }
-[data-state="wink"] .peppy-eye--wink { opacity: 1; }
-[data-state="oops"] .peppy-eye--open { opacity: 0; }
+[data-state="wink"] .peppy-eye--open-right,
+[data-state="oops"] .peppy-eye--open-right { opacity: 0; }
+[data-state="wink"] .peppy-eye--wink,
 [data-state="oops"] .peppy-eye--wink { opacity: 1; }
 
 /* --- mouths: smile, flat line, open ------------------------------------- */
