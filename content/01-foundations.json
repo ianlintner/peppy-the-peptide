@@ -18,6 +18,8 @@
   "check_question": "If two chains contain the same three amino acids in a different order, are their sequences identical?",
   "check_answer": "No. Composition is the same; the ordered sequence is different. That alone does not tell us what either chain does in a cell.",
   "sources": [
-    {"title": "NHGRI Talking Glossary — Peptide", "url": "https://www.genome.gov/genetics-glossary/Peptide", "note": "Definition, peptide bonds and chain analogy"}
+    {"title": "NHGRI Talking Glossary — Peptide", "url": "https://www.genome.gov/genetics-glossary/Peptide", "note": "Definition, peptide bonds and chain analogy"},
+    {"title": "UniProt P01275 (Pro-glucagon) — GLP-1(7-36) residues 98-127", "url": "https://www.uniprot.org/uniprotkb/P01275/entry", "note": "GLP-1 and glucagon fragment sequences and feature locations"},
+    {"title": "UniProt P01308 (Insulin) — A and B chains", "url": "https://www.uniprot.org/uniprotkb/P01308/entry", "note": "Insulin A chain (90-110) and B chain (25-54) sequences"}
   ]
 }

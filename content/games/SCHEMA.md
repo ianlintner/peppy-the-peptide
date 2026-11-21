@@ -47,6 +47,22 @@ still letting the learner practise them. `check.py` enforces the banner contract
 | `review_mode` | string | optional; `"strict"` (default) or `"flagged"` only |
 | `review_note` | string | required and non-blank on every `needs_review: true` item when `review_mode: "flagged"`; forbidden otherwise (stripped from nothing, so keep it out) |
 
+## Game-specific `data`: `bead-chain-builder`
+
+`scripts/games_data.py` (`_validate_bead_item`) validates `data` for the game `bead-chain-builder`; the browser re-checks the same rules in `site/games/bead-chain-builder/evaluator.js` (`validateItems`). The correct choice must always agree with what the data implies; a disagreement fails the build.
+
+| `data.mode` | Required `data` | Choice ids | Correct choice |
+|---|---|---|---|
+| `build` | `target` | `matches`, `differs` (the learner builds in slots; the choices only satisfy the generic schema) | `matches` |
+| `spot` | `target`, `chains` (`{choice id: residues}`, every choice id present) | any slugs, one per chain | the one chain that is a different ordering of the same beads as `target` (exactly one) |
+| `compare` | `target`, `other` | `same-sequence`, `same-beads-new-order`, `different-beads` | the relation of `other` to `target` |
+| `sorter` | `statement`, `bucket` (`cartoon`, `real` or `both`); optional `bonus: true`, optional `readout` | `cartoon`, `real`, `both` | `bucket` |
+| `inference` | `statement`, `follows` (boolean); optional `target` | `follows`, `does-not-follow` | `follows` if `follows` is true, else `does-not-follow` |
+
+Common: `view` is optional (`cartoon` default, or `chemistry` to start in the one-letter view).
+
+**Real sequences.** `target` (and `readout.sequence`) is a one-letter string of the 20 standard residues: 3 to 7 residues for `target` (Peppy has seven spheres), up to 30 for `readout`. The block also carries `accession`, `residues` (`"start-end"`, whose length must equal the string) and `source_label`. The validator only accepts a string that is an exact slice of a segment in `VERIFIED_SEGMENTS` (UniProt P01275 and P01308, fetched 2026-11-21); add a segment there only after re-fetching the record. Variant chains in `spot` and `compare` items are practice edits of `target` and are not claimed to be real sequences.
+
 ## Safety lint
 
 All text in a game file (except `id`, `game`, `lesson`, `concept`) is scanned. A match fails validation:
