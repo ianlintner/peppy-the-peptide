@@ -1,0 +1,861 @@
+{
+  "game": "three-axis-sorter",
+  "lesson": "hormone-and-medicine",
+  "review_mode": "flagged",
+  "title": "Three-Axis Sorter",
+  "summary": "Sort generic description cards onto three independent shelves: same receptor, same molecule, or reviewed-approved for the stated use — and notice when the evidence cannot settle the shelf.",
+  "items": [
+    {
+      "id": "t1-native-signal",
+      "concept": "receptor-target",
+      "tier": 1,
+      "misconception": "The body's own hormone and a receptor agonist are the same thing",
+      "prompt": "Card: 'A short-lived signal made by intestinal cells when food is present; it can stimulate the same cellular receptor as a manufactured agonist.' Which receptor shelf does this card belong on?",
+      "choices": [
+        {
+          "id": "same-receptor",
+          "text": "Same receptor as the manufactured agonist",
+          "correct": true
+        },
+        {
+          "id": "different-receptor",
+          "text": "A different receptor from any manufactured agonist",
+          "correct": false,
+          "feedback": "The card says it stimulates the same cellular receptor. A different-receptor shelf would contradict the card."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "The card does not say which receptor it uses",
+          "correct": false,
+          "feedback": "It does: the wording explicitly names the same cellular receptor as the agonist."
+        }
+      ],
+      "explanation": "Sharing a receptor is one observation. The body's GLP-1 signal and a manufactured agonist can act at the same receptor while differing as molecules. [1]",
+      "hint_ladder": [
+        "Read the last clause of the card: what does it say about the receptor?",
+        "It names the same cellular receptor as the manufactured agonist."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "receptor",
+        "card": "A short-lived signal made by intestinal cells when food is present; it can stimulate the same cellular receptor as a manufactured agonist.",
+        "answer": "same-receptor",
+        "evidence": "Source 1: both proteins work by stimulating the same cellular receptor."
+      }
+    },
+    {
+      "id": "t1-manufactured-agonist",
+      "concept": "receptor-target",
+      "tier": 1,
+      "misconception": "Manufactured agonists are just the body's hormone under another name",
+      "prompt": "Card: 'A manufactured medicine designed to act at the same receptor as the body's short-lived gut signal.' Which receptor shelf?",
+      "choices": [
+        {
+          "id": "same-receptor",
+          "text": "Same receptor as the body's own signal",
+          "correct": true
+        },
+        {
+          "id": "different-receptor",
+          "text": "A receptor with no relationship to the body's signal",
+          "correct": false,
+          "feedback": "The class is named for acting at that receptor. The card explicitly says 'same receptor'."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "There is no receptor mentioned",
+          "correct": false,
+          "feedback": "A receptor is named: the same one the body's short-lived gut signal uses."
+        }
+      ],
+      "explanation": "A GLP-1 receptor agonist is a manufactured medicine class defined by acting at that receptor; that does not make it the native hormone. [1]",
+      "hint_ladder": [
+        "Look for the phrase 'same receptor' in the card.",
+        "Receptor agonist means the manufactured ligand acts at the named receptor."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "receptor",
+        "card": "A manufactured medicine designed to act at the same receptor as the body's short-lived gut signal.",
+        "answer": "same-receptor",
+        "evidence": "Source 1: these medicines constitute a class called GLP-1 receptor agonists."
+      }
+    },
+    {
+      "id": "t1-unrelated-signal",
+      "concept": "receptor-target",
+      "tier": 1,
+      "misconception": "Every peptide signal uses the same receptor",
+      "prompt": "Card: 'A hormone from pancreatic alpha cells that signals the liver to release glucose into the blood.' Which receptor shelf relative to the GLP-1 signal?",
+      "choices": [
+        {
+          "id": "different-receptor",
+          "text": "A different receptor from the GLP-1 signal",
+          "correct": true
+        },
+        {
+          "id": "same-receptor",
+          "text": "The same receptor as the GLP-1 signal",
+          "correct": false,
+          "feedback": "The card describes a different signal with a different target organ. Source 1 calls glucagon GLP-1's 'hormonal opposite' and says the two are 'clearly different'."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "Receptor cannot be discussed for hormones",
+          "correct": false,
+          "feedback": "Hormones signal through receptors; the source describes which cells each signal acts on."
+        }
+      ],
+      "explanation": "Not every peptide signal shares a receptor. Source 1 contrasts glucagon with GLP-1 as clearly different peptides with different effects. [1]",
+      "hint_ladder": [
+        "Which hormone is described: the gut signal or the alpha-cell signal?",
+        "The alpha-cell hormone is glucagon, which source 1 contrasts with GLP-1."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "receptor",
+        "card": "A hormone from pancreatic alpha cells that signals the liver to release glucose into the blood.",
+        "answer": "different-receptor",
+        "evidence": "Source 1: glucagon and GLP-1 are 'notably similar, yet clearly different'."
+      }
+    },
+    {
+      "id": "t1-natural-origin",
+      "concept": "receptor-target",
+      "tier": 1,
+      "misconception": "The native hormone is manufactured by a drug company",
+      "prompt": "Card: 'Produced by intestinal cells close to the stomach and released only when stimulated by food.' Which receptor shelf relative to a manufactured agonist?",
+      "choices": [
+        {
+          "id": "same-receptor",
+          "text": "Same receptor as a manufactured receptor agonist",
+          "correct": true
+        },
+        {
+          "id": "different-receptor",
+          "text": "A distinct receptor used only by body-made signals",
+          "correct": false,
+          "feedback": "Origin is not receptor identity. Source 1 says the body-made peptide and exendin-4 stimulate the same cellular receptor."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "Origin tells us nothing at all, so no shelf applies",
+          "correct": false,
+          "feedback": "Origin alone would not settle it, but this card is about the known body-made signal that shares the receptor."
+        }
+      ],
+      "explanation": "This is the body's own incretin, described by source 1 as made by intestinal cells. It can act at the same receptor as a manufactured agonist. [1]",
+      "hint_ladder": [
+        "Where does the body make this signal?",
+        "It is made by intestinal cells — source 1's description of native GLP-1."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "receptor",
+        "card": "Produced by intestinal cells close to the stomach and released only when stimulated by food.",
+        "answer": "same-receptor",
+        "evidence": "Source 1: GLP-1 is produced by intestinal cells; both proteins work by stimulating the same cellular receptor."
+      }
+    },
+    {
+      "id": "t1-synthetic-ligand",
+      "concept": "receptor-target",
+      "tier": 1,
+      "misconception": "A manufactured ligand cannot target a human receptor",
+      "prompt": "Card: 'A synthetically produced molecule whose structure resembles the body's gut signal and which can stimulate the same cellular receptor.' Which receptor shelf?",
+      "choices": [
+        {
+          "id": "same-receptor",
+          "text": "Same receptor as the body's signal",
+          "correct": true
+        },
+        {
+          "id": "different-receptor",
+          "text": "A receptor unique to synthetic molecules",
+          "correct": false,
+          "feedback": "Source 1 explicitly says the two proteins work by stimulating the same cellular receptor."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "Synthetic molecules have no receptor target",
+          "correct": false,
+          "feedback": "They can: the receptor-agonist medicine class is defined by receptor targeting."
+        }
+      ],
+      "explanation": "A manufactured agonist can be structurally related yet distinct, and still act at the same receptor. [1]",
+      "hint_ladder": [
+        "Focus on the last part of the card, not where the molecule came from.",
+        "It says 'same cellular receptor'."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "receptor",
+        "card": "A synthetically produced molecule whose structure resembles the body's gut signal and which can stimulate the same cellular receptor.",
+        "answer": "same-receptor",
+        "evidence": "Source 1: exendin-4 and GLP-1 both stimulate the same cellular receptor."
+      }
+    },
+    {
+      "id": "t1-persistence-clue",
+      "concept": "receptor-target",
+      "tier": 1,
+      "misconception": "A molecule that lasts longer must use a different receptor",
+      "prompt": "Card: 'Related to the body's gut signal, persists longer in the blood, and works by stimulating the same cellular receptor.' Which receptor shelf?",
+      "choices": [
+        {
+          "id": "same-receptor",
+          "text": "Same receptor as the body's signal",
+          "correct": true
+        },
+        {
+          "id": "different-receptor",
+          "text": "A different receptor, because it lasts longer",
+          "correct": false,
+          "feedback": "Persistence and receptor target are separate observations. Source 1 reports same receptor plus a structural difference that changes persistence."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "Longer persistence rules out receptor comparison",
+          "correct": false,
+          "feedback": "The card states the receptor comparison directly; persistence does not erase it."
+        }
+      ],
+      "explanation": "Source 1 reports both facts together: same cellular receptor, different structure and persistence. [1]",
+      "hint_ladder": [
+        "Does the card mention persistence or receptor in its final clause?",
+        "The final clause says the same cellular receptor."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "receptor",
+        "card": "Related to the body's gut signal, persists longer in the blood, and works by stimulating the same cellular receptor.",
+        "answer": "same-receptor",
+        "evidence": "Source 1: same cellular receptor; a small structural difference protects the latter from digestion."
+      }
+    },
+    {
+      "id": "t2-same-receptor-other-molecule",
+      "concept": "receptor-vs-identity",
+      "tier": 2,
+      "misconception": "Same receptor proves same molecule",
+      "prompt": "Card: 'A manufactured ligand that acts at the GLP-1 receptor; its structure differs from the body's own signal.' Which single shelf is settled by this card?",
+      "choices": [
+        {
+          "id": "same-receptor",
+          "text": "Same receptor shelf — and that does not settle molecular identity",
+          "correct": true
+        },
+        {
+          "id": "same-molecule",
+          "text": "Same molecule shelf",
+          "correct": false,
+          "feedback": "The card says its structure differs. A shared receptor does not make two ligands the same molecule."
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Reviewed-approved shelf",
+          "correct": false,
+          "feedback": "The card says nothing about regulatory review; receptor targeting never implies approval."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "No shelf can be settled from this card",
+          "correct": false,
+          "feedback": "The receptor shelf is settled: the card explicitly names the GLP-1 receptor."
+        }
+      ],
+      "explanation": "One axis matches, the others do not follow. Source 1: two proteins share a receptor while their structures differ. [1]",
+      "hint_ladder": [
+        "Separate the three questions: receptor, molecule, review.",
+        "Only the receptor is named; identity is explicitly different and review is absent."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "receptor",
+        "card": "A manufactured ligand that acts at the GLP-1 receptor; its structure differs from the body's own signal.",
+        "answer": "same-receptor",
+        "evidence": "Source 1: same cellular receptor; small but significant structural difference."
+      }
+    },
+    {
+      "id": "t2-body-made-not-a-product",
+      "concept": "receptor-vs-identity",
+      "tier": 2,
+      "misconception": "The body's hormone is an approved drug product",
+      "prompt": "Card: 'A signal made by intestinal cells when food is present; short-lived in the blood; no product or stated use is described.' Which shelf is supported?",
+      "choices": [
+        {
+          "id": "same-molecule",
+          "text": "Same molecule as the body's own signal",
+          "correct": true
+        },
+        {
+          "id": "same-receptor",
+          "text": "Same receptor as a manufactured agonist",
+          "correct": false,
+          "feedback": "The card never mentions a receptor or a comparison ligand, so the receptor shelf is not settled here."
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Reviewed-approved for a stated use",
+          "correct": false,
+          "feedback": "Approval applies to products and uses. This card describes a body-made signal and states no product or use."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "All three shelves are undetermined",
+          "correct": false,
+          "feedback": "The card is the description of the native signal itself, so the molecule-identity shelf is settled."
+        }
+      ],
+      "explanation": "The native hormone is the reference molecule, not an FDA-reviewed product. [1][3]",
+      "hint_ladder": [
+        "Which shelf has a positive match in the card rather than an absence?",
+        "The card describes the body's own molecule; review is a product-level question."
+      ],
+      "source_ids": [
+        1,
+        3
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "molecule",
+        "card": "A signal made by intestinal cells when food is present; short-lived in the blood; no product or stated use is described.",
+        "answer": "same-molecule",
+        "evidence": "Source 1: GLP-1 is made by intestinal cells; source 3: approval concerns drug products."
+      }
+    },
+    {
+      "id": "t2-unapproved-claim",
+      "concept": "regulatory-status",
+      "tier": 2,
+      "misconception": "A product sold for a use has been reviewed for that use",
+      "prompt": "Card: 'A version of a receptor-agonist medicine sold without FDA premarket review for safety, effectiveness and quality.' Which shelf does the card settle?",
+      "choices": [
+        {
+          "id": "reviewed-approved",
+          "text": "Reviewed-approved for the stated use",
+          "correct": false,
+          "feedback": "The card says the opposite: no FDA premarket review. 'Sold' is not 'reviewed'."
+        },
+        {
+          "id": "same-receptor",
+          "text": "Same receptor shelf",
+          "correct": false,
+          "feedback": "The word 'receptor-agonist' hints at a target, but this card's asserted fact is about review status, not a receptor comparison."
+        },
+        {
+          "id": "same-molecule",
+          "text": "Same molecule shelf",
+          "correct": false,
+          "feedback": "The card makes no molecular-identity comparison; a claim of sameness needs its own evidence."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "Cannot determine — no review information is given",
+          "correct": false,
+          "feedback": "The card does give review information: it says premarket review did not happen."
+        },
+        {
+          "id": "regulatory-not-reviewed",
+          "text": "Regulatory shelf: not reviewed-approved",
+          "correct": true
+        }
+      ],
+      "explanation": "FDA says unapproved versions do not undergo premarket review; review status is a separate axis. [2]",
+      "hint_ladder": [
+        "Which phrase in the card describes the review axis directly?",
+        "'Without FDA premarket review' — the card answers the regulatory question."
+      ],
+      "source_ids": [
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "regulatory",
+        "card": "A version of a receptor-agonist medicine sold without FDA premarket review for safety, effectiveness and quality.",
+        "answer": "regulatory-not-reviewed",
+        "evidence": "Source 2: unapproved versions do not undergo FDA's review for safety, effectiveness and quality."
+      }
+    },
+    {
+      "id": "t2-compounded-not-approved",
+      "concept": "regulatory-status",
+      "tier": 2,
+      "misconception": "Compounded means equivalent to an approved product",
+      "prompt": "Card: 'A compounded preparation; the card gives no statement that FDA verified it for safety, effectiveness or quality before marketing.' Which regulatory shelf?",
+      "choices": [
+        {
+          "id": "reviewed-approved",
+          "text": "Reviewed-approved for a stated use",
+          "correct": false,
+          "feedback": "Source 3: compounded drugs are not FDA-approved and are not verified before marketing."
+        },
+        {
+          "id": "same-receptor",
+          "text": "Same receptor shelf",
+          "correct": false,
+          "feedback": "This card is about regulatory status; no receptor comparison is stated."
+        },
+        {
+          "id": "same-molecule",
+          "text": "Same molecule shelf",
+          "correct": false,
+          "feedback": "FDA explicitly flags 'is the same as an approved drug' as a claim needing scrutiny; this card does not establish it."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "Cannot determine — compounding status says nothing about review",
+          "correct": false,
+          "feedback": "It does: source 3 says compounded drugs are not FDA-approved. That settles this shelf."
+        },
+        {
+          "id": "regulatory-not-reviewed",
+          "text": "Regulatory shelf: not established as reviewed-approved",
+          "correct": true
+        }
+      ],
+      "explanation": "Compounded drugs are not FDA-approved; the approval question is product- and use-specific. [2][3]",
+      "hint_ladder": [
+        "What does 'compounded' tell you about FDA approval in source 3?",
+        "It is not FDA-approved, so the reviewed-approved shelf cannot be claimed."
+      ],
+      "source_ids": [
+        2,
+        3
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "regulatory",
+        "card": "A compounded preparation; the card gives no statement that FDA verified it for safety, effectiveness or quality before marketing.",
+        "answer": "regulatory-not-reviewed",
+        "evidence": "Source 3: compounded drugs are not FDA-approved; FDA does not verify them before marketing."
+      }
+    },
+    {
+      "id": "t2-structure-difference",
+      "concept": "receptor-vs-identity",
+      "tier": 2,
+      "misconception": "Related molecules are identical molecules",
+      "prompt": "Card: 'A small but significant structural difference from the body's gut signal; both act at the same cellular receptor.' Which shelf is settled about molecular identity?",
+      "choices": [
+        {
+          "id": "same-molecule",
+          "text": "Same molecule shelf",
+          "correct": false,
+          "feedback": "The card asserts a structural difference. Related is not identical."
+        },
+        {
+          "id": "same-receptor",
+          "text": "Same receptor shelf — but this card also tells us the molecules differ",
+          "correct": true
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Reviewed-approved shelf",
+          "correct": false,
+          "feedback": "No product or stated use appears in the card; structure and receptor say nothing about approval."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "Nothing about molecular identity can be said",
+          "correct": false,
+          "feedback": "A structural difference is stated, so we can say they are not the same molecule."
+        }
+      ],
+      "explanation": "Source 1 supplies both observations in one sentence: same receptor, different structure. [1]",
+      "hint_ladder": [
+        "What does 'a small but significant difference in structures' settle?",
+        "It settles that they are different molecules, even though the receptor matches."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "molecule",
+        "card": "A small but significant structural difference from the body's gut signal; both act at the same cellular receptor.",
+        "answer": "same-receptor",
+        "evidence": "Source 1: same cellular receptor plus a significant structural difference."
+      }
+    },
+    {
+      "id": "t2-rapid-clearance",
+      "concept": "receptor-vs-identity",
+      "tier": 2,
+      "misconception": "A short-lived signal cannot share a receptor with a longer-lived one",
+      "prompt": "Card: 'The body's signal disappears within minutes; a manufactured comparative molecule persists much longer; both stimulate the same cellular receptor.' What does this card settle?",
+      "choices": [
+        {
+          "id": "same-receptor",
+          "text": "The receptor shelf matches, while persistence differs",
+          "correct": true
+        },
+        {
+          "id": "different-receptor",
+          "text": "Different receptors, because persistence differs",
+          "correct": false,
+          "feedback": "Persistence and receptor targeting are separate observations; source 1 reports both in the same sentence."
+        },
+        {
+          "id": "same-molecule",
+          "text": "Same molecule, because they share a receptor",
+          "correct": false,
+          "feedback": "The card says the molecules persist differently and source 1 reports a structural difference."
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Approved for the stated use",
+          "correct": false,
+          "feedback": "No product or reviewed use appears in the card."
+        }
+      ],
+      "explanation": "Same receptor, different structure and persistence — three separate observations. [1]",
+      "hint_ladder": [
+        "Does the card talk about a product, a molecule or a receptor?",
+        "It compares receptor and persistence; no approval claim is made."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "axis": "receptor",
+        "card": "The body's signal disappears within minutes; a manufactured comparative molecule persists much longer; both stimulate the same cellular receptor.",
+        "answer": "same-receptor",
+        "evidence": "Source 1: same receptor, GLP-1 disappears in minutes, the other persists longer."
+      }
+    },
+    {
+      "id": "t3-missing-product-status",
+      "concept": "evidence-gaps",
+      "tier": 3,
+      "misconception": "A description of a molecule tells you its approval status",
+      "prompt": "Evidence: 'A manufactured ligand acts at the GLP-1 receptor and its structure is stated.' Does this settle the reviewed-approved shelf for a stated use?",
+      "choices": [
+        {
+          "id": "cannot-determine",
+          "text": "Cannot determine: the product's review status and stated use are not given",
+          "correct": true
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Yes — receptor agonists are reviewed",
+          "correct": false,
+          "feedback": "FDA describes unapproved versions of receptor-agonist drugs; receptor class membership does not establish review."
+        },
+        {
+          "id": "same-receptor",
+          "text": "Yes — the receptor shelf settles every other shelf",
+          "correct": false,
+          "feedback": "This is the misconception the whole game targets: one matching axis does not settle the others."
+        },
+        {
+          "id": "same-molecule",
+          "text": "Cannot determine — unless the structure is identical",
+          "correct": false,
+          "feedback": "The evidence has already stated the structure; the missing information is the product-level review status and use."
+        }
+      ],
+      "explanation": "The evidence gap is product-level: which product, which stated use, and whether FDA reviewed that use. [2][3]",
+      "hint_ladder": [
+        "Which shelf is being asked about: receptor, molecule, or review?",
+        "Receptor and structure are given; a product's review record and stated use are not."
+      ],
+      "source_ids": [
+        2,
+        3
+      ],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the evidence-gap wording; the item asks only what information is missing.",
+      "worked_example": "Ask: 'Which product, which stated use, and was that use reviewed?' Only then can the regulatory shelf be sorted.",
+      "data": {
+        "axis": "regulatory",
+        "card": "A manufactured ligand acts at the GLP-1 receptor and its structure is stated.",
+        "answer": "cannot-determine",
+        "undetermined": true,
+        "missing_evidence": "The product's review status for the particular stated use.",
+        "evidence": "Source 2: unapproved versions exist; source 3: approval is a product-level verification."
+      }
+    },
+    {
+      "id": "t3-missing-identity-test",
+      "concept": "evidence-gaps",
+      "tier": 3,
+      "misconception": "Same receptor settles molecular identity",
+      "prompt": "Evidence: 'Two preparations both act at the same cellular receptor. No structure comparison is reported.' Does this settle the same-molecule shelf?",
+      "choices": [
+        {
+          "id": "cannot-determine",
+          "text": "Cannot determine: a molecular-identity comparison is missing",
+          "correct": true
+        },
+        {
+          "id": "same-molecule",
+          "text": "Yes — same receptor means same molecule",
+          "correct": false,
+          "feedback": "Source 1's two receptor-sharing proteins have significantly different structures."
+        },
+        {
+          "id": "different-receptor",
+          "text": "No — they must use different receptors",
+          "correct": false,
+          "feedback": "The evidence says they act at the same receptor; that part is settled."
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Cannot determine — unless we know the dose",
+          "correct": false,
+          "feedback": "Dose is out of scope here. The missing evidence is a molecular-identity comparison."
+        }
+      ],
+      "explanation": "Receptor sharing is one observation; identity needs a separate structure comparison. [1]",
+      "hint_ladder": [
+        "Is there any structural information in this evidence?",
+        "No — a second receptor observation cannot substitute for a structure comparison."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the evidence-gap wording; no product data is used.",
+      "worked_example": "To sort the molecule shelf, ask for structural information — not a second receptor observation.",
+      "data": {
+        "axis": "molecule",
+        "card": "Two preparations both act at the same cellular receptor. No structure comparison is reported.",
+        "answer": "cannot-determine",
+        "undetermined": true,
+        "missing_evidence": "A comparison of the two molecular structures.",
+        "evidence": "Source 1: same receptor plus a significant structural difference between two proteins."
+      }
+    },
+    {
+      "id": "t3-missing-review-for-use",
+      "concept": "evidence-gaps",
+      "tier": 3,
+      "misconception": "Approval in general proves a particular use was reviewed",
+      "prompt": "Evidence: 'A label mentions receptor-agonist medicines in general; no specific product or stated use is named.' Does this settle reviewed-approved for the learner's stated use?",
+      "choices": [
+        {
+          "id": "cannot-determine",
+          "text": "Cannot determine: a product-specific, use-specific review statement is missing",
+          "correct": true
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Yes — a class-level mention proves product approval",
+          "correct": false,
+          "feedback": "Source 3 treats approval as product-specific verification, not a property of a class mention."
+        },
+        {
+          "id": "same-molecule",
+          "text": "Yes — the class mention identifies the molecule",
+          "correct": false,
+          "feedback": "A class-level label does not identify one molecule, and this is the wrong axis anyway."
+        },
+        {
+          "id": "different-receptor",
+          "text": "Cannot determine — unless the receptor is named",
+          "correct": false,
+          "feedback": "The receptor axis is not the evidence gap here; the question asks about review for a stated use."
+        }
+      ],
+      "explanation": "Approval belongs to a product and a reviewed use; a general mention cannot settle it. [2][3]",
+      "hint_ladder": [
+        "Does a general class mention name one product and one use?",
+        "No. Ask for the product-specific, use-specific review statement."
+      ],
+      "source_ids": [
+        2,
+        3
+      ],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the evidence-gap wording; no clinical recommendation is implied.",
+      "worked_example": "Name the exact product and the exact use, then check whether that use was reviewed.",
+      "data": {
+        "axis": "regulatory",
+        "card": "A label mentions receptor-agonist medicines in general; no specific product or stated use is named.",
+        "answer": "cannot-determine",
+        "undetermined": true,
+        "missing_evidence": "A product-specific statement about the reviewed stated use.",
+        "evidence": "Source 3: FDA verifies safety, effectiveness and quality through a product-level approval process."
+      }
+    },
+    {
+      "id": "t3-sameness-claim",
+      "concept": "evidence-gaps",
+      "tier": 3,
+      "misconception": "A sameness claim is evidence of sameness",
+      "prompt": "Evidence: 'An advertisement says a compounded preparation is the same as an approved one; no comparative data are supplied.' Does this settle the same-molecule shelf?",
+      "choices": [
+        {
+          "id": "cannot-determine",
+          "text": "Cannot determine: comparative evidence is missing; FDA lists sameness claims as a red flag",
+          "correct": true
+        },
+        {
+          "id": "same-molecule",
+          "text": "Yes — the claim itself establishes sameness",
+          "correct": false,
+          "feedback": "Source 2 lists 'claims such as the compounded drug is the same as an FDA-approved drug' among warning signs."
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Yes — the approved comparison product was reviewed, so both were",
+          "correct": false,
+          "feedback": "Approval does not transfer to a different preparation; source 3 says compounded drugs are not approved."
+        },
+        {
+          "id": "same-receptor",
+          "text": "Cannot determine — unless both are receptor agonists",
+          "correct": false,
+          "feedback": "The receptor is not the gap; the missing evidence is a comparative molecular identity check."
+        }
+      ],
+      "explanation": "A claim is not data. FDA flags sameness claims; identity needs comparative evidence. [2][3]",
+      "hint_ladder": [
+        "Is a claim the same thing as comparative data?",
+        "FDA lists sameness claims as a red flag; ask what comparison supports it."
+      ],
+      "source_ids": [
+        2,
+        3
+      ],
+      "needs_review": true,
+      "review_note": "Pending clinical review; framed as evaluating a claim, not judging any product.",
+      "worked_example": "Ask what comparative test or structural record supports the sameness claim before sorting the molecule shelf.",
+      "data": {
+        "axis": "molecule",
+        "card": "An advertisement says a compounded preparation is the same as an approved one; no comparative data are supplied.",
+        "answer": "cannot-determine",
+        "undetermined": true,
+        "missing_evidence": "Comparative structural or identity data for the two preparations.",
+        "evidence": "Source 2: sameness claims are a red flag; source 3: compounded drugs are not FDA-approved."
+      }
+    },
+    {
+      "id": "t3-origin-vs-review",
+      "concept": "evidence-gaps",
+      "tier": 3,
+      "misconception": "Natural origin means regulated approval",
+      "prompt": "Evidence: 'A signal is made by intestinal cells after a meal and clears quickly.' Does this settle any reviewed-approved shelf for a stated use?",
+      "choices": [
+        {
+          "id": "cannot-determine",
+          "text": "Cannot determine: no product, stated use or review record is given",
+          "correct": true
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Yes — because the body makes it",
+          "correct": false,
+          "feedback": "Being made in the body is not a product approval. Source 3 connects approval to drug products."
+        },
+        {
+          "id": "same-molecule",
+          "text": "Yes — origin always proves molecular identity",
+          "correct": false,
+          "feedback": "The question is about the regulatory shelf, and origin does not supply a review record."
+        },
+        {
+          "id": "same-receptor",
+          "text": "Cannot determine — unless the receptor is stated",
+          "correct": false,
+          "feedback": "Receptor is another axis; the review shelf needs a product and a stated use."
+        }
+      ],
+      "explanation": "Origin and lifetime are biological observations; approval is a product-level regulatory fact. [1][3]",
+      "hint_ladder": [
+        "Which shelf does the question ask about, and what does the card actually describe?",
+        "It describes origin and lifetime; review needs a product, a use and a review record."
+      ],
+      "source_ids": [
+        1,
+        3
+      ],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the evidence-gap wording; no medical advice is given.",
+      "worked_example": "Name a product and a use, then check a review record — origin alone never fills that gap.",
+      "data": {
+        "axis": "regulatory",
+        "card": "A signal is made by intestinal cells after a meal and clears quickly.",
+        "answer": "cannot-determine",
+        "undetermined": true,
+        "missing_evidence": "A product, its stated use, and the review record for that use.",
+        "evidence": "Source 1: native GLP-1 origin and brief lifetime; source 3: approval is product-level."
+      }
+    },
+    {
+      "id": "t3-marketed-vs-reviewed",
+      "concept": "evidence-gaps",
+      "tier": 3,
+      "misconception": "If it is marketed, it must have passed FDA review",
+      "prompt": "Evidence: 'A preparation is being marketed for a stated use; the card includes no review record.' Does marketing settle the reviewed-approved shelf?",
+      "choices": [
+        {
+          "id": "cannot-determine-alt",
+          "text": "Cannot determine — but only because marketing is forbidden",
+          "correct": false,
+          "feedback": "Marketing is not forbidden here; the gap is simply that no review record was supplied."
+        },
+        {
+          "id": "cannot-determine",
+          "text": "Cannot determine: a review record for that product and use is missing",
+          "correct": true
+        },
+        {
+          "id": "reviewed-approved",
+          "text": "Yes — being marketed proves premarket review",
+          "correct": false,
+          "feedback": "Source 2 says unapproved versions do not undergo FDA review before they are marketed."
+        },
+        {
+          "id": "same-receptor",
+          "text": "Yes — marketing for a receptor agonist means the receptor shelf is approved",
+          "correct": false,
+          "feedback": "Receptor targeting is a different axis; approval needs a product-level review record."
+        }
+      ],
+      "explanation": "FDA explicitly describes unapproved versions being marketed without premarket review. [2]",
+      "hint_ladder": [
+        "Does 'marketed' appear anywhere in a definition of FDA approval?",
+        "Source 2 describes unapproved products being marketed, so ask for the review record."
+      ],
+      "source_ids": [
+        2
+      ],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the evidence-gap wording; no product is named or judged.",
+      "worked_example": "Ask for a review record for that exact product and use; marketing alone cannot answer it.",
+      "data": {
+        "axis": "regulatory",
+        "card": "A preparation is being marketed for a stated use; the card includes no review record.",
+        "answer": "cannot-determine",
+        "undetermined": true,
+        "missing_evidence": "The FDA review record for that product and stated use.",
+        "evidence": "Source 2: unapproved versions do not undergo FDA review before they are marketed."
+      }
+    }
+  ]
+}

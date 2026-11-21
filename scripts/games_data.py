@@ -121,6 +121,10 @@ def validate_game(game, lessons_by_slug: dict, stem: str | None = None) -> list[
     if not isinstance(game, dict):
         return ['top level: must be a JSON object']
     errs = []
+    mode = game.get('review_mode', 'strict')
+    if mode not in ('strict', 'flagged'):
+        errs.append('review_mode: must be "strict" (default) or "flagged"')
+    flagged_ok = mode == 'flagged'
     slug = game.get('game')
     if not (isinstance(slug, str) and SLUG.match(slug)):
         errs.append('game: must be a lowercase-hyphen slug')
@@ -146,6 +150,13 @@ def validate_game(game, lessons_by_slug: dict, stem: str | None = None) -> list[
             if iid in seen:
                 errs.append(f'items[{i}].id: duplicate item id {iid!r}')
             seen.add(iid)
+        if isinstance(item, dict):
+            flagged = item.get('needs_review') is True
+            note = item.get('review_note')
+            if flagged and flagged_ok and not _nonblank(note):
+                errs.append(f'items[{i}].review_note: required non-empty reason when review_mode="flagged"')
+            if not flagged and 'review_note' in item:
+                errs.append(f'items[{i}].review_note: only needs_review=true items may carry a review note')
     for text in _strings(game):
         for rx, what in ((DOSE, 'dose-like quantity'), (BRANDS, 'drug/brand name')):
             m = rx.search(text)
@@ -171,11 +182,14 @@ def validate_dir(games_dir: Path, lessons: list[dict]) -> dict[str, list[str]]:
 
 
 def publishable_items(game: dict) -> list[dict]:
+    """Reviewed items only; flagged mode also publishes needs_review items with a visible banner."""
+    if game.get('review_mode') == 'flagged':
+        return list(game['items'])
     return [i for i in game['items'] if i['needs_review'] is False]
 
 
 def public_games(games_dir: Path, lessons: list[dict]) -> list[dict]:
-    """Validated, non-fixture games with at least one reviewed item, sorted by file name."""
+    """Validated, non-fixture games with at least one publishable item, sorted by file name."""
     problems = validate_dir(games_dir, lessons)
     if problems:
         raise ValueError('Invalid game files: ' + '; '.join(f'{f}: {e[0]}' for f, e in problems.items()))

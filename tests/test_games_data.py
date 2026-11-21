@@ -154,6 +154,24 @@ class BuildGating(unittest.TestCase):
         game['items'][0]['needs_review'] = True
         self.assertEqual(len(gd.publishable_items(game)), len(EXAMPLE['items']) - 1)
 
+    def test_strict_mode_rejects_review_note_and_bad_mode(self):
+        game = copy.deepcopy(EXAMPLE)
+        game['items'][0]['review_note'] = 'check later'
+        self.assertIn('review_note', errors(game)[0])
+        game = copy.deepcopy(EXAMPLE)
+        game['review_mode'] = 'whenever'
+        self.assertTrue(any('review_mode' in e for e in errors(game)))
+
+    def test_flagged_mode_publishes_with_notes(self):
+        game = copy.deepcopy(EXAMPLE)
+        game['review_mode'] = 'flagged'
+        game['items'][0]['needs_review'] = True
+        self.assertTrue(any('review_note' in e for e in errors(game)))  # note is required
+        game['items'][0]['review_note'] = 'Awaiting clinical review of the evidence-gap wording.'
+        self.assertEqual(errors(game), [])
+        self.assertEqual(len(gd.publishable_items(game)), len(EXAMPLE['items']))
+        self.assertEqual(all(i['needs_review'] for i in game['items'][:1]), True)
+
 
 class BuildMountPoint(unittest.TestCase):
     def setUp(self):
