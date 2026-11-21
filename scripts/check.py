@@ -53,7 +53,15 @@ for game in public:
     page=(site/'lessons'/f"{game['lesson']}.html").read_text()
     assert f'id="game-{game["game"]}"' in page and '<section class="wrap section games" id="games"' in page and '<noscript>' in page,game['game']
     data=json.loads((site/'games'/'data'/f"{game['game']}.json").read_text())
-    assert data['items'] and all(i['needs_review'] is False for i in data['items']),game['game']
+    assert data['items'],f"{game['game']}: no published items"
+    flagged_mode = game.get('review_mode') == 'flagged'
+    assert data.get('review_mode') == game.get('review_mode'),f"{game['game']}: published review_mode mismatch"
+    if flagged_mode:
+        # The card's Tier 3 items stay flagged for clinical review but are playable behind a banner.
+        assert all(i.get('review_note','').strip() for i in data['items'] if i['needs_review'] is True),f"{game['game']}: flagged item missing review note"
+        assert any(i['needs_review'] is True for i in data['items']),f"{game['game']}: flagged mode set but no flagged item"
+    else:
+        assert all(i['needs_review'] is False for i in data['items']),game['game']
     assert (site/'games'/game['game']/'main.js').is_file(),f"missing game entry module for {game['game']}"
 for lesson in lessons:  # a lesson with no public game must not carry a mount section
     if not any(g['lesson']==lesson['slug'] for g in public):

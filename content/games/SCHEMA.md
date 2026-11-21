@@ -28,9 +28,24 @@ Files whose name starts with `_` are **test fixtures**: validated like any other
 | `explanation` | string | non-empty; shown after answering |
 | `hint_ladder` | array of strings | non-blank strings, ordered gentle to strong; **at least 2 for tier 1 and 2**; may be empty or absent at tier 3 |
 | `source_ids` | array of integers | non-empty, unique, each in `1..N` where N = number of `sources` in the item's lesson (1-based position in that lesson's `sources` list, matching the numbered source shelf) |
-| `needs_review` | boolean | **required**. `true` holds the item out of the public build (clinical-claims review pending). A game is public only if at least one item is `false` |
+| `needs_review` | boolean | **required**. `true` holds the item out of the public build (clinical-claims review pending). A game is public only if at least one item is `false`; a game with `review_mode: "flagged"` is the explicit exception below. |
 | `worked_example` | string | optional; if present, non-blank |
 | `data` | object | optional; game-specific payload (e.g. cards to sort). The generic validator checks only that it is an object; the owning game card adds its own validation |
+
+## Flagged review mode (Tier 3 opt-in)
+
+`review_mode` is an optional game-level string. Default (`"strict"`) keeps the rule above unchanged:
+`needs_review: true` items never leave the build. `"flagged"` lets such items through **only** when
+every flagged item also has a non-empty `review_note` string; the build adds `review_mode` to the
+published data so the game can show a visible “Pending clinical review” banner next to those items.
+This exists for the Three-Axis Sorter, whose card requires all Tier 3 items to be flagged while
+still letting the learner practise them. `check.py` enforces the banner contract. Games that omit
+`review_mode` are unaffected.
+
+| Field | Type | Rule |
+|---|---|---|
+| `review_mode` | string | optional; `"strict"` (default) or `"flagged"` only |
+| `review_note` | string | required and non-blank on every `needs_review: true` item when `review_mode: "flagged"`; forbidden otherwise (stripped from nothing, so keep it out) |
 
 ## Safety lint
 
