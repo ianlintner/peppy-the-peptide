@@ -1,0 +1,22 @@
+/* Shared game shell styles. Colour is never the only signal: states also carry text and borders. */
+.pg-shell{background:var(--white,#fffdf5);border:3px solid var(--ink,#20272b);padding:20px;max-width:780px;box-shadow:6px 6px var(--gold,#f9d96d)}
+.pg-title{margin:0 0 6px}.pg-summary,.pg-progress{margin:0 0 8px}.pg-small{font-size:14px;color:var(--muted,#4d585b);margin:8px 0}
+.pg-tiers,.pg-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.pg-btn{border:2px solid var(--ink,#20272b);background:transparent;color:inherit;padding:9px 15px;min-height:44px;font-weight:700}
+.pg-btn[aria-pressed=true]{background:var(--blue,#116d9d);color:#fff;text-decoration:underline}
+.pg-primary{background:var(--red,#db4631);color:#fff}
+.pg-btn[aria-disabled=true]{opacity:.65;border-style:dashed}
+.pg-offer,.pg-done,.pg-src,.pg-feedback:not(:empty){border:2px solid var(--ink,#20272b);padding:12px 15px;margin:12px 0}
+.pg-offer{background:var(--gold,#f9d96d)}
+.pg-feedback:focus{outline:3px solid var(--blue,#116d9d);outline-offset:3px}
+.pg-feedback:empty{border:0;padding:0;margin:0}
+.pg-choices,.pg-confidence{border:0;padding:0;margin:0 0 12px}.pg-confidence{border:2px solid var(--ink,#20272b);padding:8px 12px}
+.pg-prompt{font-weight:700;font-size:19px;margin-bottom:10px;padding:0}
+.pg-choice{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--ink,#20272b);padding:10px 12px;margin:0 0 8px;min-height:44px}
+.pg-choice input,.pg-confidence input{width:20px;height:20px;margin-top:2px;flex:none}
+.pg-choice.is-picked{border-width:4px}.pg-choice.is-correct{border-style:double;border-width:5px}
+.pg-run:focus{outline:3px solid var(--blue,#116d9d);outline-offset:3px}
+.pg-hints{padding-left:22px}.pg-worked{border-left:6px solid var(--ink,#20272b);padding-left:10px}
+.pg-shell [hidden]{display:none}
+@media(prefers-reduced-motion:no-preference){.pg-btn{transition:background .15s}}
+@media(prefers-reduced-motion:reduce){.pg-shell *{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
