@@ -20,7 +20,7 @@ function stateOwners(el) {
     );
     if (found.length) return found;
   }
-  return [el];
+  return []; // no figure: never write state onto an unrelated element (it would outlive a later mount)
 }
 
 /** Keep the generated accessible name in step with the state; explicit custom labels are kept. */

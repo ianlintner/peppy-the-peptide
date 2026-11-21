@@ -2,7 +2,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { safeColor, pickInk, contrastRatio, renderPeppySvg, STATE_LABELS } from '../peppy-svg.js';
+import { safeColor, pickInk, contrastRatio, renderPeppySvg, STATE_LABELS, STATES } from '../peppy-svg.js';
+import { galleryCellHtml } from '../peppy-gallery.js';
 import { setPeppyState } from '../peppy-state.js';
 
 const css = readFileSync(new URL('../peppy.css', import.meta.url), 'utf8');
@@ -109,4 +110,28 @@ test('unknown states are ignored', () => {
   frame.dataset.state = 'idle';
   setPeppyState(frame, 'bogus');
   assert.equal(frame.dataset.state, 'idle');
+});
+
+test('setPeppyState before mount leaves the container untouched', () => {
+  const root = el(['div']);
+  setPeppyState(root, 'cheer');
+  assert.equal(root.dataset.state, undefined);
+  // A thinking figure mounting later must be the only pose owner.
+  const frame = el(['.peppy-frame'], { role: 'img', 'aria-label': STATE_LABELS.thinking }, root);
+  frame.dataset.state = 'thinking';
+  setPeppyState(root, 'point');
+  assert.equal(frame.dataset.state, 'point');
+  assert.equal(root.dataset.state, undefined);
+});
+
+test('gallery cells: the svg owns the state and its accessible name matches the pose', () => {
+  for (const state of STATES) {
+    const html = galleryCellHtml(state, state);
+    assert.doesNotMatch(html, /<span class="peppy-frame"[^>]*data-state/, `${state}: wrapper must not own state`);
+    assert.match(html, new RegExp(`<svg[^>]*data-state="${state}"`), state);
+    const title = /<title id="[^"]*-title">([^<]*)<\/title>/.exec(html)[1];
+    assert.equal(title, STATE_LABELS[state], state);
+  }
+  const beads = galleryCellHtml('cheer', 'beads-cheer', { beads: [{ letter: 'A', color: '#fff' }] });
+  assert.match(beads, /<svg[^>]*data-state="cheer"/);
 });
