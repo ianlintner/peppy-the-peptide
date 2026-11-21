@@ -10,6 +10,7 @@ import { newSession, answer, chooseTier, offerTarget, dismissOffer } from '../en
 import { pickNext } from '../engine/select.js';
 import { createLadder, nextHint, hintLabel, shownHints } from '../engine/hints.js';
 import { record, startTier } from '../engine/mastery.js';
+import { itemReset, progressText } from '../engine/view.js';
 const html = htm.bind(h);
 let shellSeq = 0; // unique radio group names per shell instance (lessons can mount several games)
 
@@ -45,7 +46,8 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
 
   const load = (s, seen = s.seen) => {
     const next = pickNext(items, { tier: s.tier, seen, seed: seed + ':' + seen.length });
-    setItem(next); setLoadId((n) => n + 1); setTentative(null); setConfident(null); setRevealed(null); setShowSrc(false);
+    const r = itemReset(); // clears hint/tier notes too, so nothing from the previous question leaks
+    setItem(next); setLoadId((n) => n + 1); setTentative(r.tentative); setConfident(r.confident); setRevealed(r.revealed); setShowSrc(r.showSrc); setNote(r.note);
     setLadder(createLadder(next && next.hint_ladder));
   };
   // Focus the prompt group of the new item once it renders (after "Next question" unmounts the button).
@@ -61,7 +63,7 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
   const showAnswer = () => finish({ ...(Runner.answer ? Runner.answer(item) : { correct: true }), correct: false, shownAnswer: true }, undefined);
   const hint = () => { const l = nextHint(ladder); setLadder(l); setNote(`Hint ${l.used}: ${l.hints[l.used - 1]}`); };
   const pickTier = (t) => { const s = chooseTier(done >= total ? { ...session, seen: [] } : session, t); // a finished set starts a fresh pass
-    setSession(s); setNote(`Now practicing ${TIER_NAMES[s.tier]} questions.`); load(s); };
+    setSession(s); load(s); setNote(`Now practicing ${TIER_NAMES[s.tier]} questions.`); };
   const offer = session.offer;
   const target = offerTarget(offer);
   const ot = offerText(offer, target);
@@ -76,7 +78,7 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
     <header class="pg-head">
       <h3 class="pg-title">${title}</h3>
       ${summary && html`<p class="pg-summary">${summary}</p>`}
-      <p class="pg-progress" role="status">Question ${Math.min(done + (revealed ? 0 : 1), total)} of ${total} · ${done} answered · ${TIER_NAMES[session.tier]} tier</p>
+      <p class="pg-progress" role="status">${progressText({ done, total, revealed, item, tierNames: TIER_NAMES })}</p>
       ${!store.isPersistent() && html`<p class="pg-small">Progress can't be saved in this browser, so it will reset when you leave the page.</p>`}
     </header>
 
