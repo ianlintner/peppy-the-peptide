@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { itemReset, progressText } from '../view.js';
+import { itemReset, progressText, tierNote, finishReset } from '../view.js';
 import { pickNext } from '../select.js';
 import { createLadder, nextHint } from '../hints.js';
 
@@ -39,4 +39,23 @@ test('progress line counts: first item, after reveal, clamped at total, no item'
   assert.match(progressText({ done: 1, total: 3, revealed: {}, item, tierNames: names }), /^Question 1 of 3 · 1 answered/);
   assert.match(progressText({ done: 3, total: 3, revealed: null, item, tierNames: names }), /^Question 3 of 3/);
   assert.equal(progressText({ done: 0, total: 0, revealed: null, item: null, tierNames: names }), 'Question 0 of 0 · 0 answered');
+});
+
+test('finish clears the hint note so it cannot resurface on the completion screen', () => {
+  let st = { ...itemReset(), note: 'Hint 1: x', revealed: { correct: true } };
+  st = { ...st, ...finishReset() };
+  assert.equal(st.note, '');
+  assert.equal(st.revealed, null);
+});
+
+test('tier announcement names the preference and, on fallback, the shown tier', () => {
+  const items = [{ id: 'a', tier: 1, concept: 'c' }, { id: 'b', tier: 3, concept: 'c' }];
+  const same = pickNext(items, { tier: 3, seen: [], seed: 's' });
+  assert.equal(tierNote(3, same, names), 'Now practicing Mechanism questions.');
+  const fb = pickNext(items, { tier: 1, seen: ['a'], seed: 's' });
+  const text = tierNote(1, fb, names);
+  assert.match(text, /preference set to Curious/);
+  assert.match(text, /Mechanism question/);
+  assert.doesNotMatch(text, /Now practicing Curious/);
+  assert.match(tierNote(2, null, names), /Now practicing College/);
 });

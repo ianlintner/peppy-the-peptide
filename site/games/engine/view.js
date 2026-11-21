@@ -12,3 +12,13 @@ export function progressText({ done, total, revealed, item, tierNames }) {
   const tier = item && tierNames[item.tier] ? ` · ${tierNames[item.tier]} question` : '';
   return `Question ${n} of ${total} · ${done} answered${tier}`;
 }
+
+/** Polite announcement after the learner picks a tier. Names the preference, and the shown question's tier when pickNext fell back. */
+export function tierNote(preferred, item, tierNames) {
+  const pref = tierNames[preferred];
+  if (!item || item.tier === preferred) return `Now practicing ${pref} questions.`;
+  return `Tier preference set to ${pref}. No unseen ${pref} questions are left, so this is a ${tierNames[item.tier]} question.`;
+}
+
+/** Finish (last item revealed -> completion screen): drop all per-item text, including a hint note. */
+export const finishReset = () => ({ revealed: null, note: '' });

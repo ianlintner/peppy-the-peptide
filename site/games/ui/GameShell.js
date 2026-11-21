@@ -10,7 +10,7 @@ import { newSession, answer, chooseTier, offerTarget, dismissOffer } from '../en
 import { pickNext } from '../engine/select.js';
 import { createLadder, nextHint, hintLabel, shownHints } from '../engine/hints.js';
 import { record, startTier } from '../engine/mastery.js';
-import { itemReset, progressText } from '../engine/view.js';
+import { itemReset, progressText, tierNote, finishReset } from '../engine/view.js';
 const html = htm.bind(h);
 let shellSeq = 0; // unique radio group names per shell instance (lessons can mount several games)
 
@@ -63,7 +63,8 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
   const showAnswer = () => finish({ ...(Runner.answer ? Runner.answer(item) : { correct: true }), correct: false, shownAnswer: true }, undefined);
   const hint = () => { const l = nextHint(ladder); setLadder(l); setNote(`Hint ${l.used}: ${l.hints[l.used - 1]}`); };
   const pickTier = (t) => { const s = chooseTier(done >= total ? { ...session, seen: [] } : session, t); // a finished set starts a fresh pass
-    setSession(s); load(s); setNote(`Now practicing ${TIER_NAMES[s.tier]} questions.`); };
+    const next = pickNext(items, { tier: s.tier, seen: s.seen, seed: seed + ':' + s.seen.length });
+    setSession(s); load(s); setNote(tierNote(s.tier, next, TIER_NAMES)); };
   const offer = session.offer;
   const target = offerTarget(offer);
   const ot = offerText(offer, target);
@@ -137,7 +138,7 @@ export function GameShell({ title, summary, items, sources = [], store, runner: 
       ${!revealed && note && html`<p>${note}</p>`}
     </div>
 
-    ${revealed && !finished && html`<div class="pg-actions"><button type="button" class="pg-btn pg-primary" onClick=${() => (done >= total ? setRevealed(null) : load(session))}>${done >= total ? 'Finish' : 'Next question'}</button></div>`}
+    ${revealed && !finished && html`<div class="pg-actions"><button type="button" class="pg-btn pg-primary" onClick=${() => (done >= total ? (setRevealed(finishReset().revealed), setNote(finishReset().note)) : load(session))}>${done >= total ? 'Finish' : 'Next question'}</button></div>`}
     <p class="pg-small">Nothing here is timed or locked. Educational practice, not medical advice.</p>
   </div>`;
 }

@@ -39,3 +39,10 @@ test('review fixes: per-instance radio groups/ids, remount per load, fresh pass 
   assert.match(shell, /done >= total \? \{ \.\.\.session, seen: \[\] \}/);
   assert.match(shell, /ladder\.hints\.length > 0[^\n]*aria-disabled=\$\{!label\}/);
 });
+
+test('shell wires finishReset and tierNote (no stale hint on Finish, no contradictory tier announcement)', () => {
+  const shell = readFileSync(dir + 'GameShell.js', 'utf8');
+  assert.match(shell, /finishReset\(\)\.note/);
+  assert.match(shell, /tierNote\(s\.tier, next, TIER_NAMES\)/);
+  assert.doesNotMatch(shell, /Now practicing \$\{TIER_NAMES/);
+});
