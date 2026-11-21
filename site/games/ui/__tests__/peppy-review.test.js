@@ -54,7 +54,12 @@ function el(selectorsMatched, attrs = {}, parent = null) {
     getAttribute(k) { return k in this.attrs ? this.attrs[k] : null; },
     setAttribute(k, v) { this.attrs[k] = v; },
     hasAttribute(k) { return k in this.attrs; },
-    querySelector(sel) { return sel === 'title' ? this.titleNode : null; },
+    querySelector(sel) {
+      if (sel === 'title') return this.titleNode;
+      const stated = sel.endsWith('[data-state]');
+      const base = stated ? sel.slice(0, -'[data-state]'.length) : sel;
+      return this.querySelectorAll(base).find((n) => !stated || n.dataset.state !== undefined) || null;
+    },
     querySelectorAll(sel) {
       const out = [];
       const walk = (n) => { for (const c of n.children) { if (c.matches(sel)) out.push(c); walk(c); } };
@@ -134,4 +139,20 @@ test('gallery cells: the svg owns the state and its accessible name matches the 
   }
   const beads = galleryCellHtml('cheer', 'beads-cheer', { beads: [{ letter: 'A', color: '#fff' }] });
   assert.match(beads, /<svg[^>]*data-state="cheer"/);
+});
+
+test('switching a rendered gallery cell updates only the svg owner and its title', () => {
+  for (const start of ['frame', 'svg', 'ancestor']) {
+    const li = el(['li']);
+    const frame = el(['.peppy-frame'], {}, li);
+    const svg = el(['svg.peppy'], {}, frame);
+    svg.dataset.state = 'wink';
+    svg.titleNode = { textContent: STATE_LABELS.wink };
+    const target = { frame, svg, ancestor: li }[start];
+    setPeppyState(target, 'cheer');
+    assert.equal(svg.dataset.state, 'cheer', start);
+    assert.equal(svg.titleNode.textContent, STATE_LABELS.cheer, start);
+    assert.equal(frame.dataset.state, undefined, `${start}: wrapper must not gain a competing state`);
+    assert.equal(li.dataset.state, undefined, start);
+  }
 });

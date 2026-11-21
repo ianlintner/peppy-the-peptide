@@ -9,16 +9,26 @@ const STANDALONE = 'svg.peppy';
  * Accepts the owner itself, anything inside one, or an ancestor containing figures. Setting state on
  * an ancestor instead would stack a second `data-state` over the frame's own and show two poses.
  */
+const OWNING_SVG = `${STANDALONE}[data-state]`;
+
+/** A frame whose inner svg carries `data-state` (e.g. gallery cells) delegates ownership to that svg. */
+function resolveOwner(node) {
+  if (node.matches?.(FRAME) && typeof node.querySelector === 'function') {
+    return node.querySelector(OWNING_SVG) || node;
+  }
+  return node;
+}
+
 function stateOwners(el) {
   if (typeof el.closest === 'function') {
     const own = el.closest(FRAME) || el.closest(STANDALONE);
-    if (own) return [own];
+    if (own) return [resolveOwner(own)];
   }
   if (typeof el.querySelectorAll === 'function') {
     const found = [...el.querySelectorAll(`${FRAME}, ${STANDALONE}`)].filter(
       (node) => node.matches(FRAME) || !node.closest(FRAME),
     );
-    if (found.length) return found;
+    if (found.length) return found.map(resolveOwner);
   }
   return []; // no figure: never write state onto an unrelated element (it would outlive a later mount)
 }
