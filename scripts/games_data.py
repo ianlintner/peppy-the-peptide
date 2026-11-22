@@ -210,7 +210,85 @@ def _validate_bead_item(item, where):
     return errs
 
 
-ITEM_VALIDATORS = {'bead-chain-builder': _validate_bead_item}
+def _validate_dispatch_item(item, where):
+    """Islet Dispatch: qualitative state + a cell/signal/target triple per choice."""
+    d = item.get('data')
+    if not isinstance(d, dict):
+        return [f'{where}.data: islet-dispatch items need a data object']
+    errs, w = [], f'{where}.data'
+    if d.get('state') not in ('low', 'elevated'):
+        errs.append(f'{w}.state: must be "low" or "elevated"')
+    if not _nonblank(d.get('cue')):
+        errs.append(f'{w}.cue: missing scenario cue')
+    options = d.get('options')
+    if not isinstance(options, dict) or len(options) < 3:
+        errs.append(f'{w}.options: need at least three dispatch plans')
+        return errs
+    expected = {'low': ('Alpha cell', 'glucagon', 'liver'),
+                'elevated': ('Beta cell', 'insulin', 'many cell types')}
+    state = d.get('state')
+    if state in expected:
+        answer = d.get('answer')
+        want = expected[state]
+        if options.get(answer) != {'cell': want[0], 'signal': want[1], 'target': want[2]}:
+            errs.append(f'{w}.answer: must name the sourced triple for the scenario state')
+        for oid, value in options.items():
+            if not isinstance(value, dict) or not all(_nonblank(value.get(k)) for k in ('cell', 'signal', 'target')):
+                errs.append(f'{w}.options[{oid}]: cell/signal/target must be non-empty text')
+    cs = [c for c in item.get('choices', []) if isinstance(c, dict)]
+    ids = [c.get('id') for c in cs]
+    right = [c.get('id') for c in cs if c.get('correct') is True]
+    if sorted(ids) != sorted(options) or right != [d.get('answer')]:
+        errs.append(f'{where}.choices: one correct choice matching data.answer, one choice per data.options id')
+    return errs
+
+
+def _validate_relay_item(item, where):
+    """Relay Race: main lane is ordered; DPP-4 branch is separate; distractors are labelled."""
+    d = item.get('data')
+    if not isinstance(d, dict):
+        return [f'{where}.data: relay-race items need a data object']
+    errs, w = [], f'{where}.data'
+    steps, main, branch = d.get('steps'), d.get('main_order'), d.get('branch_ids')
+    if not isinstance(steps, dict) or not steps:
+        errs.append(f'{w}.steps: need a step map')
+        return errs
+    if not isinstance(main, list) or not all(isinstance(s, str) for s in main):
+        errs.append(f'{w}.main_order: need a list of step ids')
+        main = []
+    if not isinstance(branch, list) or not all(isinstance(s, str) for s in branch):
+        errs.append(f'{w}.branch_ids: need a list of step ids')
+        branch = []
+    if set(main) & set(branch):
+        errs.append(f'{w}: main_order and branch_ids must be disjoint')
+    for sid, step in steps.items():
+        if not isinstance(step, dict) or not _nonblank(step.get('label')):
+            errs.append(f'{w}.steps[{sid}]: need a text label')
+        want = 'main' if sid in main else 'branch' if sid in branch else 'distractor'
+        if isinstance(step, dict) and step.get('lane') != want:
+            errs.append(f'{w}.steps[{sid}].lane: expected {want!r}')
+    if not main or not any(sid not in main for sid in steps):
+        errs.append(f'{w}: need at least one main step and one branch or distractor step')
+    canonical_main, canonical_branch = d.get('main_answer'), d.get('branch_answer')
+    if not (isinstance(canonical_main, list) and isinstance(canonical_branch, list)
+            and canonical_main == ['meal', 'lcell', 'receptor', 'insulin']
+            and canonical_branch == ['dpp4']):
+        errs.append(f'{w}: main_answer/branch_answer must be the sourced relay and degradation branch')
+    if 'gap' in d and not _nonblank(d['gap']):
+        errs.append(f'{w}.gap: when present, must be non-empty text')
+    cs = [c for c in item.get('choices', []) if isinstance(c, dict)]
+    ids = [c.get('id') for c in cs]
+    right = [c.get('id') for c in cs if c.get('correct') is True]
+    if right != ['main-branch'] or 'main-branch' not in ids:
+        errs.append(f'{where}.choices: exactly the "main-branch" choice may be correct')
+    return errs
+
+
+ITEM_VALIDATORS = {
+    'bead-chain-builder': _validate_bead_item,
+    'islet-dispatch': _validate_dispatch_item,
+    'relay-race': _validate_relay_item,
+}
 
 
 def validate_game(game, lessons_by_slug: dict, stem: str | None = None) -> list[str]:

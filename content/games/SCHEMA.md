@@ -92,6 +92,42 @@ The lint is deliberately blunt. Rewrite the text, or, if a legitimate case exist
 }
 ```
 
+## Game-specific `data` contracts
+
+### `islet-dispatch` (Lesson 2)
+
+Each item's `data` must carry:
+
+- `state`: `"low"` or `"elevated"` — the qualitative glucose state on the scenario card;
+- `cue`: short text naming the scenario cue (no numbers);
+- `options`: an object mapping each choice id to `{cell, signal, target}` (all non-empty);
+- `answer`: the choice id matching the sourced triple for the state — `low` →
+  `Alpha cell / glucagon / liver`, `elevated` → `Beta cell / insulin / many cell types`.
+
+`choices` must contain exactly one option per `data.options` key, with the single correct
+choice equal to `data.answer`. DPP-4, concentrations and timing are out of scope. Optional
+`contrast` names the other state for paired scenario cards.
+
+### `relay-race` (Lesson 3)
+
+Each item's `data` must carry:
+
+- `steps`: object mapping step ids to `{label, lane}`, where `lane` is `main`, `branch` or
+  `distractor`;
+- `main_order`: ordered array of main-lane step ids (the sourced relay sequence);
+- `branch_ids`: array of step ids on the separate degradation branch (empty is allowed for
+  repair items whose branch card starts in the distractor tray);
+- `answer`: always `"main-branch"`, the only permitted correct choice id;
+- `main_answer` / `branch_answer`: the canonical sourced sequence and degradation branch.
+  These stay constant even when `main_order` / `branch_ids` describe a scrambled starting board
+  for a repair item.
+
+`main_order` and `branch_ids` must be disjoint, each step's `lane` must match its arrays,
+and every step needs a text label. Optional `gap` (non-empty when present) records what
+extra evidence would be needed for a Tier 3 critique. A `distractor` step is a plausible
+but unsupported card the learner must keep off the main lane. Optional `cue` names the item's
+board scenario.
+
 ## Changing the schema
 
 Edit this file, `scripts/games_data.py` and `tests/test_games_data.py` together; add a failing-fixture test for any new rule.

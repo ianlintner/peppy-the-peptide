@@ -246,5 +246,82 @@ class BeadChainRules(unittest.TestCase):
         self.assertBead(lambda i: i['data']['readout'].__setitem__('sequence', 'HAEGTFTSDVSSYLEGQAAKEFIAWLVKGG'), 'cc-direction-readout', 'readout')
 
 
+DISPATCH = json.loads((ROOT / 'content' / 'games' / 'islet-dispatch.json').read_text(encoding='utf-8'))
+RELAY = json.loads((ROOT / 'content' / 'games' / 'relay-race.json').read_text(encoding='utf-8'))
+
+
+class IsletDispatchRules(unittest.TestCase):
+    def dispatch_errors(self, fn, item_id):
+        game = copy.deepcopy(DISPATCH)
+        fn(next(i for i in game['items'] if i['id'] == item_id))
+        return gd.validate_game(game, BY_SLUG, 'islet-dispatch')
+
+    def assertDispatch(self, fn, item_id, fragment):
+        errs = self.dispatch_errors(fn, item_id)
+        self.assertTrue(any(fragment in e for e in errs), f'expected {fragment!r} in {errs}')
+
+    def test_shipped_game_is_valid_and_public(self):
+        self.assertEqual(gd.validate_game(DISPATCH, BY_SLUG, 'islet-dispatch'), [])
+        self.assertIn('islet-dispatch', [g['game'] for g in gd.public_games(ROOT / 'content' / 'games', LESSONS)])
+        tiers = [i['tier'] for i in DISPATCH['items']]
+        self.assertTrue(all(tiers.count(t) >= 6 for t in (1, 2, 3)))
+
+    def test_state_and_cue_required(self):
+        self.assertDispatch(lambda i: i['data'].__setitem__('state', 'normal'), 't1-after-meal', 'data.state')
+        self.assertDispatch(lambda i: i['data'].pop('cue'), 't1-after-meal', 'data.cue')
+
+    def test_answer_must_match_qualitative_state(self):
+        def swap(i):
+            i['data']['state'] = 'low'
+        self.assertDispatch(swap, 't1-after-meal', 'data.answer')
+        def unknown(i):
+            i['data']['answer'] = 'made-up'
+        self.assertDispatch(unknown, 't1-after-meal', 'data.answer')
+
+    def test_options_and_choices_must_agree(self):
+        self.assertDispatch(lambda i: i['data']['options'].pop('beta-insulin-liver-only'), 't1-after-meal', 'choices')
+        self.assertDispatch(lambda i: i['data']['options']['beta-insulin-many-cells'].__setitem__('signal', ''),
+                            't1-after-meal', 'options')
+
+
+class RelayRaceRules(unittest.TestCase):
+    def relay_errors(self, fn, item_id):
+        game = copy.deepcopy(RELAY)
+        fn(next(i for i in game['items'] if i['id'] == item_id))
+        return gd.validate_game(game, BY_SLUG, 'relay-race')
+
+    def assertRelay(self, fn, item_id, fragment):
+        errs = self.relay_errors(fn, item_id)
+        self.assertTrue(any(fragment in e for e in errs), f'expected {fragment!r} in {errs}')
+
+    def test_shipped_game_is_valid_and_public(self):
+        self.assertEqual(gd.validate_game(RELAY, BY_SLUG, 'relay-race'), [])
+        self.assertIn('relay-race', [g['game'] for g in gd.public_games(ROOT / 'content' / 'games', LESSONS)])
+        tiers = [i['tier'] for i in RELAY['items']]
+        self.assertTrue(all(tiers.count(t) >= 6 for t in (1, 2, 3)))
+
+    def test_lanes_must_be_disjoint_and_labels_must_match(self):
+        def overlap(i):
+            i['data']['branch_ids'].append('meal')
+        self.assertRelay(overlap, 't1-relay-order', 'disjoint')
+        self.assertRelay(lambda i: i['data']['steps']['meal'].__setitem__('lane', 'branch'),
+                         't1-relay-order', 'expected')
+        self.assertRelay(lambda i: i['data']['steps']['dpp4'].pop('label'), 't1-relay-order', 'label')
+
+    def test_insert_item_can_start_with_empty_branch_but_needs_a_distractor(self):
+        # repair items deliberately start with DPP-4 in the distractor tray
+        self.assertEqual(self.relay_errors(lambda i: None, 't2-insert-branch'), [])
+        self.assertRelay(lambda i: i['data']['steps'].pop('dpp4'), 't2-insert-branch', 'branch or distractor')
+
+    def test_only_main_branch_choice_may_be_correct(self):
+        def flip(i):
+            right = next(c for c in i['choices'] if c['correct'])
+            other = next(c for c in i['choices'] if not c['correct'])
+            right['correct'] = False
+            right['feedback'] = 'not this one'
+            other['correct'] = True
+        self.assertRelay(flip, 't1-relay-order', 'main-branch')
+
+
 if __name__ == '__main__':
     unittest.main()

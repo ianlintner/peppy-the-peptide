@@ -1,0 +1,1921 @@
+{
+  "game": "relay-race",
+  "lesson": "endogenous-glp1",
+  "review_mode": "flagged",
+  "title": "Relay Race: The GLP-1 Message",
+  "summary": "Order the main relay from meal to glucose-dependent effect and place DPP-4 degradation on its own branch.",
+  "items": [
+    {
+      "id": "t1-relay-order",
+      "concept": "relay-sequence",
+      "tier": 1,
+      "misconception": "The receptor step can come after the effect",
+      "prompt": "Put the main relay in lesson order: what happens after a meal?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Start with the event that creates the context.",
+        "The receptor comes before the insulin effect; degradation is a side branch."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "first pass"
+      }
+    },
+    {
+      "id": "t1-side-branch",
+      "concept": "relay-sequence",
+      "tier": 1,
+      "misconception": "Degradation is another main relay step",
+      "prompt": "Where does DPP-4 degradation belong on this board?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Start with the event that creates the context.",
+        "The receptor comes before the insulin effect; degradation is a side branch."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "branch"
+      }
+    },
+    {
+      "id": "t1-meal-first",
+      "concept": "relay-sequence",
+      "tier": 1,
+      "misconception": "The signal can come before the meal",
+      "prompt": "Which card starts the relay, and why?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Start with the event that creates the context.",
+        "The receptor comes before the insulin effect; degradation is a side branch."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          },
+          "meal-last": {
+            "label": "Meal after the signal is released",
+            "lane": "distractor"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "start"
+      }
+    },
+    {
+      "id": "t1-glucose-condition",
+      "concept": "glucose-dependence",
+      "tier": 1,
+      "misconception": "The insulin effect ignores glucose",
+      "prompt": "The last main card says “insulin effect”. What condition must stay attached?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Start with the event that creates the context.",
+        "The receptor comes before the insulin effect; degradation is a side branch."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          },
+          "glucose-only": {
+            "label": "Insulin effect regardless of glucose",
+            "lane": "distractor"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "condition"
+      }
+    },
+    {
+      "id": "t1-surface-reader",
+      "concept": "receptor-location",
+      "tier": 1,
+      "misconception": "The message enters the cell to work",
+      "prompt": "Where does the lesson place the receptor that reads the message?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Start with the event that creates the context.",
+        "The receptor comes before the insulin effect; degradation is a side branch."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          },
+          "enters": {
+            "label": "GLP-1 enters the beta cell",
+            "lane": "distractor"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "surface"
+      }
+    },
+    {
+      "id": "t1-two-lanes",
+      "concept": "multi-branch-ordering",
+      "tier": 1,
+      "misconception": "A branch is a wrong answer",
+      "prompt": "Peppy draws two lanes. What does the lower lane mean?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "One lane carries the main sequence.",
+        "The other holds a separate fact about the signal’s fate."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "lanes"
+      }
+    },
+    {
+      "id": "t2-insert-branch",
+      "concept": "multi-branch-ordering",
+      "tier": 2,
+      "misconception": "Putting degradation inside the main lane",
+      "prompt": "A learner placed “DPP-4 degrades the native signal” between release and receptor. Fix the board.",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Which lane did the learner use?",
+        "Move the degradation card to the branch lane; main order stays unchanged."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "distractor"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "insert"
+      }
+    },
+    {
+      "id": "t2-repair-order",
+      "concept": "relay-sequence",
+      "tier": 2,
+      "misconception": "A later step can be swapped without consequence",
+      "prompt": "The board reads meal → receptor → L cell release → insulin effect. Repair the main lane.",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Two adjacent steps are reversed.",
+        "The L cell release comes before the receptor step."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "receptor",
+          "lcell",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "repair"
+      }
+    },
+    {
+      "id": "t2-glucose-gate",
+      "concept": "glucose-dependence",
+      "tier": 2,
+      "misconception": "A receptor event makes the effect unconditional",
+      "prompt": "A learner removes the glucose condition from the final card. What is lost?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Look at the wording of the last main card.",
+        "The effect is described as glucose-dependent."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          },
+          "glucose-only": {
+            "label": "Insulin effect regardless of glucose",
+            "lane": "distractor"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "gate"
+      }
+    },
+    {
+      "id": "t2-separate-facts",
+      "concept": "multi-branch-ordering",
+      "tier": 2,
+      "misconception": "Brief lifetime explains the glucose condition",
+      "prompt": "The branch card and the final main card are both in the lesson. What relation does the lesson assert?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson keeps degradation on a branch and the glucose-dependent effect on the main lane; it does not make one explain the other. [1][2]",
+      "hint_ladder": [
+        "Does the lesson join the two cards with “because”?",
+        "They are separate observations; the board keeps them in separate lanes."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "separate"
+      }
+    },
+    {
+      "id": "t2-distractor-check",
+      "concept": "receptor-location",
+      "tier": 2,
+      "misconception": "A plausible extra step is still unsupported",
+      "prompt": "A learner adds “GLP-1 enters the beta cell” to the main lane. Should it stay?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Reread the panel note about the receptor.",
+        "The message meets a reader at the cell surface; no entry step is shown."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          },
+          "enters": {
+            "label": "GLP-1 enters the beta cell",
+            "lane": "distractor"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "distractor"
+      }
+    },
+    {
+      "id": "t2-rewrite",
+      "concept": "relay-sequence",
+      "tier": 2,
+      "misconception": "Reordering can change the meaning of the relay",
+      "prompt": "Which of these rewrites keeps both the main order and the separate branch?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Read the options as complete boards.",
+        "Only one keeps degradation out of the main lane."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "rewrite"
+      }
+    },
+    {
+      "id": "t3-causal-claim",
+      "concept": "source-limits",
+      "tier": 3,
+      "misconception": "A branch card is offered as the cause",
+      "prompt": "Claim to critique: “The DPP-4 branch is why the insulin effect depends on glucose.” What is missing?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Which observation would the claim have to measure?",
+        "It would need to vary degradation and watch the glucose-dependent effect."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "causal",
+        "gap": "Evidence that varying degradation changes the glucose-dependent effect."
+      },
+      "review_note": "Pending qualified review: epistemic critique only; no mechanism beyond the lesson.",
+      "worked_example": "Say the sources report both facts separately, then name the experiment that would join them."
+    },
+    {
+      "id": "t3-deeper-why",
+      "concept": "source-limits",
+      "tier": 3,
+      "misconception": "The board is a full molecular mechanism",
+      "prompt": "A learner asks for the molecular steps inside the receptor card. What should Peppy say?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "What does the lesson say its mechanism layer is?",
+        "An entry point, not a complete molecular pathway."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "why",
+        "gap": "A fetched, quoted source for deeper receptor signalling detail."
+      },
+      "review_note": "Pending qualified review: deeper mechanism explicitly deferred to a quoted source.",
+      "worked_example": "Name the sourced sequence, then say a deeper why needs its own source and review."
+    },
+    {
+      "id": "t3-metaphor-limit",
+      "concept": "source-limits",
+      "tier": 3,
+      "misconception": "A relay cartoon is a literal pathway diagram",
+      "prompt": "Claim to critique: “The relay board shows every step the body takes after a meal.” What is the right reply?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Check the metaphor note on lesson 3.",
+        "The board orders a few sourced steps; it is not a complete pathway."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "metaphor",
+        "gap": "A source showing a complete pathway; the lesson does not claim one."
+      },
+      "review_note": "Pending qualified review: metaphor-boundary critique only.",
+      "worked_example": "Say what the board orders and stop; a complete pathway would need a different, reviewed source."
+    },
+    {
+      "id": "t3-branch-universal",
+      "concept": "multi-branch-ordering",
+      "tier": 3,
+      "misconception": "Every GLP-1 molecule must take the branch",
+      "prompt": "Claim to critique: “The DPP-4 branch happens to every message before it reaches a receptor.” What is the careful correction?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Does the source give a per-molecule sequence?",
+        "No; it reports degradation as a separate fact, not a mandatory step."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "universal",
+        "gap": "A source describing the fate of individual molecules, which the lesson does not provide."
+      },
+      "review_note": "Pending qualified review: source-strength critique; no numeric degradation claim.",
+      "worked_example": "Keep degradation as a separate branch and say the lesson does not assert a per-molecule order."
+    },
+    {
+      "id": "t3-quant-demand",
+      "concept": "qualitative-only",
+      "tier": 3,
+      "misconception": "An unordered qualitative board cannot teach sequence",
+      "prompt": "Claim to critique: “Without timing values, the relay board cannot say what comes first.” How should Peppy respond?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Is this about elapsed time or about order?",
+        "Order; the sources support the sequence without durations."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "quant",
+        "gap": "Numbers would answer a timing question, not an ordering question."
+      },
+      "review_note": "Pending qualified review: qualitative ordering versus quantitative timing.",
+      "worked_example": "Point to the sourced order and say timing values would answer a different question."
+    },
+    {
+      "id": "t3-partner-frame",
+      "concept": "glucose-dependence",
+      "tier": 3,
+      "misconception": "The receptor step alone decides the effect",
+      "prompt": "Claim to critique: “Once the message meets its receptor, the insulin effect follows unconditionally.” What does the lesson say?",
+      "choices": [
+        {
+          "id": "main-branch",
+          "text": "Meal → L cell GLP-1 release → receptor on beta cell → glucose-dependent insulin effect; DPP-4 degradation on a separate branch",
+          "correct": true
+        },
+        {
+          "id": "dpp4-in-main",
+          "text": "Meal → L cell release → DPP-4 degradation → receptor → insulin effect",
+          "correct": false,
+          "feedback": "DPP-4 degradation is a separate branch in the lesson, not a hand-off step in the main relay."
+        },
+        {
+          "id": "insulin-before-receptor",
+          "text": "Meal → L cell release → insulin effect → receptor on beta cell",
+          "correct": false,
+          "feedback": "The receptor step comes before the insulin effect; this order reverses them."
+        },
+        {
+          "id": "meal-after-release",
+          "text": "L cell release → receptor → insulin effect → meal",
+          "correct": false,
+          "feedback": "The meal is the context that comes first; putting it last breaks the lesson’s sequence."
+        },
+        {
+          "id": "receptor-enters",
+          "text": "Meal → L cell release → GLP-1 enters the beta cell → insulin effect",
+          "correct": false,
+          "feedback": "The lesson puts the message at a cell-surface receptor; it does not show the ligand entering the cell."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Meal → L cell release → receptor → insulin effect regardless of glucose",
+          "correct": false,
+          "feedback": "The lesson says the insulin effect is glucose-dependent; this removes that condition."
+        },
+        {
+          "id": "no-branch",
+          "text": "Meal → L cell release → receptor → insulin effect; no degradation branch",
+          "correct": false,
+          "feedback": "The lesson reports degradation of the native signal as a separate fact."
+        }
+      ],
+      "explanation": "The lesson orders the main steps from meal to receptor to a glucose-dependent insulin effect, and keeps degradation on a separate branch. [1][2]",
+      "hint_ladder": [
+        "Which word is attached to the final card?",
+        "“Dependent” — the effect is described as glucose-dependent."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "steps": {
+          "meal": {
+            "label": "Meal: nutrient context changes",
+            "lane": "main"
+          },
+          "lcell": {
+            "label": "Intestinal L cell releases GLP-1",
+            "lane": "main"
+          },
+          "receptor": {
+            "label": "GLP-1 meets the GLP-1 receptor on a beta cell",
+            "lane": "main"
+          },
+          "insulin": {
+            "label": "Insulin effect, dependent on glucose",
+            "lane": "main"
+          },
+          "dpp4": {
+            "label": "DPP-4 degrades the native signal",
+            "lane": "branch"
+          },
+          "glucose-only": {
+            "label": "Insulin effect regardless of glucose",
+            "lane": "distractor"
+          }
+        },
+        "main_order": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_ids": [
+          "dpp4"
+        ],
+        "answer": "main-branch",
+        "main_answer": [
+          "meal",
+          "lcell",
+          "receptor",
+          "insulin"
+        ],
+        "branch_answer": [
+          "dpp4"
+        ],
+        "cue": "partner",
+        "gap": "Evidence that receptor engagement removes the glucose condition."
+      },
+      "review_note": "Pending qualified review: glucose-dependence wording only.",
+      "worked_example": "Sequence alone is not enough: the final card keeps its glucose condition."
+    }
+  ]
+}
