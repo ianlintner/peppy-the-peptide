@@ -23,7 +23,7 @@ Files whose name starts with `_` are **test fixtures**: validated like any other
 | `tier` | integer | **required**, 1, 2 or 3 = Curious / College / Mechanism (booleans, floats and strings rejected) |
 | `misconception` | string | **required**, non-blank: the named misconception this item targets |
 | `prompt` | string | non-empty |
-| `choices` | array | at least 2; each `{id, text, correct, feedback?}`; `id` slug unique in the item; `text` non-empty; `correct` boolean; **exactly one** `correct: true` |
+| `choices` | array | at least 2; each `{id, text, correct, feedback?}`; `id` slug unique in the item; `text` non-empty; `correct` boolean; **exactly one** `correct: true`. Authoring order is not display order: runners render choices in a deterministic seeded order keyed by item id and assign display letters after shuffling, so the correct choice is not always first. Scoring is always by id. |
 | `choices[].feedback` | string | **required and non-blank on every distractor** (`correct: false`): says why this particular wrong answer is tempting and what it misses |
 | `explanation` | string | non-empty; shown after answering |
 | `hint_ladder` | array of strings | non-blank strings, ordered gentle to strong; **at least 2 for tier 1 and 2**; may be empty or absent at tier 3 |

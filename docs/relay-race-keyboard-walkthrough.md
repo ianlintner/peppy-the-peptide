@@ -39,6 +39,8 @@ with zero page errors and zero failed requests.
 3. Tier 3 critique items instead show the sourced relay as context and ask the
    learner to choose a careful reply with the arrow keys and `Space`; the authored
    choices and their misconception feedback are now actually exercised.
+   Choice display order in both games is seeded by item id, so the sourced
+   correct answer is not always the first ("Plan A") option.
 4. Lane and position are written into each card (`1`, `2`, `…` on the main lane,
    `B` on the branch) and into each list's accessible name, so no meaning rests
    on the branch's border style alone.

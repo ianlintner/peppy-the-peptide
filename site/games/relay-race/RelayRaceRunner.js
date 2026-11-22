@@ -7,6 +7,7 @@
 import { h } from '../../vendor/preact/preact.mjs';
 import htm from '../../vendor/htm/htm.mjs';
 import { useState } from '../../vendor/preact/hooks.mjs';
+import { shuffle } from '../engine/shuffle.js';
 import { Peppy } from '../ui/peppy.js';
 import { OUTCOME, boardFromSelection, critiqueCorrectId, evaluateBoard, initialBoard, moveStep } from './evaluator.js';
 
@@ -75,6 +76,7 @@ function Lane({ title, ids, steps, lane, onMove, locked }) {
 
 function CritiqueChoices({ item, locked, onSelect }) {
   const [picked, setPicked] = useState(null);
+  const orderedChoices = shuffle(item.choices || [], item.id);
   const pick = (choice) => {
     if (locked) return;
     setPicked(choice.id);
@@ -87,7 +89,7 @@ function CritiqueChoices({ item, locked, onSelect }) {
   };
   return html`<fieldset class="rr-critique" aria-label=${item.prompt}>
     <legend>Choose the careful reply</legend>
-    ${item.choices.map((choice) => html`<label class="rr-choice ${picked === choice.id ? 'is-picked' : ''}">
+    ${orderedChoices.map((choice) => html`<label class="rr-choice ${picked === choice.id ? 'is-picked' : ''}">
       <input type="radio" name=${`rr-critique-${item.id}`} value=${choice.id} checked=${picked === choice.id}
         disabled=${!!locked} onChange=${() => pick(choice)} />
       <span>${choice.text}</span>

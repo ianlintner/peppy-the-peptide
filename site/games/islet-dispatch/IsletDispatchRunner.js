@@ -5,6 +5,7 @@
 import { h } from '../../vendor/preact/preact.mjs';
 import htm from '../../vendor/htm/htm.mjs';
 import { useState } from '../../vendor/preact/hooks.mjs';
+import { shuffle } from '../engine/shuffle.js';
 import { Peppy } from '../ui/peppy.js';
 import { OUTCOME, dispatchOutcome, markedCorrectId, planText } from './evaluator.js';
 
@@ -35,6 +36,7 @@ export function IsletDispatchRunner({ item, locked, revealed, onSelect }) {
     : (chosen ? 'Peppy is waiting while you say how sure you are.'
       : 'Peppy waits beside the dispatch board.');
 
+  const orderedChoices = shuffle(item.choices || [], item.id);
   const pick = (id) => {
     if (locked) return;
     setChosen(id);
@@ -76,7 +78,7 @@ export function IsletDispatchRunner({ item, locked, revealed, onSelect }) {
     <fieldset class="id-choices" disabled=${!!locked}>
       <legend>Which cell → signal → target plan fits this card?</legend>
       <div class="id-grid">
-        ${item.choices.map((c, idx) => {
+        ${orderedChoices.map((c, idx) => {
           const plan = data.options?.[c.id];
           const marked = revealed && revealed.choiceId === c.id;
           return html`<label class="id-choice" data-selected=${chosen === c.id} data-marked=${!!marked}>

@@ -30,6 +30,29 @@ const press = async (page, selector) => {
   await page.keyboard.press(selector.includes('input') ? 'Space' : 'Enter');
 };
 
+/** Native radio groups expose one Tab stop; move inside the group with Arrow keys. */
+async function pressRadio(page, group, value) {
+  await tabTo(page, `${group} input`);
+  const values = await page.evaluate((sel) => Array.from(document.querySelectorAll(`${sel} input`)).map((n) => n.value), group);
+  const target = values.indexOf(value);
+  assertIndex(target, values, value);
+  const focused = await page.evaluate((sel) => document.activeElement.value, group);
+  let from = values.indexOf(focused);
+  assertIndex(from, values, focused);
+  while (from !== target) {
+    const forward = (target - from + values.length) % values.length <= (from - target + values.length) % values.length;
+    await page.keyboard.press(forward ? 'ArrowRight' : 'ArrowLeft');
+    const current = await page.evaluate((sel) => document.activeElement.value, group);
+    from = values.indexOf(current);
+    assertIndex(from, values, current);
+  }
+  await page.keyboard.press('Space');
+}
+
+function assertIndex(index, values, value) {
+  if (index < 0) throw new Error(`radio value ${value} not in group [${values.join(',')}]`);
+}
+
 /** Identify the shown item by its rendered prompt and return the sourced item. */
 async function shownItem(page, slug, data) {
   const prompt = (await page.locator(`#game-${slug} blockquote`).first().textContent()).trim();
@@ -42,7 +65,7 @@ async function solveDispatch(page, slug) {
   const data = await (await fetch(`${BASE}/games/data/${slug}.json`)).json();
   const item = await shownItem(page, slug, data);
   const right = item.choices.find((c) => c.correct === true);
-  await press(page, `#game-${slug} .id-choice input[value="${right.id}"]`);
+  await pressRadio(page, `#game-${slug} .id-choices`, right.id);
 }
 
 async function readBoard(page, slug, item) {
@@ -67,7 +90,7 @@ async function solveRelay(page, slug) {
   const item = await shownItem(page, slug, data);
   if (item.data.mode === 'critique') {
     const right = item.choices.find((c) => c.correct === true);
-    await press(page, `#game-${slug} .rr-critique input[value="${right.id}"]`);
+    await pressRadio(page, `#game-${slug} .rr-critique`, right.id);
     return;
   }
   const step = (id) => item.data.steps[id].label;
