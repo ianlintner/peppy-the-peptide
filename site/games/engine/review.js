@@ -2,13 +2,13 @@
 // One "item" here is a compact retrieval card derived from already-played game items
 // and each lesson's own check question; no game runner is re-used.
 import { isDue, INTERVAL_DAYS } from './leitner.js';
-import { shuffle } from './shuffle.js';
 
 export const SESSION_MIN = 3;
 export const SESSION_MAX = 5;
 export const NEW_CAP = 2; // at most two unseen items per session
 
-/** Normalise a raw item into a review card. Returns null when the data is unusable. */
+/** Normalise a raw item into a review card. Returns null when the data is unusable.
+ *  `lesson` must be the lesson slug (string); lesson display fields live alongside it. */
 export function toCard(raw, lesson, sourceCount = 0) {
   if (!raw || typeof raw !== 'object') return null;
   const id = typeof raw.id === 'string' ? raw.id.trim() : '';
@@ -17,12 +17,13 @@ export function toCard(raw, lesson, sourceCount = 0) {
   const answer = typeof raw.explanation === 'string' ? raw.explanation.trim() : '';
   if (!id || !concept || !prompt || !answer) return null;
   const ids = Array.isArray(raw.source_ids) ? raw.source_ids.filter((n) => Number.isInteger(n) && n >= 1 && n <= sourceCount) : [];
+  const slug = typeof lesson === 'string' ? lesson : (lesson && lesson.slug) || '';
   return {
     id,
     concept,
-    lesson,
+    lesson: slug,
     lessonNumber: (lesson && lesson.number) || '',
-    lessonTitle: (lesson && lesson.title) || lesson,
+    lessonTitle: (lesson && lesson.title) || slug,
     game: (lesson && lesson.game) || '',
     prompt,
     answer,
@@ -124,22 +125,26 @@ export function selectQueue(pool, state, { now, seed = 'daily', seen = [], size 
 
   const target = Math.min(SESSION_MAX, Math.max(SESSION_MIN, size));
   const orderedReviews = interleave(reviews);
-  const orderedFresh = interleave(fresh).slice(0, Math.max(0, newCap));
-  // Alternate review/new where possible, then fill with remaining reviews; never exceed target.
+  // Interleave the full fresh pool before capping so the cap never reintroduces
+  // two cards from the same lesson when another lesson has a candidate.
+  const orderedFresh = interleave(fresh);
+  // Session mix: one new card after each review, up to NEW_CAP, then reviews.
   const queue = [];
-  let ri = 0, ni = 0;
-  while (queue.length < target && (ri < orderedReviews.length || ni < orderedFresh.length)) {
-    if (ni < orderedFresh.length && (ri >= orderedReviews.length || queue.length % 2 === 1)) queue.push(orderedFresh[ni++]);
-    else if (ri < orderedReviews.length) queue.push(orderedReviews[ri++]);
-    else queue.push(orderedFresh[ni++]);
+  const usedConcepts = new Set();
+  let ri = 0, ni = 0, newUsed = 0;
+  const push = (c) => { if (!usedConcepts.has(c.concept)) { queue.push(c); usedConcepts.add(c.concept); } };
+  while (queue.length < target && (ri < orderedReviews.length || (ni < orderedFresh.length && newUsed < newCap))) {
+    if (ni < orderedFresh.length && newUsed < newCap && (ri >= orderedReviews.length || queue.length % 2 === 1)) {
+      const c = orderedFresh[ni++];
+      push(c); newUsed++;
+    } else if (ri < orderedReviews.length) push(orderedReviews[ri++]);
+    else { const c = orderedFresh[ni++]; push(c); newUsed++; }
   }
-  // A deterministic tie-shuffle of equal-due neighbours keeps sessions from always starting
-  // with the same lesson without disturbing the due order.
-  if (seed && queue.length > 1) {
-    const order = shuffle(queue.map((_, i) => i), seed);
-    const swaps = order.map((i) => queue[i]);
-    if (swaps.every((c, i) => c.due === queue[i].due)) return swaps;
-  }
+  // Fill remaining capacity from the interleaved fresh order (beyond the new cap)
+  // so a session still reaches SESSION_MIN and lesson round-robin is preserved.
+  while (queue.length < target && ni < orderedFresh.length) push(orderedFresh[ni++]);
+  // Last resort: a small session whose only candidates share a concept still
+  // stays unique by concept, even if that means fewer than SESSION_MIN.
   return queue;
 }
 

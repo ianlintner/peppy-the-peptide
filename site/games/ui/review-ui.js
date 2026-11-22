@@ -42,12 +42,15 @@ export function ReviewUI({ cards, store, now = () => Date.now(), seed = 'daily' 
   };
 
   const grade = (correct) => {
-    if (!card || revealed || confident === null) return;
+    if (!card || !revealed || confident === null) return;
     const t = now();
-    const next = record(store.get(), card.concept, { tier: card.tier, correct }, t);
+    const next = record(store.get(), card.concept, {
+      tier: card.tier,
+      correct,
+      confidence: confident ? 'sure' : 'unsure',
+    }, t);
     store.set(next); setState(next);
-    setRevealed(true);
-    setNote(correct ? 'Marked correct. Scheduled for a later review.' : 'Marked as a miss. This one will come back soon.');
+    setNote(`${confident ? 'Sure' : 'Unsure'} · ${correct ? 'Marked correct. Scheduled for a later review.' : 'Marked as a miss. This one will come back soon.'}`);
   };
 
   const next = () => {
@@ -92,13 +95,15 @@ export function ReviewUI({ cards, store, now = () => Date.now(), seed = 'daily' 
         <label><input type="radio" name=${group.current} checked=${confident === true} onChange=${() => setConfident(true)} /> Sure</label>
         <label><input type="radio" name=${group.current} checked=${confident === false} onChange=${() => setConfident(false)} /> Unsure</label>
       </fieldset>`}
-      <div class="rv-actions">
-        ${!revealed && html`<button type="button" class="rv-btn rv-primary" aria-disabled=${confident === null} onClick=${() => grade(true)}>I was right</button>`}
-        ${!revealed && html`<button type="button" class="rv-btn rv-primary" aria-disabled=${confident === null} onClick=${() => grade(false)}>I missed it</button>`}
-        ${!revealed && html`<button type="button" class="rv-btn" onClick=${() => { setRevealed(true); setNote('Answer shown without grading; your schedule is unchanged.'); }}>Show answer</button>`}
-        ${revealed && html`<button type="button" class="rv-btn rv-primary" onClick=${next}>${index + 1 < queue.length ? 'Next question' : 'Finish session'}</button>`}
-      </div>
-      ${!revealed && confident === null && html`<p class="rv-small">Choose Sure or Unsure, then grade your answer. You can always show the answer.</p>`}
+      ${!revealed && html`<div class="rv-actions">
+        <button type="button" class="rv-btn rv-primary" aria-disabled=${confident === null} onClick=${() => { setRevealed(true); setNote('Answer shown. Now mark how you did; the schedule changes only when you grade.'); }}>Show answer</button>
+      </div>`}
+      ${!revealed && confident === null && html`<p class="rv-small">Choose Sure or Unsure, then reveal the answer.</p>`}
+      ${revealed && html`<div class="rv-actions rv-grade">
+        <button type="button" class="rv-btn rv-primary" disabled=${confident === null} onClick=${() => grade(true)}>I was right</button>
+        <button type="button" class="rv-btn rv-primary" disabled=${confident === null} onClick=${() => grade(false)}>I missed it</button>
+        <button type="button" class="rv-btn" onClick=${next}>${index + 1 < queue.length ? 'Next question' : 'Finish session'}</button>
+      </div>`}
       <div class="rv-feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" ref=${feedback}>
         ${revealed && html`<div>
           <h3>Answer</h3><p>${card.answer}</p>

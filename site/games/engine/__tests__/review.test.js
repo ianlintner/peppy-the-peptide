@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { selectQueue, allCards, completedCards, lessonCards, toCard, dueCount, SESSION_MIN, SESSION_MAX, NEW_CAP, boxDays } from '../review.js';
-import { record, emptyState } from '../mastery.js';
+import { selectQueue, allCards, completedCards, lessonCards, toCard, dueCount, SESSION_MIN, SESSION_MAX, boxDays } from '../review.js';
+import { record, emptyState, migrate } from '../mastery.js';
 import { INTERVAL_DAYS, DAY_MS } from '../leitner.js';
 
 const T0 = 1_800_000_000_000;
@@ -40,6 +40,31 @@ test('allCards merges published game items and lesson checks; completedCards fil
   assert.deepEqual(completedCards(all, state).map((c) => c.id), ['i1']);
 });
 
+test('toCard keeps lesson as a slug string, so interleaving and source lookup work', () => {
+  const lesson = { slug: 'chains', number: '01', title: 'Chains', sources: [{ title: 'S1', url: 'https://x' }, { title: 'S2', url: 'https://y' }] };
+  const game = { game: 'beads', lesson: 'chains', items: [
+    { id: 'i1', concept: 'c1', prompt: 'P', explanation: 'A', source_ids: [1, 2], tier: 2 },
+  ] };
+  const cards = allCards([game], [{ ...lesson, check_question: 'Q?', check_answer: 'A.' }]);
+  const gameCard = cards.find((c) => c.id === 'i1');
+  assert.equal(gameCard.lesson, 'chains');
+  assert.equal(typeof gameCard.lesson, 'string');
+  assert.equal(gameCard.lessonTitle, 'Chains');
+  assert.equal(gameCard.game, 'beads');
+  assert.deepEqual(gameCard.sourceIds, [1, 2]);
+});
+
+test('selectQueue contains no repeated concept even when many items share one', () => {
+  const pool = [
+    card('a1', 'shared', 'l1'), card('a2', 'shared', 'l1'), card('a3', 'shared', 'l1'),
+    card('b1', 'other', 'l2'), card('b2', 'third', 'l2'),
+  ];
+  const q = selectQueue(pool, emptyState(), { now: T0, size: 5, seed: 0 });
+  assert.equal(new Set(q.map((c) => c.concept)).size, q.length, 'one card per concept');
+  assert.ok(q.length >= SESSION_MIN);
+  assert.deepEqual(q.map((c) => c.lesson), ['l1', 'l2', 'l2']);
+});
+
 test('queue: due ordering (most overdue first) and interleave across lessons', () => {
   const pool = [
     card('l1a', 'a', 'l1'), card('l1b', 'b', 'l1'), card('l1c', 'c', 'l1'),
@@ -65,19 +90,18 @@ test('queue: unseen items capped, due items fill the rest, seen excluded', () =>
   let state = { concepts: {} };
   for (const c of ['r1', 'r2']) state.concepts[c] = { box: 2, due: T0 - (c === 'r1' ? DAY_MS : 2 * DAY_MS), seen: 1, correct: 1, bestTier: 1, recent: [1] };
   const q = selectQueue(pool, state, { now: T0, seed: 0 });
-  assert.equal(q.length, 4);
-  assert.equal(q.filter((c) => c.isNew).length, NEW_CAP);
+  assert.equal(q.length, 5, 'new cap is a soft target; session fills to SESSION_MIN');
   assert.equal(q.filter((c) => !c.isNew).length, 2);
+  assert.ok(q.filter((c) => c.isNew).length <= 3);
   const again = selectQueue(pool, state, { now: T0, seed: 0, seen: q.map((c) => c.id) });
-  assert.equal(again.length, 1, 'items seen this session are not repeated');
-  assert.equal(again[0].id, 'n3');
+  assert.equal(again.length, 0, 'items seen this session are not repeated');
 });
 
-test('queue: new-only pool still interleaves and caps; empty pool yields empty queue', () => {
+test('queue: new-only pool interleaves, fills to SESSION_MIN and empty pool yields empty queue', () => {
   const pool = [card('n1', 'n1', 'l1'), card('n2', 'n2', 'l1'), card('n3', 'n3', 'l2'), card('n4', 'n4', 'l2')];
   const q = selectQueue(pool, emptyState(), { now: T0, size: 5, seed: 0 });
-  assert.equal(q.length, NEW_CAP);
-  assert.deepEqual(q.map((c) => c.lesson), ['l1', 'l2']);
+  assert.ok(q.length >= SESSION_MIN, 'a fresh session has at least three cards');
+  assert.deepEqual(q.map((c) => c.lesson), ['l1', 'l2', 'l1', 'l2']);
   assert.deepEqual(selectQueue([], emptyState(), { now: T0 }), []);
 });
 
@@ -100,6 +124,16 @@ test('queue: deterministic for a seed, not trivially identical for another', () 
   const opts = { now: T0, seed: 'one' };
   assert.deepEqual(selectQueue(pool, emptyState(), opts), selectQueue(pool, emptyState(), opts));
   assert.deepEqual(boxDays, INTERVAL_DAYS);
+});
+
+test('record() stores the learner confidence tag without breaking migration', () => {
+  const s = record(emptyState(), 'c', { tier: 2, correct: true, confidence: 'sure' }, T0);
+  assert.equal(s.concepts.c.confidence, 'sure');
+  const s2 = record(s, 'c', { tier: 2, correct: false, confidence: 'unsure' }, T0 + DAY_MS);
+  assert.equal(s2.concepts.c.confidence, 'unsure');
+  const migrated = migrate(JSON.parse(JSON.stringify(s2)), T0).state;
+  assert.equal(migrated.concepts.c.confidence, 'unsure');
+  assert.equal(migrate({ v: 1, concepts: { c: { confidence: 'bogus' } } }, T0).state.concepts.c.confidence, '');
 });
 
 test('record() schedules according to Leitner and the queue reflects a miss returning to box 1', () => {

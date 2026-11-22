@@ -31,3 +31,20 @@ test('review shell markup: aria-live, confidence, sources, reduced motion', () =
   assert.match(css, /prefers-reduced-motion:reduce/);
   assert.match(css, /\.sr-only/);
 });
+
+test('review flow is confidence, then reveal, then grade; confidence is stored', () => {
+  const ui = readFileSync(new URL('review-ui.js', dir), 'utf8');
+  const revealAt = ui.indexOf('Show answer');
+  const gradeAt = ui.indexOf('I was right');
+  assert.ok(revealAt < gradeAt, 'the reveal control appears before the grade controls');
+  assert.match(ui, /!revealed && html`<div class="rv-actions">[\s\S]*?setRevealed\(true\)/, 'reveal is available before grading');
+  assert.match(ui, /revealed && html`<div class="rv-actions rv-grade">/, 'grade controls appear only after reveal');
+  assert.match(ui, /confidence: confident \? 'sure' : 'unsure'/, 'the chosen confidence is passed into the mastery record');
+});
+
+test('shared hub/course styles are available outside review.html', () => {
+  const styles = readFileSync(new URL('../../styles.css', dir), 'utf8');
+  assert.match(styles, /\.sr-only\s*\{/, '.sr-only must live in the global stylesheet');
+  assert.match(styles, /\.game-mastery\s*,/, 'mastery line styling must live in the global stylesheet');
+  assert.match(styles, /\.course-game-progress/, 'course-map progress styling must live in the global stylesheet');
+});
