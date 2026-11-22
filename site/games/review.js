@@ -3,7 +3,7 @@
 import { h, render } from '../vendor/preact/preact.mjs';
 import htm from '../vendor/htm/htm.mjs';
 import { browserStore } from './ui/store.js';
-import { allCards } from './engine/review.js';
+import { allCards, withSources } from './engine/review.js';
 import { exportJSON, importJSON } from './ui/progress.js';
 import { ReviewUI } from './ui/review-ui.js';
 const html = htm.bind(h);
@@ -20,8 +20,7 @@ async function loadData() {
   const gameData = await Promise.all(gamePromises);
   const games = manifest.games.map((g, i) => gameData[i] ? { game: g.game, lesson: g.lesson, items: gameData[i].items || [] } : null).filter(Boolean);
   const lessons = manifest.lessons.map((l) => ({ ...bySlug.get(l.slug), slug: l.slug }));
-  const cards = allCards(games, lessons).map((c) => ({ ...c, sources: (bySlug.get(c.lesson) || {}).sources || [] }));
-  return cards;
+  return withSources(allCards(games, lessons), manifest.lessons);
 }
 
 function safeName() { return 'peppy-progress-' + new Date().toISOString().slice(0, 10) + '.json'; }

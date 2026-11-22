@@ -79,17 +79,23 @@ const cardSort = (a, b) => {
   return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 };
 
+/** Attach each lesson's published sources to its cards, looked up by slug string. */
+export function withSources(cards, lessons) {
+  const bySlug = new Map(lessons.map((l) => [l.slug, l]));
+  return cards.map((c) => ({ ...c, sources: (bySlug.get(c.lesson) || {}).sources || [] }));
+}
+
 /**
  * Choose 3-5 retrieval cards for one session.
  * Rules: due review cards first (oldest due first), at most NEW_CAP unseen cards,
- * cards already seen today/this session are excluded, and the result is interleaved
- * across lessons (round-robin by lesson, never two of the same lesson while another
- * lesson has a candidate). Deterministic given `seed`.
+ * cards already seen today/this session are excluded, each concept appears at most once,
+ * and the result is interleaved across lessons (round-robin by lesson, never two of the
+ * same lesson while another lesson has a candidate). Deterministic for the given inputs.
  * @param {object[]} pool all candidate cards (each has id, concept, lesson)
  * @param {object} state mastery state {v, concepts}
  * @param {{now:number, seed:string|number, seen?:string[], size?:number, newCap?:number}} opts
  */
-export function selectQueue(pool, state, { now, seed = 'daily', seen = [], size = SESSION_MAX, newCap = NEW_CAP }) {
+export function selectQueue(pool, state, { now, seed = 'daily', seen = [], size = SESSION_MAX, newCap = NEW_CAP } = {}) {
   const taken = new Set(seen);
   const concepts = (state && state.concepts) || {};
   const reviews = [], fresh = [];

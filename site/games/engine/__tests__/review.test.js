@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { selectQueue, allCards, completedCards, lessonCards, toCard, dueCount, SESSION_MIN, SESSION_MAX, boxDays } from '../review.js';
+import { selectQueue, allCards, completedCards, lessonCards, toCard, withSources, dueCount, SESSION_MIN, SESSION_MAX, boxDays } from '../review.js';
 import { record, emptyState, migrate } from '../mastery.js';
 import { INTERVAL_DAYS, DAY_MS } from '../leitner.js';
 
@@ -52,6 +52,17 @@ test('toCard keeps lesson as a slug string, so interleaving and source lookup wo
   assert.equal(gameCard.lessonTitle, 'Chains');
   assert.equal(gameCard.game, 'beads');
   assert.deepEqual(gameCard.sourceIds, [1, 2]);
+});
+
+test('source lookup resolves by lesson slug for game cards and lesson checks', () => {
+  const lessons = [{ slug: 'chains', title: 'Chains', check_question: 'Q?', check_answer: 'A.', sources: [{ title: 'S1', url: 'https://example.test/1' }] }];
+  const game = { game: 'beads', lesson: 'chains', items: [{ id: 'i1', concept: 'c1', prompt: 'P', explanation: 'A', source_ids: [1], tier: 2 }] };
+  const cards = withSources(allCards([game], lessons), lessons);
+  assert.equal(cards.length, 2);
+  for (const c of cards) {
+    assert.equal(c.lesson, 'chains');
+    assert.deepEqual(c.sources, lessons[0].sources);
+  }
 });
 
 test('selectQueue contains no repeated concept even when many items share one', () => {
