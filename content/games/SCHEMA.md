@@ -137,6 +137,33 @@ its reply texts must be item-specific and distinct across items. The board-rule
 `distractor` step is a plausible but unsupported card the learner must keep off the main
 lane. Optional `cue` names the item's board scenario.
 
+### `claim-detective` (Lesson 4, preview-only capstone)
+
+Every item is a **fictional** social-style post (no real people, brands, dosing or efficacy
+numbers). The learner highlights the exact claim as a half-open word span, classifies it, and
+names the persuasion technique. Each item's `data` must carry:
+
+- `post`: the fictional post text, at most 60 whitespace-separated words so keyboard
+  word-level highlighting stays addressable;
+- `spans`: at least one `{id, start, end, role}` with a slug `id` and
+  `0 <= start < end <= word count`; ids must be unique. `mode: "split"` posts need exactly
+  two spans, one `role: "supported"` and one `role: "unsupported"`, because Tier 3 posts
+  are partly right and only the unsupported half is the claim to flag;
+- `answer_span`: the `id` of the span that must be highlighted;
+- `mode`: `single`, `split` or `boss`. `boss` items are optional, skippable Tier 3 extras
+  (`boss: true`) that mix the three-axis and regulatory-status ideas;
+- `answer`: one of `supported`, `hypothesis`, `out-of-scope` — the id of the single correct
+  choice;
+- `technique`: one of `false-equivalence`, `appeal-to-receptor-sameness`,
+  `unreviewed-product-reassurance`, `origin-over-evidence`.
+
+`review_mode` must be `"flagged"` and **every** item must have `needs_review: true` plus a
+non-empty `review_note`. The validator rejects a false `needs_review` outright, so clearing
+one item silently cannot remove the visible preview banner. The browser runner also renders
+the banner whenever all published items are flagged; the build's flagged-mode contract
+keeps the banner text machine-checkable. Highlight scoring is exact: a wrong span, class or
+technique is reported separately by the pure `evaluator.js`.
+
 ## Changing the schema
 
 Edit this file, `scripts/games_data.py` and `tests/test_games_data.py` together; add a failing-fixture test for any new rule.

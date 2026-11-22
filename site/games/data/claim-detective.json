@@ -1,0 +1,785 @@
+{
+ "game": "claim-detective",
+ "items": [
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "claim-evidence",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "claim",
+    "mode": "single",
+    "post": "My post got thousands of reposts so the biology must be settled.",
+    "spans": [
+     {
+      "end": 12,
+      "id": "claim",
+      "role": "claim",
+      "start": 7
+     }
+    ],
+    "technique": "origin-over-evidence"
+   },
+   "explanation": "Reposts measure reach, not evidence. The cited source, not a crowd, settles a claim.",
+   "hint_ladder": [
+    "Who is making the claim, and what do they cite?",
+    "A count of reposts is not a measurement of biology."
+   ],
+   "id": "t1-follower-count",
+   "misconception": "popularity-as-evidence",
+   "needs_review": true,
+   "prompt": "Which words turn a share count into a biology claim?",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 1
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "receptor-sameness",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "claim",
+    "mode": "single",
+    "post": "Same receptor means same molecule, so the two are interchangeable.",
+    "spans": [
+     {
+      "end": 10,
+      "id": "claim",
+      "role": "claim",
+      "start": 6
+     }
+    ],
+    "technique": "appeal-to-receptor-sameness"
+   },
+   "explanation": "The source reports a shared cellular receptor; that does not make two molecules identical.",
+   "hint_ladder": [
+    "What did the experiment actually show?",
+    "Does sharing a receptor settle everything about a molecule?"
+   ],
+   "id": "t1-same-receptor",
+   "misconception": "receptor-identity-leap",
+   "needs_review": true,
+   "prompt": "Highlight the step that goes beyond the receptor observation.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 1
+  },
+  {
+   "choices": [
+    {
+     "correct": true,
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": false,
+     "feedback": "The cited source settles this one; it is not merely a hypothesis.",
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "claim-evidence",
+   "data": {
+    "answer": "supported",
+    "answer_span": "claim",
+    "mode": "single",
+    "post": "The lesson source says the signal is made by intestinal cells after food.",
+    "spans": [
+     {
+      "end": 13,
+      "id": "claim",
+      "role": "claim",
+      "start": 7
+     }
+    ],
+    "technique": "origin-over-evidence"
+   },
+   "explanation": "This is a direct restatement of the NIDDK source quote about intestinal cells and food.",
+   "hint_ladder": [
+    "Check the quote in source 1.",
+    "Does the wording match the source?"
+   ],
+   "id": "t1-cited-source",
+   "misconception": "source-absence",
+   "needs_review": true,
+   "prompt": "Highlight the part that the cited source supports.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 1
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": false,
+     "feedback": "The cited source settles this one; it is not merely a hypothesis.",
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": true,
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "scope-boundary",
+   "data": {
+    "answer": "out-of-scope",
+    "answer_span": "claim",
+    "mode": "single",
+    "post": "Tell me which option is right for my body and my situation.",
+    "spans": [
+     {
+      "end": 12,
+      "id": "claim",
+      "role": "claim",
+      "start": 5
+     }
+    ],
+    "technique": "unreviewed-product-reassurance"
+   },
+   "explanation": "A personalized choice needs a clinician; the course sources do not give treatment guidance.",
+   "hint_ladder": [
+    "Is this a claim about biology or a request for advice?",
+    "Which source could answer a personal question?"
+   ],
+   "id": "t1-out-of-scope",
+   "misconception": "asking-for-advice",
+   "needs_review": true,
+   "prompt": "Highlight the request that a course source cannot answer.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    3
+   ],
+   "tier": 1
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "three-axes",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "claim",
+    "mode": "single",
+    "post": "It starts in the gut, so it must stay active for a long time.",
+    "spans": [
+     {
+      "end": 14,
+      "id": "claim",
+      "role": "claim",
+      "start": 6
+     }
+    ],
+    "technique": "origin-over-evidence"
+   },
+   "explanation": "Where a signal starts and how long it lasts are separate observations in the lesson.",
+   "hint_ladder": [
+    "Name the two ideas the post mixes.",
+    "Does the source tie origin to duration?"
+   ],
+   "id": "t2-origin-timing",
+   "misconception": "origin-explains-timing",
+   "needs_review": true,
+   "prompt": "Highlight the conclusion that origin cannot support.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 2
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "receptor-sameness",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "claim",
+    "mode": "single",
+    "post": "Both activate the same cellular receptor, so the two molecules are identical.",
+    "spans": [
+     {
+      "end": 12,
+      "id": "claim",
+      "role": "claim",
+      "start": 7
+     }
+    ],
+    "technique": "appeal-to-receptor-sameness"
+   },
+   "explanation": "The source says the receptor is shared and the structures differ — receptor sharing is not identity.",
+   "hint_ladder": [
+    "Which observation is shared?",
+    "Did the source also report a structural difference?"
+   ],
+   "id": "t2-receptor-equivalence",
+   "misconception": "receptor-identity-leap",
+   "needs_review": true,
+   "prompt": "Highlight the claim that the receptor result does not establish.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 2
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "three-axes",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "claim",
+    "mode": "single",
+    "post": "Because it clears quickly it cannot depend on glucose at all.",
+    "spans": [
+     {
+      "end": 11,
+      "id": "claim",
+      "role": "claim",
+      "start": 4
+     }
+    ],
+    "technique": "false-equivalence"
+   },
+   "explanation": "Clearance and glucose-dependence are separate observations; the source does not link them that way.",
+   "hint_ladder": [
+    "List the two ideas in the post.",
+    "Does a short lifetime rule out a glucose-dependent effect?"
+   ],
+   "id": "t2-clearance-confusion",
+   "misconception": "lifetime-explains-glucose",
+   "needs_review": true,
+   "prompt": "Highlight the leap from clearance to glucose-dependence.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 2
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "regulatory-status",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "claim",
+    "mode": "single",
+    "post": "A compounding pharmacy makes it, so an agency must have checked it.",
+    "spans": [
+     {
+      "end": 12,
+      "id": "claim",
+      "role": "claim",
+      "start": 6
+     }
+    ],
+    "technique": "unreviewed-product-reassurance"
+   },
+   "explanation": "The FDA source says compounded drugs are not FDA-approved and are not reviewed before marketing.",
+   "hint_ladder": [
+    "What does the regulatory source say about approval?",
+    "Is preparation the same as review?"
+   ],
+   "id": "t2-compounding-reassurance",
+   "misconception": "unreviewed-reassurance",
+   "needs_review": true,
+   "prompt": "Highlight the reassurance the source does not give.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    2,
+    3
+   ],
+   "tier": 2
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "three-axes",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "part-b",
+    "mode": "split",
+    "post": "The source says the signal comes from gut cells after a meal and that it lasts for hours.",
+    "spans": [
+     {
+      "end": 12,
+      "id": "part-a",
+      "role": "supported",
+      "start": 5
+     },
+     {
+      "end": 18,
+      "id": "part-b",
+      "role": "unsupported",
+      "start": 14
+     }
+    ],
+    "technique": "origin-over-evidence"
+   },
+   "explanation": "The sourced origin claim is right; the duration half is not supported by the cited sentence.",
+   "hint_ladder": [],
+   "id": "t3-partly-right-origin",
+   "misconception": "origin-explains-timing",
+   "needs_review": true,
+   "prompt": "One half matches the source. Highlight only the unsupported half.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 3
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "receptor-sameness",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "part-b",
+    "mode": "split",
+    "post": "Both work through the same receptor, and that proves they have identical structures.",
+    "spans": [
+     {
+      "end": 6,
+      "id": "part-a",
+      "role": "supported",
+      "start": 0
+     },
+     {
+      "end": 13,
+      "id": "part-b",
+      "role": "unsupported",
+      "start": 9
+     }
+    ],
+    "technique": "appeal-to-receptor-sameness"
+   },
+   "explanation": "Shared receptor is sourced; identical structures contradict the source's noted structural difference.",
+   "hint_ladder": [],
+   "id": "t3-partly-right-receptor",
+   "misconception": "receptor-identity-leap",
+   "needs_review": true,
+   "prompt": "One half matches the source. Highlight only the unsupported half.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 3
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "regulatory-status",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "part-b",
+    "mode": "split",
+    "post": "Compounding can serve a patient need, so every compounded version must be approved.",
+    "spans": [
+     {
+      "end": 6,
+      "id": "part-a",
+      "role": "supported",
+      "start": 0
+     },
+     {
+      "end": 13,
+      "id": "part-b",
+      "role": "unsupported",
+      "start": 7
+     }
+    ],
+    "technique": "unreviewed-product-reassurance"
+   },
+   "explanation": "The source allows a patient-need role but states plainly that compounded drugs are not FDA-approved.",
+   "hint_ladder": [],
+   "id": "t3-partly-right-regulatory",
+   "misconception": "unreviewed-reassurance",
+   "needs_review": true,
+   "prompt": "One half matches the source. Highlight only the unsupported half.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    3
+   ],
+   "tier": 3
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": false,
+     "feedback": "The cited source settles this one; it is not merely a hypothesis.",
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": true,
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "scope-boundary",
+   "data": {
+    "answer": "out-of-scope",
+    "answer_span": "part-b",
+    "mode": "split",
+    "post": "The lesson describes a glucose-dependent effect, so it tells me what to take.",
+    "spans": [
+     {
+      "end": 6,
+      "id": "part-a",
+      "role": "supported",
+      "start": 0
+     },
+     {
+      "end": 13,
+      "id": "part-b",
+      "role": "unsupported",
+      "start": 7
+     }
+    ],
+    "technique": "false-equivalence"
+   },
+   "explanation": "The biology is in scope; a personal decision is not answered by the lesson sources.",
+   "hint_ladder": [],
+   "id": "t3-scope-split",
+   "misconception": "asking-for-advice",
+   "needs_review": true,
+   "prompt": "One half describes biology. Highlight the half that needs a clinician.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1
+   ],
+   "tier": 3
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "three-axes",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "claim",
+    "boss": true,
+    "mode": "boss",
+    "post": "It clears quickly, so any glucose-dependent claim must be unapproved.",
+    "spans": [
+     {
+      "end": 10,
+      "id": "claim",
+      "role": "claim",
+      "start": 3
+     }
+    ],
+    "technique": "false-equivalence"
+   },
+   "explanation": "Clearance, glucose-dependence and regulatory status are three separate ideas; the sources do not chain them.",
+   "hint_ladder": [],
+   "id": "t3-boss-glucose-regulatory",
+   "misconception": "lifetime-explains-glucose",
+   "needs_review": true,
+   "prompt": "Boss: name the two unrelated ideas this post merges.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1,
+    3
+   ],
+   "tier": 3
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": true,
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": false,
+     "feedback": "This is answerable from the cited course sources.",
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "receptor-sameness",
+   "data": {
+    "answer": "hypothesis",
+    "answer_span": "claim",
+    "boss": true,
+    "mode": "boss",
+    "post": "Same receptor means identical product, and identical product means reviewed product.",
+    "spans": [
+     {
+      "end": 11,
+      "id": "claim",
+      "role": "claim",
+      "start": 9
+     }
+    ],
+    "technique": "appeal-to-receptor-sameness"
+   },
+   "explanation": "A shared receptor says nothing about product identity or review status.",
+   "hint_ladder": [],
+   "id": "t3-boss-receptor-status",
+   "misconception": "receptor-identity-leap",
+   "needs_review": true,
+   "prompt": "Boss: find the final leap from biology to regulatory status.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1,
+    3
+   ],
+   "tier": 3
+  },
+  {
+   "choices": [
+    {
+     "correct": false,
+     "feedback": "The cited source does not support this highlighted claim.",
+     "id": "supported",
+     "text": "Supported by a cited course source"
+    },
+    {
+     "correct": false,
+     "feedback": "The cited source settles this one; it is not merely a hypothesis.",
+     "id": "hypothesis",
+     "text": "Hypothesis, not settled by the cited source"
+    },
+    {
+     "correct": true,
+     "id": "out-of-scope",
+     "text": "Out of scope — needs a clinician"
+    }
+   ],
+   "concept": "scope-boundary",
+   "data": {
+    "answer": "out-of-scope",
+    "answer_span": "claim",
+    "boss": true,
+    "mode": "boss",
+    "post": "The sources settle the biology, so they settle which option suits you.",
+    "spans": [
+     {
+      "end": 12,
+      "id": "claim",
+      "role": "claim",
+      "start": 6
+     }
+    ],
+    "technique": "unreviewed-product-reassurance"
+   },
+   "explanation": "Sourced biology cannot answer an individual treatment question; that needs a clinician.",
+   "hint_ladder": [],
+   "id": "t3-boss-out-of-scope",
+   "misconception": "asking-for-advice",
+   "needs_review": true,
+   "prompt": "Boss: highlight the point where biology becomes personal advice.",
+   "review_note": "Fictional post and framing awaiting clinical and regulatory review.",
+   "source_ids": [
+    1,
+    3
+   ],
+   "tier": 3
+  }
+ ],
+ "lesson": "hormone-and-medicine",
+ "review_mode": "flagged",
+ "review_note": "All posts are fictional and flagged; a qualified reviewer must clear them before this capstone leaves preview.",
+ "summary": "Highlight the claim, check it against the cited sources and name the technique. Preview only: every post is awaiting clinical review.",
+ "title": "Claim Detective"
+}

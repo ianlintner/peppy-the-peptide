@@ -295,10 +295,76 @@ def _validate_relay_item(item, where):
     return errs
 
 
+# --- claim-detective: preview-only capstone (all items flagged until reviewed) ---
+CLAIM_CLASSES = ('supported', 'hypothesis', 'out-of-scope')
+CLAIM_TECHNIQUES = ('false-equivalence', 'appeal-to-receptor-sameness',
+                    'unreviewed-product-reassurance', 'origin-over-evidence')
+
+
+def _validate_claim_item(item, where):
+    """Claim Detective: word-span highlight, classification and technique, preview only."""
+    d = item.get('data')
+    if not isinstance(d, dict):
+        return [f'{where}.data: claim-detective items need a data object']
+    errs, w = [], f'{where}.data'
+    post = d.get('post')
+    words = post.split() if isinstance(post, str) else []
+    if not words:
+        errs.append(f'{w}.post: a non-empty fictional post is required')
+    elif len(words) > 60:
+        errs.append(f'{w}.post: at most 60 words (keyboard word-level highlighting)')
+    spans = d.get('spans')
+    if not isinstance(spans, list) or not spans:
+        errs.append(f'{w}.spans: need at least one authored word span')
+        spans = []
+    else:
+        ids = []
+        for s in spans:
+            sid = s.get('id') if isinstance(s, dict) else None
+            start = s.get('start') if isinstance(s, dict) else None
+            end = s.get('end') if isinstance(s, dict) else None
+            ids.append(sid)
+            if not (isinstance(sid, str) and SLUG.match(sid)):
+                errs.append(f'{w}.spans[].id: must be a lowercase-hyphen slug')
+            if not (_is_int(start) and _is_int(end) and 0 <= start < end <= len(words)):
+                errs.append(f'{w}.spans[{sid}]: need 0 <= start < end <= {len(words)}')
+        if len(set(ids)) != len(ids):
+            errs.append(f'{w}.spans: ids must be unique')
+    if d.get('answer_span') not in [s.get('id') for s in spans if isinstance(s, dict)]:
+        errs.append(f'{w}.answer_span: must name an authored span')
+    if d.get('mode') not in ('single', 'split', 'boss'):
+        errs.append(f'{w}.mode: must be single, split or boss')
+    if d.get('mode') == 'split' and not (
+            len(spans) == 2 and {s.get('role') for s in spans} == {'supported', 'unsupported'}):
+        errs.append(f'{w}: split posts need one supported and one unsupported span')
+    cs = [c for c in item.get('choices', []) if isinstance(c, dict)]
+    right = [c.get('id') for c in cs if c.get('correct') is True]
+    if len(right) != 1 or right[0] != d.get('answer') or d.get('answer') not in CLAIM_CLASSES:
+        errs.append(f'{where}.choices: exactly one correct choice matching a known data.answer')
+    if d.get('technique') not in CLAIM_TECHNIQUES:
+        errs.append(f'{w}.technique: must be one of {", ".join(CLAIM_TECHNIQUES)}')
+    # Preview rule: this capstone ships only as a flagged preview. Setting any
+    # item to needs_review=false would silently clear the banner contract.
+    if item.get('needs_review') is not True:
+        errs.append(f'{where}.needs_review: Claim Detective items must be true (preview only)')
+    if not _nonblank(item.get('review_note')):
+        errs.append(f'{where}.review_note: every preview item needs a review note')
+    return errs
+
+
+def _validate_claim_game(game):
+    """The capstone is published only as a flagged preview, never as cleared content."""
+    errs = []
+    if game.get('review_mode') != 'flagged':
+        errs.append('review_mode: claim-detective must be "flagged" (preview only)')
+    return errs
+
+
 ITEM_VALIDATORS = {
     'bead-chain-builder': _validate_bead_item,
     'islet-dispatch': _validate_dispatch_item,
     'relay-race': _validate_relay_item,
+    'claim-detective': _validate_claim_item,
 }
 
 
@@ -312,6 +378,8 @@ def validate_game(game, lessons_by_slug: dict, stem: str | None = None) -> list[
         errs.append('review_mode: must be "strict" (default) or "flagged"')
     flagged_ok = mode == 'flagged'
     slug = game.get('game')
+    if slug == 'claim-detective':
+        errs += _validate_claim_game(game)
     if not (isinstance(slug, str) and SLUG.match(slug)):
         errs.append('game: must be a lowercase-hyphen slug')
     elif stem is not None and stem.lstrip('_') != slug:
