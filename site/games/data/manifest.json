@@ -1,0 +1,131 @@
+{
+ "games": [
+  {
+   "concepts": [
+    "cartoon-vs-chemistry",
+    "sequence-limits",
+    "sequence-vs-composition"
+   ],
+   "game": "bead-chain-builder",
+   "lesson": "foundations",
+   "summary": "Build Peppy's bead chain in the right order, tell composition from sequence, then switch to the one-letter view and see what the cartoon leaves out.",
+   "title": "Bead Chain Builder"
+  },
+  {
+   "concepts": [
+    "evidence-gaps",
+    "receptor-target",
+    "receptor-vs-identity",
+    "regulatory-status"
+   ],
+   "game": "three-axis-sorter",
+   "lesson": "hormone-and-medicine",
+   "summary": "Sort generic description cards onto three independent shelves: same receptor, same molecule, or reviewed-approved for the stated use — and notice when the evidence cannot settle the shelf.",
+   "title": "Three-Axis Sorter"
+  },
+  {
+   "concepts": [
+    "clearance-vs-glucose",
+    "combined-settings",
+    "critique-claims",
+    "evidence-limits",
+    "predict-observe-explain",
+    "qualitative-visual",
+    "self-explanation",
+    "two-observations"
+   ],
+   "game": "two-dials",
+   "lesson": "endogenous-glp1",
+   "summary": "Turn one dial at a time, predict what happens to the other readout, and notice that brief lifetime and glucose-dependence are separate observations.",
+   "title": "Two Dials: Lifetime and Glucose-Dependence"
+  }
+ ],
+ "lessons": [
+  {
+   "check_answer": "No. Composition is the same; the ordered sequence is different. That alone does not tell us what either chain does in a cell.",
+   "check_question": "If two chains contain the same three amino acids in a different order, are their sequences identical?",
+   "number": "01",
+   "slug": "foundations",
+   "sources": [
+    {
+     "note": "Definition, peptide bonds and chain analogy",
+     "title": "NHGRI Talking Glossary — Peptide",
+     "url": "https://www.genome.gov/genetics-glossary/Peptide"
+    },
+    {
+     "note": "GLP-1 and glucagon fragment sequences and feature locations",
+     "title": "UniProt P01275 (Pro-glucagon) — GLP-1(7-36) residues 98-127",
+     "url": "https://www.uniprot.org/uniprotkb/P01275/entry"
+    },
+    {
+     "note": "Insulin A chain (90-110) and B chain (25-54) sequences",
+     "title": "UniProt P01308 (Insulin) — A and B chains",
+     "url": "https://www.uniprot.org/uniprotkb/P01308/entry"
+    }
+   ],
+   "title": "Chains with character"
+  },
+  {
+   "check_answer": "Different signals. Beta cells release insulin; alpha cells release glucagon. Their effects depend on biological context, so neither is simply good or bad.",
+   "check_question": "Which is accurate: insulin and glucagon are the same message in two colors, or different signals made by different islet cells?",
+   "number": "02",
+   "slug": "signal-cast",
+   "sources": [
+    {
+     "note": "Islet beta/alpha cells, insulin and glucagon roles",
+     "title": "NIDDK — Discovery of glucagon and GLP-1 medicines",
+     "url": "https://www.niddk.nih.gov/news/archive/2021/story-discovery-medications-diabetes-obesity-emerged-research-pancreatic-hormone"
+    },
+    {
+     "note": "Low glucose, liver glucose output and islet regulation",
+     "title": "Endotext (NCBI Bookshelf) — Glucagon Physiology",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK279127/"
+    }
+   ],
+   "title": "The signal cast"
+  },
+  {
+   "check_answer": "No. Its short lifetime and glucose-dependent insulin effect are distinct observations. One does not establish the mechanism of the other.",
+   "check_question": "If GLP-1 is cleared quickly, does that fact by itself explain why its insulin effect depends on glucose?",
+   "number": "03",
+   "slug": "endogenous-glp1",
+   "sources": [
+    {
+     "note": "Gut origin, glucose-related insulin response and brief native signal",
+     "title": "NIDDK — How GLP-1 research led to medicines",
+     "url": "https://www.niddk.nih.gov/news/archive/2021/story-discovery-medications-diabetes-obesity-emerged-research-pancreatic-hormone"
+    },
+    {
+     "note": "Incretin biology, GLP-1R, DPP-4 degradation and clearance",
+     "title": "Müller et al., Molecular Metabolism — Glucagon-like peptide 1 (GLP-1)",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812410/"
+    }
+   ],
+   "title": "The GLP-1 message"
+  },
+  {
+   "check_answer": "No. Sharing a receptor target does not settle molecular identity, exposure or whether a specific product was reviewed and approved. These are separate questions.",
+   "check_question": "If two substances can act at the same receptor, have we learned that they are the same molecule and equally reviewed products?",
+   "number": "04",
+   "slug": "hormone-and-medicine",
+   "sources": [
+    {
+     "note": "Distinction between native hormone and engineered longer-lived medicines",
+     "title": "NIDDK — How GLP-1 research led to medicines",
+     "url": "https://www.niddk.nih.gov/news/archive/2021/story-discovery-medications-diabetes-obesity-emerged-research-pancreatic-hormone"
+    },
+    {
+     "note": "Unapproved products do not receive FDA premarket review",
+     "title": "FDA — Concerns with unapproved GLP-1 drugs",
+     "url": "https://www.fda.gov/drugs/drug-alerts-and-statements/fdas-concerns-unapproved-glp-1-drugs-used-weight-loss"
+    },
+    {
+     "note": "Compounded drugs are not FDA-approved",
+     "title": "FDA — Compounding and the FDA: Questions and Answers",
+     "url": "https://www.fda.gov/drugs/human-drug-compounding/compounding-and-fda-questions-and-answers"
+    }
+   ],
+   "title": "Hormone ≠ medicine"
+  }
+ ]
+}
