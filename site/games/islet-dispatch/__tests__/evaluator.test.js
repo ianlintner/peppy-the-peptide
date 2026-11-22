@@ -52,7 +52,8 @@ test('cell/signal/target mismatches name the specific misconception', () => {
   assert.equal(dispatchOutcome(elevated, 'beta-glucagon-many-cells').outcome, OUTCOME.WRONG_SIGNAL);
   assert.equal(dispatchOutcome(elevated, 'beta-insulin-liver-only').outcome, OUTCOME.WRONG_TARGET);
   const low = byId('t1-between-meals');
-  assert.equal(dispatchOutcome(low, 'beta-glucagon-many-cells').outcome, OUTCOME.WRONG_CELL);
+  assert.equal(dispatchOutcome(low, 'beta-glucagon-liver').outcome, OUTCOME.WRONG_CELL);
+  assert.equal(dispatchOutcome(low, 'alpha-insulin-liver').outcome, OUTCOME.WRONG_SIGNAL);
   assert.equal(dispatchOutcome(low, 'alpha-glucagon-many-cells').outcome, OUTCOME.WRONG_TARGET);
 });
 

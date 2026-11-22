@@ -80,13 +80,13 @@
     {
      "correct": false,
      "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here.",
-     "id": "beta-glucagon-many-cells",
+     "id": "beta-glucagon-liver",
      "text": "Beta cell → glucagon → liver"
     },
     {
      "correct": false,
      "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell.",
-     "id": "alpha-insulin-many-cells",
+     "id": "alpha-insulin-liver",
      "text": "Alpha cell → insulin → liver"
     },
     {
@@ -111,12 +111,12 @@
       "signal": "glucagon",
       "target": "many cell types"
      },
-     "alpha-insulin-many-cells": {
+     "alpha-insulin-liver": {
       "cell": "Alpha cell",
       "signal": "insulin",
       "target": "liver"
      },
-     "beta-glucagon-many-cells": {
+     "beta-glucagon-liver": {
       "cell": "Beta cell",
       "signal": "glucagon",
       "target": "liver"
@@ -204,7 +204,7 @@
     },
     "state": "elevated"
    },
-   "explanation": "Different islet cells release different signals in different contexts; neither is simply good or bad. [1]",
+   "explanation": "The elevated-state plan pairs beta-cell insulin with insulin action on many cell types; the low-state plan pairs alpha-cell glucagon with the liver. Neither cell is good or bad. Answer: the elevated-state plan.",
    "hint_ladder": [
     "Name the cell and the context for each signal.",
     "They are different signals with different roles, not a moral ranking."
@@ -212,7 +212,7 @@
    "id": "t1-partners",
    "misconception": "One messenger is good and the other is bad",
    "needs_review": false,
-   "prompt": "Peppy says the two messengers are “partners, not good versus bad”. What makes that claim accurate?",
+   "prompt": "Which dispatch plan shows both islet cells as partners rather than naming one good and one bad?",
    "source_ids": [
     1
    ],
@@ -228,13 +228,13 @@
     {
      "correct": false,
      "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here.",
-     "id": "beta-glucagon-many-cells",
+     "id": "beta-glucagon-liver",
      "text": "Beta cell → glucagon → liver"
     },
     {
      "correct": false,
      "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell.",
-     "id": "alpha-insulin-many-cells",
+     "id": "alpha-insulin-liver",
      "text": "Alpha cell → insulin → liver"
     },
     {
@@ -259,12 +259,12 @@
       "signal": "glucagon",
       "target": "many cell types"
      },
-     "alpha-insulin-many-cells": {
+     "alpha-insulin-liver": {
       "cell": "Alpha cell",
       "signal": "insulin",
       "target": "liver"
      },
-     "beta-glucagon-many-cells": {
+     "beta-glucagon-liver": {
       "cell": "Beta cell",
       "signal": "glucagon",
       "target": "liver"
@@ -296,13 +296,13 @@
     {
      "correct": false,
      "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here.",
-     "id": "beta-glucagon-many-cells",
+     "id": "beta-glucagon-liver",
      "text": "Beta cell → glucagon → liver"
     },
     {
      "correct": false,
      "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell.",
-     "id": "alpha-insulin-many-cells",
+     "id": "alpha-insulin-liver",
      "text": "Alpha cell → insulin → liver"
     },
     {
@@ -327,12 +327,12 @@
       "signal": "glucagon",
       "target": "many cell types"
      },
-     "alpha-insulin-many-cells": {
+     "alpha-insulin-liver": {
       "cell": "Alpha cell",
       "signal": "insulin",
       "target": "liver"
      },
-     "beta-glucagon-many-cells": {
+     "beta-glucagon-liver": {
       "cell": "Beta cell",
       "signal": "glucagon",
       "target": "liver"
@@ -525,13 +525,13 @@
     {
      "correct": false,
      "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here.",
-     "id": "beta-glucagon-many-cells",
+     "id": "beta-glucagon-liver",
      "text": "Beta cell → glucagon → liver"
     },
     {
      "correct": false,
      "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell.",
-     "id": "alpha-insulin-many-cells",
+     "id": "alpha-insulin-liver",
      "text": "Alpha cell → insulin → liver"
     },
     {
@@ -556,12 +556,12 @@
       "signal": "glucagon",
       "target": "many cell types"
      },
-     "alpha-insulin-many-cells": {
+     "alpha-insulin-liver": {
       "cell": "Alpha cell",
       "signal": "insulin",
       "target": "liver"
      },
-     "beta-glucagon-many-cells": {
+     "beta-glucagon-liver": {
       "cell": "Beta cell",
       "signal": "glucagon",
       "target": "liver"
@@ -662,13 +662,13 @@
     {
      "correct": false,
      "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here.",
-     "id": "beta-glucagon-many-cells",
+     "id": "beta-glucagon-liver",
      "text": "Beta cell → glucagon → liver"
     },
     {
      "correct": false,
      "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell.",
-     "id": "alpha-insulin-many-cells",
+     "id": "alpha-insulin-liver",
      "text": "Alpha cell → insulin → liver"
     },
     {
@@ -693,12 +693,12 @@
       "signal": "glucagon",
       "target": "many cell types"
      },
-     "alpha-insulin-many-cells": {
+     "alpha-insulin-liver": {
       "cell": "Alpha cell",
       "signal": "insulin",
       "target": "liver"
      },
-     "beta-glucagon-many-cells": {
+     "beta-glucagon-liver": {
       "cell": "Beta cell",
       "signal": "glucagon",
       "target": "liver"
@@ -880,13 +880,13 @@
     {
      "correct": false,
      "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here.",
-     "id": "beta-glucagon-many-cells",
+     "id": "beta-glucagon-liver",
      "text": "Beta cell → glucagon → liver"
     },
     {
      "correct": false,
      "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell.",
-     "id": "alpha-insulin-many-cells",
+     "id": "alpha-insulin-liver",
      "text": "Alpha cell → insulin → liver"
     },
     {
@@ -918,12 +918,12 @@
       "signal": "glucagon",
       "target": "many cell types"
      },
-     "alpha-insulin-many-cells": {
+     "alpha-insulin-liver": {
       "cell": "Alpha cell",
       "signal": "insulin",
       "target": "liver"
      },
-     "beta-glucagon-many-cells": {
+     "beta-glucagon-liver": {
       "cell": "Beta cell",
       "signal": "glucagon",
       "target": "liver"
@@ -1129,13 +1129,13 @@
     {
      "correct": false,
      "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here.",
-     "id": "beta-glucagon-many-cells",
+     "id": "beta-glucagon-liver",
      "text": "Beta cell → glucagon → liver"
     },
     {
      "correct": false,
      "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell.",
-     "id": "alpha-insulin-many-cells",
+     "id": "alpha-insulin-liver",
      "text": "Alpha cell → insulin → liver"
     },
     {
@@ -1167,12 +1167,12 @@
       "signal": "glucagon",
       "target": "many cell types"
      },
-     "alpha-insulin-many-cells": {
+     "alpha-insulin-liver": {
       "cell": "Alpha cell",
       "signal": "insulin",
       "target": "liver"
      },
-     "beta-glucagon-many-cells": {
+     "beta-glucagon-liver": {
       "cell": "Beta cell",
       "signal": "glucagon",
       "target": "liver"
@@ -1294,13 +1294,13 @@
     {
      "correct": false,
      "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here.",
-     "id": "beta-glucagon-many-cells",
+     "id": "beta-glucagon-liver",
      "text": "Beta cell → glucagon → liver"
     },
     {
      "correct": false,
      "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell.",
-     "id": "alpha-insulin-many-cells",
+     "id": "alpha-insulin-liver",
      "text": "Alpha cell → insulin → liver"
     },
     {
@@ -1332,12 +1332,12 @@
       "signal": "glucagon",
       "target": "many cell types"
      },
-     "alpha-insulin-many-cells": {
+     "alpha-insulin-liver": {
       "cell": "Alpha cell",
       "signal": "insulin",
       "target": "liver"
      },
-     "beta-glucagon-many-cells": {
+     "beta-glucagon-liver": {
       "cell": "Beta cell",
       "signal": "glucagon",
       "target": "liver"

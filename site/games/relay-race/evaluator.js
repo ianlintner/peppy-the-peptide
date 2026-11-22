@@ -46,14 +46,21 @@ export function initialBoard(item) {
 export function boardFromSelection(item, selectedChoiceId) {
   if (selectedChoiceId !== 'main-branch') return initialBoard(item);
   const d = item?.data;
-  return d ? { main: d.main_order.slice(), branch: d.branch_ids.slice(),
-    tray: Object.keys(d.steps).filter((id) => !d.main_order.includes(id) && !d.branch_ids.includes(id)) } : null;
+  return d ? { main: (d.main_answer ?? d.main_order).slice(), branch: (d.branch_answer ?? d.branch_ids).slice(), tray: [] } : null;
 }
 
 function firstDifference(a, b) {
   const n = Math.min(a.length, b.length);
   for (let i = 0; i < n; i += 1) if (a[i] !== b[i]) return i;
   return a.length === b.length ? -1 : n;
+}
+
+/** True when the authored starting board already matches the sourced answer. */
+export function startsSolved(item) {
+  const board = initialBoard(item);
+  if (!board) return false;
+  return board.main.join('|') === item.data.main_answer.join('|')
+    && board.branch.join('|') === item.data.branch_answer.join('|');
 }
 
 /**
@@ -147,13 +154,18 @@ export function validateItems(items) {
       const lane = d.main_order.includes(id) ? LANE.MAIN : d.branch_ids.includes(id) ? LANE.BRANCH : LANE.DISTRACTOR;
       if (steps[id]?.lane !== lane) errors.push(`${where}.data.steps[${id}].lane: expected ${lane}`);
     }
+    if (d.mode === 'critique') {
+      if (item.tier !== 3 || !d.gap) errors.push(`${where}.data: critique mode requires tier 3 and a gap`);
+    } else if (item.tier !== 3 && startsSolved(item)) {
+      errors.push(`${where}.data: board starts solved; learners must have a move to make`);
+    }
     if (markedCorrectId(item) !== 'main-branch') errors.push(`${where}.choices: only main-branch may be correct`);
     if (item.needs_review === true && typeof item.review_note !== 'string') {
       errors.push(`${where}.review_note: required for flagged items`);
     }
   });
   for (const tier of [1, 2, 3]) {
-    if ((tiers.get(tier) ?? 0) < 5) errors.push(`tier ${tier}: need at least 5 items`);
+    if ((tiers.get(tier) ?? 0) !== 6) errors.push(`tier ${tier}: need exactly 6 items`);
   }
   return errors;
 }

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  LANE, OUTCOME, boardFromSelection, evaluateBoard, initialBoard, markedCorrectId, moveStep, validateItems,
+  LANE, OUTCOME, boardFromSelection, evaluateBoard, initialBoard, markedCorrectId, moveStep, startsSolved, validateItems,
 } from '../evaluator.js';
 
 const content = JSON.parse(
@@ -26,7 +26,7 @@ test('every item has tier, misconception, sourced ids, and no numeric physiology
   }
 });
 
-test('every shipped board starts from its declared main order and separate branch', () => {
+test('board items never start solved; tier 3 critique items use choices instead', () => {
   for (const item of items) {
     assert.equal(markedCorrectId(item), 'main-branch', item.id);
     const board = initialBoard(item);
@@ -36,12 +36,21 @@ test('every shipped board starts from its declared main order and separate branc
     const result = evaluateBoard(item, solved);
     assert.equal(result.correct, true, `${item.id}: ${result.outcome}`);
     assert.equal(result.outcome, OUTCOME.CORRECT, item.id);
+    if (item.tier === 3) {
+      assert.equal(item.data.mode, 'critique', item.id);
+      assert.ok(item.data.gap?.trim(), item.id);
+    } else {
+      assert.equal(startsSolved(item), false, `${item.id}: board already solved`);
+      assert.equal(evaluateBoard(item, board).correct, false, `${item.id}: start scores correct`);
+    }
   }
 });
 
 test('the sourced main order is meal → L cell → receptor → glucose-dependent effect', () => {
   const item = byId('t1-relay-order');
-  assert.deepEqual(item.data.main_order, ['meal', 'lcell', 'receptor', 'insulin']);
+  assert.deepEqual(item.data.main_answer, ['meal', 'lcell', 'receptor', 'insulin']);
+  assert.deepEqual(item.data.branch_answer, ['dpp4']);
+  assert.deepEqual(item.data.main_order, ['meal', 'receptor', 'lcell', 'insulin']);
   assert.deepEqual(item.data.branch_ids, ['dpp4']);
   assert.equal(item.data.steps.dpp4.lane, LANE.BRANCH);
 });
@@ -82,32 +91,56 @@ test('repair items start with the branch card in the tray and can be moved into 
 });
 
 test('moveStep supports keyboard actions without mutating the input board', () => {
-  const item = byId('t1-relay-order');
+  const item = byId('t2-repair-order');
   const start = initialBoard(item);
-  const moved = moveStep(start, 'insulin', 'up', 3);
+  assert.deepEqual(start.main, ['meal', 'receptor', 'lcell', 'insulin']);
+  const moved = moveStep(start, 'lcell', 'up', 2);
   assert.deepEqual(start.main, item.data.main_order);
-  assert.deepEqual(moved.main, ['meal', 'lcell', 'insulin', 'receptor']);
-  const back = moveStep(moved, 'insulin', 'down', 2);
-  assert.equal(evaluateBoard(item, back).correct, true);
+  assert.deepEqual(moved.main, ['meal', 'lcell', 'receptor', 'insulin']);
+  assert.equal(evaluateBoard(item, moved).correct, true);
+  const back = moveStep(moved, 'lcell', 'down', 1);
+  assert.equal(evaluateBoard(item, back).correct, false);
   assert.equal(moveStep(null, 'x', 'up'), null);
 });
 
-test('boardFromSelection uses authored data for the correct choice and initial board otherwise', () => {
+test('to-main returns a card from the branch or tray to the main lane', () => {
+  const item = byId('t1-side-branch');
+  const start = initialBoard(item);
+  assert.ok(start.tray.includes('dpp4'));
+  const fromTray = moveStep(start, 'dpp4', 'to-main', 0);
+  assert.deepEqual(fromTray.main, ['dpp4', 'meal', 'lcell', 'receptor', 'insulin']);
+  assert.ok(!fromTray.tray.includes('dpp4'));
+
+  const onBranch = moveStep(initialBoard(byId('t1-relay-order')), 'dpp4', 'to-branch');
+  const fromBranch = moveStep(onBranch, 'dpp4', 'to-main', 1);
+  assert.deepEqual(fromBranch.main, ['meal', 'dpp4', 'receptor', 'lcell', 'insulin']);
+  assert.deepEqual(fromBranch.branch, []);
+  assert.equal(evaluateBoard(item, fromBranch).outcome, OUTCOME.BRANCH_IN_MAIN);
+  assert.equal(moveStep(start, 'missing', 'to-main'), start);
+});
+
+test('boardFromSelection returns the canonical answer for the correct choice', () => {
   const item = byId('t1-relay-order');
-  assert.deepEqual(boardFromSelection(item, 'main-branch').main, item.data.main_order);
+  const correct = boardFromSelection(item, 'main-branch');
+  assert.deepEqual(correct.main, item.data.main_answer);
+  assert.deepEqual(correct.branch, item.data.branch_answer);
+  assert.equal(evaluateBoard(item, correct).correct, true);
   assert.deepEqual(boardFromSelection(item, 'dpp4-in-main'), initialBoard(item));
 });
 
-test('tier 3 items are flagged with a review note and an evidence gap', () => {
+test('tier 3 critique items are flagged with a review note, evidence gap, and shown choices', () => {
   for (const item of items.filter((i) => i.tier === 3)) {
     assert.equal(item.needs_review, true, item.id);
     assert.ok(item.review_note?.trim(), item.id);
     assert.ok(item.data.gap?.trim(), item.id);
     assert.ok(item.worked_example?.trim(), item.id);
+    assert.equal(item.choices.length >= 2, true, item.id);
+    assert.equal(item.choices.filter((c) => c.correct).length, 1, item.id);
+    for (const wrong of item.choices.filter((c) => !c.correct)) assert.ok(wrong.feedback?.trim(), item.id);
   }
 });
 
-test('validator rejects lane overlap, bad lane labels, and non-main-branch correct choices', () => {
+test('validator rejects lane overlap, bad lane labels, non-main-branch choices, solved boards, and malformed critique', () => {
   const overlap = structuredClone(items);
   overlap[0].data.branch_ids.push('meal');
   assert.ok(validateItems(overlap).some((e) => e.includes('lanes must be disjoint')));
@@ -121,4 +154,13 @@ test('validator rejects lane overlap, bad lane labels, and non-main-branch corre
   wrongAnswer[0].choices[0].feedback = 'no';
   wrongAnswer[0].choices[1].correct = true;
   assert.ok(validateItems(wrongAnswer).some((e) => e.includes('main-branch')));
+
+  const solved = structuredClone(items);
+  solved[0].data.main_order = solved[0].data.main_answer.slice();
+  solved[0].data.branch_ids = solved[0].data.branch_answer.slice();
+  assert.ok(validateItems(solved).some((e) => e.includes('starts solved')));
+
+  const critique = structuredClone(items);
+  delete critique[12].data.gap;
+  assert.ok(validateItems(critique).some((e) => e.includes('critique mode requires')));
 });

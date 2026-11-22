@@ -123,10 +123,16 @@ Each item's `data` must carry:
   for a repair item.
 
 `main_order` and `branch_ids` must be disjoint, each step's `lane` must match its arrays,
-and every step needs a text label. Optional `gap` (non-empty when present) records what
-extra evidence would be needed for a Tier 3 critique. A `distractor` step is a plausible
-but unsupported card the learner must keep off the main lane. Optional `cue` names the item's
-board scenario.
+and every step needs a text label. They describe the **starting board**: every non-critique
+item must start unsolved (`startsSolved(item)` is false in the browser evaluator), so the
+learner always has a move to make before Check answer becomes available. Canonical scoring
+stays in `main_answer` / `branch_answer`. Tier 3 items whose prompt is a critique set
+`data.mode: "critique"`; the runner then asks the learner to choose from the sourced
+`choices` (so the choices and their feedback are actually tested) and shows the canonical
+board only as context. Critique mode requires a non-empty `gap`. Optional `gap` (non-empty
+when present) records what extra evidence would be needed for a Tier 3 critique. A
+`distractor` step is a plausible but unsupported card the learner must keep off the main
+lane. Optional `cue` names the item's board scenario.
 
 ## Changing the schema
 

@@ -89,8 +89,8 @@
         },
         "main_order": [
           "meal",
-          "lcell",
           "receptor",
+          "lcell",
           "insulin"
         ],
         "branch_ids": [
@@ -188,7 +188,7 @@
           },
           "dpp4": {
             "label": "DPP-4 degrades the native signal",
-            "lane": "branch"
+            "lane": "distractor"
           }
         },
         "main_order": [
@@ -197,9 +197,7 @@
           "receptor",
           "insulin"
         ],
-        "branch_ids": [
-          "dpp4"
-        ],
+        "branch_ids": [],
         "answer": "main-branch",
         "main_answer": [
           "meal",
@@ -300,8 +298,8 @@
           }
         },
         "main_order": [
-          "meal",
           "lcell",
+          "meal",
           "receptor",
           "insulin"
         ],
@@ -410,8 +408,8 @@
         "main_order": [
           "meal",
           "lcell",
-          "receptor",
-          "insulin"
+          "insulin",
+          "receptor"
         ],
         "branch_ids": [
           "dpp4"
@@ -508,7 +506,7 @@
           },
           "dpp4": {
             "label": "DPP-4 degrades the native signal",
-            "lane": "branch"
+            "lane": "distractor"
           },
           "enters": {
             "label": "GLP-1 enters the beta cell",
@@ -521,9 +519,7 @@
           "receptor",
           "insulin"
         ],
-        "branch_ids": [
-          "dpp4"
-        ],
+        "branch_ids": [],
         "answer": "main-branch",
         "main_answer": [
           "meal",
@@ -616,18 +612,21 @@
           },
           "dpp4": {
             "label": "DPP-4 degrades the native signal",
-            "lane": "branch"
+            "lane": "main"
+          },
+          "enters": {
+            "label": "GLP-1 enters the beta cell",
+            "lane": "distractor"
           }
         },
         "main_order": [
           "meal",
           "lcell",
+          "dpp4",
           "receptor",
           "insulin"
         ],
-        "branch_ids": [
-          "dpp4"
-        ],
+        "branch_ids": [],
         "answer": "main-branch",
         "main_answer": [
           "meal",
@@ -926,7 +925,7 @@
           },
           "dpp4": {
             "label": "DPP-4 degrades the native signal",
-            "lane": "branch"
+            "lane": "distractor"
           },
           "glucose-only": {
             "label": "Insulin effect regardless of glucose",
@@ -936,12 +935,10 @@
         "main_order": [
           "meal",
           "lcell",
-          "receptor",
-          "insulin"
+          "insulin",
+          "receptor"
         ],
-        "branch_ids": [
-          "dpp4"
-        ],
+        "branch_ids": [],
         "answer": "main-branch",
         "main_answer": [
           "meal",
@@ -1034,18 +1031,16 @@
           },
           "dpp4": {
             "label": "DPP-4 degrades the native signal",
-            "lane": "branch"
+            "lane": "distractor"
           }
         },
         "main_order": [
           "meal",
-          "lcell",
           "receptor",
+          "lcell",
           "insulin"
         ],
-        "branch_ids": [
-          "dpp4"
-        ],
+        "branch_ids": [],
         "answer": "main-branch",
         "main_answer": [
           "meal",
@@ -1142,14 +1137,15 @@
           },
           "enters": {
             "label": "GLP-1 enters the beta cell",
-            "lane": "distractor"
+            "lane": "main"
           }
         },
         "main_order": [
           "meal",
           "lcell",
           "receptor",
-          "insulin"
+          "insulin",
+          "enters"
         ],
         "branch_ids": [
           "dpp4"
@@ -1246,18 +1242,16 @@
           },
           "dpp4": {
             "label": "DPP-4 degrades the native signal",
-            "lane": "branch"
+            "lane": "distractor"
           }
         },
         "main_order": [
           "meal",
           "lcell",
-          "receptor",
-          "insulin"
+          "insulin",
+          "receptor"
         ],
-        "branch_ids": [
-          "dpp4"
-        ],
+        "branch_ids": [],
         "answer": "main-branch",
         "main_answer": [
           "meal",
@@ -1373,7 +1367,8 @@
           "dpp4"
         ],
         "cue": "causal",
-        "gap": "Evidence that varying degradation changes the glucose-dependent effect."
+        "gap": "Evidence that varying degradation changes the glucose-dependent effect.",
+        "mode": "critique"
       },
       "review_note": "Pending qualified review: epistemic critique only; no mechanism beyond the lesson.",
       "worked_example": "Say the sources report both facts separately, then name the experiment that would join them."
@@ -1480,7 +1475,8 @@
           "dpp4"
         ],
         "cue": "why",
-        "gap": "A fetched, quoted source for deeper receptor signalling detail."
+        "gap": "A fetched, quoted source for deeper receptor signalling detail.",
+        "mode": "critique"
       },
       "review_note": "Pending qualified review: deeper mechanism explicitly deferred to a quoted source.",
       "worked_example": "Name the sourced sequence, then say a deeper why needs its own source and review."
@@ -1587,7 +1583,8 @@
           "dpp4"
         ],
         "cue": "metaphor",
-        "gap": "A source showing a complete pathway; the lesson does not claim one."
+        "gap": "A source showing a complete pathway; the lesson does not claim one.",
+        "mode": "critique"
       },
       "review_note": "Pending qualified review: metaphor-boundary critique only.",
       "worked_example": "Say what the board orders and stop; a complete pathway would need a different, reviewed source."
@@ -1694,7 +1691,8 @@
           "dpp4"
         ],
         "cue": "universal",
-        "gap": "A source describing the fate of individual molecules, which the lesson does not provide."
+        "gap": "A source describing the fate of individual molecules, which the lesson does not provide.",
+        "mode": "critique"
       },
       "review_note": "Pending qualified review: source-strength critique; no numeric degradation claim.",
       "worked_example": "Keep degradation as a separate branch and say the lesson does not assert a per-molecule order."
@@ -1801,7 +1799,8 @@
           "dpp4"
         ],
         "cue": "quant",
-        "gap": "Numbers would answer a timing question, not an ordering question."
+        "gap": "Numbers would answer a timing question, not an ordering question.",
+        "mode": "critique"
       },
       "review_note": "Pending qualified review: qualitative ordering versus quantitative timing.",
       "worked_example": "Point to the sourced order and say timing values would answer a different question."
@@ -1912,7 +1911,8 @@
           "dpp4"
         ],
         "cue": "partner",
-        "gap": "Evidence that receptor engagement removes the glucose condition."
+        "gap": "Evidence that receptor engagement removes the glucose condition.",
+        "mode": "critique"
       },
       "review_note": "Pending qualified review: glucose-dependence wording only.",
       "worked_example": "Sequence alone is not enough: the final card keeps its glucose condition."

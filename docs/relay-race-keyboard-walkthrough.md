@@ -4,7 +4,7 @@ Run against the built site (no dev server in CI):
 
 ```sh
 python3 -m http.server 8765 --bind 127.0.0.1 --directory site
-node tests/keyboard-walkthrough-games-4-5.cjs
+PLAYWRIGHT_MODULE=/path/to/playwright.js node tests/keyboard-walkthrough-games-4-5.cjs
 ```
 
 The script drives headless Chromium with keyboard events only: `Tab` to reach each
@@ -33,17 +33,23 @@ with zero page errors and zero failed requests.
 1. `Tab` to a tier button and press `Enter`.
 2. The board has three lists: main relay, separate degradation branch, card tray.
    `Tab` to a card's `↑ Earlier` / `↓ Later` / `To branch` / `To tray` button and
-   press `Space`. Disabled buttons carry `disabled` and are skipped by Tab.
-3. Lane and position are written into each card (`1`, `2`, `…` on the main lane,
+   press `Space`; `To main` returns a branch or tray card to the relay. Disabled
+   buttons carry `disabled` and are skipped by Tab. Every board item now starts
+   unsolved, so there is always a meaningful move before Check answer is enabled.
+3. Tier 3 critique items instead show the sourced relay as context and ask the
+   learner to choose a careful reply with the arrow keys and `Space`; the authored
+   choices and their misconception feedback are now actually exercised.
+4. Lane and position are written into each card (`1`, `2`, `…` on the main lane,
    `B` on the branch) and into each list's accessible name, so no meaning rests
    on the branch's border style alone.
-4. Choose Sure or Unsure with `Space`, then `Tab` to Check answer and press
+5. Choose Sure or Unsure with `Space`, then `Tab` to Check answer and press
    `Enter`. A wrong layout gets a specific text explanation in the live region
    (wrong order, branch in main, main in branch, or unsupported card).
 
-Verified on 2026-11-22 with headless Chromium: moving a card with `Space`, then
-Unsure → Check answer produced a substantive "Not quite." explanation in the
-live region, with zero page errors and zero failed requests.
+Verified on 2026-11-22 with headless Chromium: the walkthrough now reads the
+published item data, drives `Tab`/`Space`/`Enter` to reach a sourced correct solve
+for both games, and asserts `Correct.` in the live region with zero page errors
+and zero failed requests.
 
 ## General accessibility notes
 

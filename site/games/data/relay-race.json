@@ -63,8 +63,8 @@
     ],
     "main_order": [
      "meal",
-     "lcell",
      "receptor",
+     "lcell",
      "insulin"
     ],
     "steps": {
@@ -155,9 +155,7 @@
     "branch_answer": [
      "dpp4"
     ],
-    "branch_ids": [
-     "dpp4"
-    ],
+    "branch_ids": [],
     "cue": "branch",
     "main_answer": [
      "meal",
@@ -174,7 +172,7 @@
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
-      "lane": "branch"
+      "lane": "distractor"
      },
      "insulin": {
       "label": "Insulin effect, dependent on glucose",
@@ -270,8 +268,8 @@
      "insulin"
     ],
     "main_order": [
-     "meal",
      "lcell",
+     "meal",
      "receptor",
      "insulin"
     ],
@@ -380,8 +378,8 @@
     "main_order": [
      "meal",
      "lcell",
-     "receptor",
-     "insulin"
+     "insulin",
+     "receptor"
     ],
     "steps": {
      "dpp4": {
@@ -475,9 +473,7 @@
     "branch_answer": [
      "dpp4"
     ],
-    "branch_ids": [
-     "dpp4"
-    ],
+    "branch_ids": [],
     "cue": "surface",
     "main_answer": [
      "meal",
@@ -494,7 +490,7 @@
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
-      "lane": "branch"
+      "lane": "distractor"
      },
      "enters": {
       "label": "GLP-1 enters the beta cell",
@@ -583,9 +579,7 @@
     "branch_answer": [
      "dpp4"
     ],
-    "branch_ids": [
-     "dpp4"
-    ],
+    "branch_ids": [],
     "cue": "lanes",
     "main_answer": [
      "meal",
@@ -596,13 +590,18 @@
     "main_order": [
      "meal",
      "lcell",
+     "dpp4",
      "receptor",
      "insulin"
     ],
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
-      "lane": "branch"
+      "lane": "main"
+     },
+     "enters": {
+      "label": "GLP-1 enters the beta cell",
+      "lane": "distractor"
      },
      "insulin": {
       "label": "Insulin effect, dependent on glucose",
@@ -893,9 +892,7 @@
     "branch_answer": [
      "dpp4"
     ],
-    "branch_ids": [
-     "dpp4"
-    ],
+    "branch_ids": [],
     "cue": "gate",
     "main_answer": [
      "meal",
@@ -906,13 +903,13 @@
     "main_order": [
      "meal",
      "lcell",
-     "receptor",
-     "insulin"
+     "insulin",
+     "receptor"
     ],
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
-      "lane": "branch"
+      "lane": "distractor"
      },
      "glucose-only": {
       "label": "Insulin effect regardless of glucose",
@@ -1001,9 +998,7 @@
     "branch_answer": [
      "dpp4"
     ],
-    "branch_ids": [
-     "dpp4"
-    ],
+    "branch_ids": [],
     "cue": "separate",
     "main_answer": [
      "meal",
@@ -1013,14 +1008,14 @@
     ],
     "main_order": [
      "meal",
-     "lcell",
      "receptor",
+     "lcell",
      "insulin"
     ],
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
-      "lane": "branch"
+      "lane": "distractor"
      },
      "insulin": {
       "label": "Insulin effect, dependent on glucose",
@@ -1119,7 +1114,8 @@
      "meal",
      "lcell",
      "receptor",
-     "insulin"
+     "insulin",
+     "enters"
     ],
     "steps": {
      "dpp4": {
@@ -1128,7 +1124,7 @@
      },
      "enters": {
       "label": "GLP-1 enters the beta cell",
-      "lane": "distractor"
+      "lane": "main"
      },
      "insulin": {
       "label": "Insulin effect, dependent on glucose",
@@ -1213,9 +1209,7 @@
     "branch_answer": [
      "dpp4"
     ],
-    "branch_ids": [
-     "dpp4"
-    ],
+    "branch_ids": [],
     "cue": "rewrite",
     "main_answer": [
      "meal",
@@ -1226,13 +1220,13 @@
     "main_order": [
      "meal",
      "lcell",
-     "receptor",
-     "insulin"
+     "insulin",
+     "receptor"
     ],
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
-      "lane": "branch"
+      "lane": "distractor"
      },
      "insulin": {
       "label": "Insulin effect, dependent on glucose",
@@ -1334,6 +1328,7 @@
      "receptor",
      "insulin"
     ],
+    "mode": "critique",
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
@@ -1441,6 +1436,7 @@
      "receptor",
      "insulin"
     ],
+    "mode": "critique",
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
@@ -1548,6 +1544,7 @@
      "receptor",
      "insulin"
     ],
+    "mode": "critique",
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
@@ -1655,6 +1652,7 @@
      "receptor",
      "insulin"
     ],
+    "mode": "critique",
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
@@ -1762,6 +1760,7 @@
      "receptor",
      "insulin"
     ],
+    "mode": "critique",
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
@@ -1869,6 +1868,7 @@
      "receptor",
      "insulin"
     ],
+    "mode": "critique",
     "steps": {
      "dpp4": {
       "label": "DPP-4 degrades the native signal",
