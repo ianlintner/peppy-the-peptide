@@ -1,0 +1,819 @@
+{
+  "game": "two-dials",
+  "lesson": "endogenous-glp1",
+  "review_mode": "flagged",
+  "title": "Two Dials: Lifetime and Glucose-Dependence",
+  "summary": "Turn one dial at a time, predict what happens to the other readout, and notice that brief lifetime and glucose-dependence are separate observations.",
+  "items": [
+    {
+      "id": "t1-clearance-dial",
+      "concept": "clearance-vs-glucose",
+      "tier": 1,
+      "misconception": "There is only one signal dial, so turning it changes everything",
+      "prompt": "Peppy's lab has two dials: one for how fast a signal is cleared, one for glucose level. You turn only the clearance dial from quick to slow. Which readout changes?",
+      "choices": [
+        {
+          "id": "clearance-only",
+          "text": "Only the clearance readout changes; the glucose-dependence readout stays put",
+          "correct": true
+        },
+        {
+          "id": "both-change",
+          "text": "Both readouts change together",
+          "correct": false,
+          "feedback": "That treats two separate observations as one dial. The sources describe clearance and glucose-dependent insulin response independently."
+        },
+        {
+          "id": "glucose-only",
+          "text": "Only the glucose-dependence readout changes",
+          "correct": false,
+          "feedback": "You turned the clearance dial, so its own readout is the one that moves."
+        }
+      ],
+      "explanation": "Turning the clearance dial changes clearance. The glucose-dependence readout is a separate observation. [1][2]",
+      "hint_ladder": [
+        "Which dial did you actually turn?",
+        "Only the clearance dial moved, so only its readout is expected to change."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": false,
+      "data": {
+        "dial": "clearance",
+        "setting": "slow",
+        "observation": "The signal is cleared more slowly.",
+        "answer": "clearance-only",
+        "invariant": "glucose-dependence",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["mid"]
+        }
+      }
+    },
+    {
+      "id": "t1-glucose-dial",
+      "concept": "clearance-vs-glucose",
+      "tier": 1,
+      "misconception": "Glucose level is just another name for signal lifetime",
+      "prompt": "Now reset the lab. You turn only the glucose dial from mid to high. Which readout changes?",
+      "choices": [
+        {
+          "id": "glucose-only",
+          "text": "Only the glucose-dependence readout changes; the clearance readout stays put",
+          "correct": true
+        },
+        {
+          "id": "both-change",
+          "text": "Both readouts change together",
+          "correct": false,
+          "feedback": "Glucose level and clearance are two different dials; the sources do not make one follow from the other."
+        },
+        {
+          "id": "clearance-only",
+          "text": "Only the clearance readout changes",
+          "correct": false,
+          "feedback": "You turned the glucose dial, so its own readout is the one that moves."
+        }
+      ],
+      "explanation": "The glucose dial concerns the glucose-dependent response. Clearance stays a separate question. [2]",
+      "hint_ladder": [
+        "Name the dial you turned, then name its readout.",
+        "The glucose dial moved; clearance was left alone."
+      ],
+      "source_ids": [2],
+      "needs_review": false,
+      "data": {
+        "dial": "glucose",
+        "setting": "high",
+        "observation": "The glucose level is higher.",
+        "answer": "glucose-only",
+        "invariant": "clearance",
+        "dials": {
+          "clearance": ["quick"],
+          "glucose": ["mid", "high"]
+        }
+      }
+    },
+    {
+      "id": "t1-two-readouts",
+      "concept": "two-observations",
+      "tier": 1,
+      "misconception": "The lab has one readout with two labels",
+      "prompt": "Peppy points at two gauges. One gauge shows how fast the signal is cleared. The other shows whether the insulin effect depends on glucose. What are they showing?",
+      "choices": [
+        {
+          "id": "two-observations",
+          "text": "Two separate observations that can be changed independently",
+          "correct": true
+        },
+        {
+          "id": "one-observation",
+          "text": "One observation described in two different ways",
+          "correct": false,
+          "feedback": "The lesson's check question already separates brief lifetime from glucose-dependent insulin effect."
+        },
+        {
+          "id": "same-dial",
+          "text": "Two labels on the same clearance dial",
+          "correct": false,
+          "feedback": "Glucose-dependence is not a second label for clearance; the sources treat them as distinct facts."
+        }
+      ],
+      "explanation": "Brief lifetime and glucose-dependent insulin effect are two observations, not two words for one. [1][2]",
+      "hint_ladder": [
+        "Reread the lesson's check question.",
+        "It asks whether clearance by itself explains glucose-dependence — and the answer is no."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": false,
+      "data": {
+        "dial": "clearance",
+        "setting": "quick",
+        "observation": "The signal is cleared quickly.",
+        "answer": "two-observations",
+        "invariant": "glucose-dependence",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["low"]
+        }
+      }
+    },
+    {
+      "id": "t1-hold-steady",
+      "concept": "two-observations",
+      "tier": 1,
+      "misconception": "An unchanged readout means the experiment failed",
+      "prompt": "You turn the clearance dial and watch the glucose-dependence gauge. It does not move. What should you conclude?",
+      "choices": [
+        {
+          "id": "held-steady",
+          "text": "The two dials are independent for this observation; nothing is broken",
+          "correct": true
+        },
+        {
+          "id": "broken-gauge",
+          "text": "The glucose gauge is broken and should be ignored",
+          "correct": false,
+          "feedback": "A steady readout is the expected result here; the lesson says the two observations do not establish each other."
+        },
+        {
+          "id": "hidden-change",
+          "text": "The glucose gauge must have changed somewhere else",
+          "correct": false,
+          "feedback": "There is no hidden change to assume. The point is that a clearance change does not move this gauge."
+        }
+      ],
+      "explanation": "A steady gauge is evidence of independence here, not a malfunction. [1][2]",
+      "hint_ladder": [
+        "What did the lesson's check answer say about one fact establishing the other?",
+        "It said no — so a steady readout is exactly what you would expect."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": false,
+      "data": {
+        "dial": "clearance",
+        "setting": "slow",
+        "observation": "The signal is cleared slowly.",
+        "answer": "held-steady",
+        "invariant": "glucose-dependence",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["mid"]
+        }
+      }
+    },
+    {
+      "id": "t1-qualitative-only",
+      "concept": "qualitative-visual",
+      "tier": 1,
+      "misconception": "A dial needs numbers to be meaningful",
+      "prompt": "The lab dials say 'quick / slow' and 'low / mid / high' with no scales or numbers. Can you still compare settings?",
+      "choices": [
+        {
+          "id": "words-enough",
+          "text": "Yes — the words name qualitative settings, and that is all this lab needs",
+          "correct": true
+        },
+        {
+          "id": "need-numbers",
+          "text": "No — a dial is useless without a numeric scale",
+          "correct": false,
+          "feedback": "The lesson deliberately keeps the cartoon qualitative; its metaphor-limit note says the images do not encode numeric response curves."
+        },
+        {
+          "id": "need-timer",
+          "text": "No — you need a timer to read the clearance dial",
+          "correct": false,
+          "feedback": "There are no timers in this lab. The dial compares 'quick' with 'slow' as words."
+        }
+      ],
+      "explanation": "Qualitative settings are enough to practise the separation; the lesson's visuals carry no numeric axes. [2]",
+      "hint_ladder": [
+        "Check the lesson's metaphor-limit note.",
+        "It says the images do not encode quantitative response curves, so words are the intended level."
+      ],
+      "source_ids": [2],
+      "needs_review": false,
+      "data": {
+        "dial": "glucose",
+        "setting": "low",
+        "observation": "The glucose level is low.",
+        "answer": "words-enough",
+        "invariant": "clearance",
+        "dials": {
+          "clearance": ["quick"],
+          "glucose": ["low", "mid", "high"]
+        }
+      }
+    },
+    {
+      "id": "t1-predict-before-reveal",
+      "concept": "predict-observe-explain",
+      "tier": 1,
+      "misconception": "Revealing the answer first is the same as predicting",
+      "prompt": "Peppy covers the second gauge before you answer. Why does the lab ask for your prediction first?",
+      "choices": [
+        {
+          "id": "commit-then-check",
+          "text": "So you commit to a claim, then compare it with what the reveal shows",
+          "correct": true
+        },
+        {
+          "id": "skip-thinking",
+          "text": "So you can skip thinking and just copy the reveal",
+          "correct": false,
+          "feedback": "Copying the reveal is not predicting; the lab is built around predict, observe, explain."
+        },
+        {
+          "id": "hide-evidence",
+          "text": "So the evidence can be hidden from you forever",
+          "correct": false,
+          "feedback": "The reveal always follows your prediction; the evidence is only delayed, not withheld."
+        }
+      ],
+      "explanation": "Predict–observe–explain: commit first, then reveal, then explain the comparison. [1][2]",
+      "hint_ladder": [
+        "Name the three steps in the lab's name.",
+        "Predict, observe, explain — the reveal comes after the prediction."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": false,
+      "data": {
+        "dial": "clearance",
+        "setting": "quick",
+        "observation": "The signal is cleared quickly.",
+        "answer": "commit-then-check",
+        "invariant": "glucose-dependence",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["mid"]
+        }
+      }
+    },
+    {
+      "id": "t2-combined-slow-low",
+      "concept": "combined-settings",
+      "tier": 2,
+      "misconception": "Slow clearance makes glucose-dependence disappear at low glucose",
+      "prompt": "Set the dials to slow clearance and low glucose. You predict what the reveal will show. Which outcome fits the two separate observations?",
+      "choices": [
+        {
+          "id": "clearance-moves",
+          "text": "Clearance looks slow; glucose-dependence still holds as a separate observation",
+          "correct": true
+        },
+        {
+          "id": "dependence-lost",
+          "text": "Slow clearance removes the glucose-dependence",
+          "correct": false,
+          "feedback": "Nothing in the sources makes clearance erase the glucose-dependent insulin response."
+        },
+        {
+          "id": "both-move",
+          "text": "Both readouts move because the settings were combined",
+          "correct": false,
+          "feedback": "Combining settings does not merge two independent dials into one."
+        }
+      ],
+      "explanation": "Slow clearance and low glucose are simultaneous settings, not a causal link between the readouts. [1][2]",
+      "hint_ladder": [
+        "Separate the two dials before you predict.",
+        "Only the clearance readout reflects the clearance setting."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": false,
+      "data": {
+        "dial": "clearance",
+        "setting": "slow",
+        "observation": "The signal is cleared slowly.",
+        "answer": "clearance-moves",
+        "invariant": "glucose-dependence",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["low", "mid", "high"]
+        }
+      }
+    },
+    {
+      "id": "t2-combined-quick-high",
+      "concept": "combined-settings",
+      "tier": 2,
+      "misconception": "High glucose makes rapid clearance irrelevant",
+      "prompt": "Set the dials to quick clearance and high glucose. Which readout follows the glucose dial?",
+      "choices": [
+        {
+          "id": "glucose-moves",
+          "text": "The glucose-dependence readout follows the glucose dial; clearance stays quick",
+          "correct": true
+        },
+        {
+          "id": "clearance-stops",
+          "text": "The clearance readout stops at high glucose",
+          "correct": false,
+          "feedback": "High glucose does not switch off clearance; the sources describe clearance as its own process."
+        },
+        {
+          "id": "both-move",
+          "text": "Both readouts change at high glucose",
+          "correct": false,
+          "feedback": "The glucose dial belongs to the glucose-dependent response, not to clearance."
+        }
+      ],
+      "explanation": "The glucose setting belongs to the glucose-dependent readout; the clearance setting remains its own. [2]",
+      "hint_ladder": [
+        "Which of the two dials is 'high' describing?",
+        "It is the glucose dial, so its own readout is the one that follows."
+      ],
+      "source_ids": [2],
+      "needs_review": false,
+      "data": {
+        "dial": "glucose",
+        "setting": "high",
+        "observation": "The glucose level is higher.",
+        "answer": "glucose-moves",
+        "invariant": "clearance",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["low", "mid", "high"]
+        }
+      }
+    },
+    {
+      "id": "t2-swap-dials",
+      "concept": "combined-settings",
+      "tier": 2,
+      "misconception": "The two dials can be swapped without changing the prediction",
+      "prompt": "First run: slow clearance, mid glucose. Second run: quick clearance, mid glucose. What differs between the runs?",
+      "choices": [
+        {
+          "id": "only-clearance",
+          "text": "Only the clearance readout differs; glucose-dependence is the same in both",
+          "correct": true
+        },
+        {
+          "id": "only-glucose",
+          "text": "Only the glucose readout differs",
+          "correct": false,
+          "feedback": "The glucose dial was held at mid in both runs, so its readout is not the difference."
+        },
+        {
+          "id": "both-differ",
+          "text": "Both readouts differ",
+          "correct": false,
+          "feedback": "Holding the glucose dial steady keeps its readout steady; only clearance was changed."
+        }
+      ],
+      "explanation": "Changing one dial while holding the other steady isolates that dial's readout. [1][2]",
+      "hint_ladder": [
+        "Which dial is identical in both runs?",
+        "Glucose is held at mid, so only the clearance readout can differ."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": false,
+      "data": {
+        "dial": "clearance",
+        "setting": "slow",
+        "observation": "The signal is cleared slowly.",
+        "answer": "only-clearance",
+        "invariant": "glucose-dependence",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["mid"]
+        }
+      }
+    },
+    {
+      "id": "t2-same-reading-different-dial",
+      "concept": "combined-settings",
+      "tier": 2,
+      "misconception": "A matching prediction means the dials were set the same",
+      "prompt": "Two learners both predict that the glucose-dependence readout will stay the same. One changed clearance; one changed glucose. Who is right?",
+      "choices": [
+        {
+          "id": "depends-on-dial",
+          "text": "Neither generalises: the answer depends on which dial each one turned",
+          "correct": true
+        },
+        {
+          "id": "both-right",
+          "text": "Both are right, because that readout never changes for anyone",
+          "correct": false,
+          "feedback": "The glucose-dependence readout follows the glucose dial; a glucose change does move it."
+        },
+        {
+          "id": "both-wrong",
+          "text": "Both are wrong, because that readout always changes",
+          "correct": false,
+          "feedback": "A clearance change leaves this readout steady, so the claim can be right for that dial."
+        }
+      ],
+      "explanation": "The same spoken prediction can be right or wrong depending on which dial was turned. [1][2]",
+      "hint_ladder": [
+        "Ask what each learner changed before judging the prediction.",
+        "A clearance change and a glucose change have different readouts."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": false,
+      "data": {
+        "dial": "glucose",
+        "setting": "low",
+        "observation": "The glucose level is low.",
+        "answer": "depends-on-dial",
+        "invariant": "clearance",
+        "dials": {
+          "clearance": ["quick"],
+          "glucose": ["low", "high"]
+        }
+      }
+    },
+    {
+      "id": "t2-best-explanation-independence",
+      "concept": "self-explanation",
+      "tier": 2,
+      "misconception": "A longer-lived signal would make glucose-dependence stronger",
+      "prompt": "Pick the best one-line explanation after the reveal: you turned clearance and the glucose gauge held steady.",
+      "choices": [
+        {
+          "id": "separate-observations",
+          "text": "Clearance and glucose-dependence are separate observations; this run changed only the first",
+          "correct": true
+        },
+        {
+          "id": "longer-stronger",
+          "text": "A longer-lived signal makes glucose-dependence stronger",
+          "correct": false,
+          "feedback": "That invents a causal link the sources do not provide."
+        },
+        {
+          "id": "steady-means-absent",
+          "text": "A steady gauge means the signal has no glucose-dependence at all",
+          "correct": false,
+          "feedback": "Steady means unchanged in this comparison, not absent."
+        }
+      ],
+      "explanation": "The best explanation names the separation without adding a mechanism. [1][2]",
+      "hint_ladder": [
+        "Does your sentence add a cause the sources did not state?",
+        "Stay with what the reveal showed: one readout moved, the other did not."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": false,
+      "data": {
+        "dial": "clearance",
+        "setting": "slow",
+        "observation": "The signal is cleared slowly.",
+        "answer": "separate-observations",
+        "invariant": "glucose-dependence",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["mid"]
+        }
+      }
+    },
+    {
+      "id": "t2-best-explanation-glucose",
+      "concept": "self-explanation",
+      "tier": 2,
+      "misconception": "A glucose change tells you how fast the signal clears",
+      "prompt": "Pick the best one-line explanation after the reveal: you turned glucose and the clearance gauge held steady.",
+      "choices": [
+        {
+          "id": "glucose-own-readout",
+          "text": "The glucose dial belongs to the glucose-dependent response; clearance was not tested by this change",
+          "correct": true
+        },
+        {
+          "id": "glucose-sets-lifetime",
+          "text": "Glucose level sets the signal's lifetime",
+          "correct": false,
+          "feedback": "That conflates the glucose dial with clearance; the reveal showed clearance unchanged."
+        },
+        {
+          "id": "nothing-testable",
+          "text": "The reveal shows nothing can ever be learned about clearance",
+          "correct": false,
+          "feedback": "It shows only that this glucose change did not test clearance."
+        }
+      ],
+      "explanation": "An unchanged gauge limits the conclusion to the dial that was turned. [2]",
+      "hint_ladder": [
+        "Which dial does the glucose-dependent response belong to?",
+        "It belongs to the glucose dial; clearance was untouched."
+      ],
+      "source_ids": [2],
+      "needs_review": false,
+      "data": {
+        "dial": "glucose",
+        "setting": "high",
+        "observation": "The glucose level is higher.",
+        "answer": "glucose-own-readout",
+        "invariant": "clearance",
+        "dials": {
+          "clearance": ["quick"],
+          "glucose": ["mid", "high"]
+        }
+      }
+    },
+    {
+      "id": "t3-critique-short-lifetime",
+      "concept": "critique-claims",
+      "tier": 3,
+      "misconception": "Short lifetime explains glucose-dependence",
+      "prompt": "Claim to critique: 'The signal's short lifetime explains why its insulin effect depends on glucose.' What is the strongest critique?",
+      "choices": [
+        {
+          "id": "two-facts-no-link",
+          "text": "It joins two separately reported facts into a cause. Evidence would need to vary clearance and show the glucose-dependence changing with it",
+          "correct": true
+        },
+        {
+          "id": "claim-is-true",
+          "text": "It is true because both facts appear in the same lesson",
+          "correct": false,
+          "feedback": "Appearing together is not evidence that one causes the other."
+        },
+        {
+          "id": "lifetime-irrelevant",
+          "text": "It is false because lifetime has no role anywhere in biology",
+          "correct": false,
+          "feedback": "Too strong: lifetime matters for exposure. The problem is the unsupported causal link."
+        }
+      ],
+      "explanation": "The lesson names these as distinct observations; a causal claim would need a test that varies one and observes the other. [1][2]",
+      "hint_ladder": [
+        "Ask whether the claim reports two facts or asserts a cause.",
+        "Name the experiment that would be needed to support the cause."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the critique wording; no mechanism beyond the lesson's sourced facts is asserted.",
+      "worked_example": "Ask: if clearance is varied while glucose stays fixed, does the glucose-dependence readout move? Without that evidence, the two facts stay separate.",
+      "data": {
+        "dial": "clearance",
+        "setting": "quick",
+        "observation": "The signal is cleared quickly.",
+        "answer": "two-facts-no-link",
+        "invariant": "glucose-dependence",
+        "missing_evidence": "A comparison that varies clearance while holding glucose fixed and measures the glucose-dependent response.",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["mid"]
+        }
+      }
+    },
+    {
+      "id": "t3-critique-glucose-clears",
+      "concept": "critique-claims",
+      "tier": 3,
+      "misconception": "Glucose-dependence explains the clearance rate",
+      "prompt": "Claim to critique: 'Because the insulin effect depends on glucose, that dependence is what clears the signal quickly.' What evidence would settle it?",
+      "choices": [
+        {
+          "id": "need-clearance-test",
+          "text": "You would need a clearance measurement that changes the glucose-dependent response and watches clearance, not a restatement of the response",
+          "correct": true
+        },
+        {
+          "id": "claim-proven",
+          "text": "No evidence needed: glucose-dependence is already measured",
+          "correct": false,
+          "feedback": "Measuring one readout cannot establish a cause of the other readout."
+        },
+        {
+          "id": "reverse-also-true",
+          "text": "The reverse claim is equally supported, so both are true",
+          "correct": false,
+          "feedback": "Two unsupported causal claims do not support each other."
+        }
+      ],
+      "explanation": "A response property is not a clearance mechanism; the sources report degradation and elimination separately from the glucose-dependent response. [2]",
+      "hint_ladder": [
+        "Which readout would the claim need to measure to be a clearance claim?",
+        "Clearance itself — the glucose-dependent response is a different readout."
+      ],
+      "source_ids": [2],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the critique wording; the cited source reports degradation and elimination but the game states no numeric detail.",
+      "worked_example": "To test the claim, vary the glucose-dependent response and measure clearance directly. A statement about the response alone cannot do it.",
+      "data": {
+        "dial": "glucose",
+        "setting": "low",
+        "observation": "The glucose level is low.",
+        "answer": "need-clearance-test",
+        "invariant": "clearance",
+        "missing_evidence": "A direct clearance measurement under a changed glucose-dependent response.",
+        "dials": {
+          "clearance": ["quick"],
+          "glucose": ["low", "high"]
+        }
+      }
+    },
+    {
+      "id": "t3-critique-both-dials",
+      "concept": "critique-claims",
+      "tier": 3,
+      "misconception": "One dial setting can explain both readouts",
+      "prompt": "Claim to critique: 'Set the clearance dial and you have explained both gauges.' What is missing?",
+      "choices": [
+        {
+          "id": "second-dial-unset",
+          "text": "The glucose dial was never varied, so the second gauge was not tested at all",
+          "correct": true
+        },
+        {
+          "id": "one-dial-enough",
+          "text": "Nothing is missing; the first dial covers everything",
+          "correct": false,
+          "feedback": "The lab has two dials and two readouts; varying one leaves the other untested."
+        },
+        {
+          "id": "gauges-broken",
+          "text": "Both gauges must be broken if one dial cannot move them",
+          "correct": false,
+          "feedback": "The gauges behave as the sources describe; the flaw is the over-broad claim."
+        }
+      ],
+      "explanation": "A one-dial experiment supports a one-dial conclusion. [1][2]",
+      "hint_ladder": [
+        "Count the dials in the lab.",
+        "There are two; turning one leaves the other untested."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the critique wording; no physiological numbers or product claims.",
+      "worked_example": "Run a second trial that turns only the glucose dial; only then can you say what moves that gauge.",
+      "data": {
+        "dial": "clearance",
+        "setting": "slow",
+        "observation": "The signal is cleared slowly.",
+        "answer": "second-dial-unset",
+        "invariant": "glucose-dependence",
+        "missing_evidence": "A trial that varies the glucose dial while clearance is held fixed.",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["mid"]
+        }
+      }
+    },
+    {
+      "id": "t3-critique-deeper-why",
+      "concept": "evidence-limits",
+      "tier": 3,
+      "misconception": "The lesson's sources explain the deeper molecular why",
+      "prompt": "A learner asks: 'What molecular step makes the insulin effect glucose-dependent?' What should the lab assistant say?",
+      "choices": [
+        {
+          "id": "source-limited",
+          "text": "The lesson's sources report the dependence, not a full molecular cause; any deeper why needs its own quoted source and review",
+          "correct": true
+        },
+        {
+          "id": "invent-mechanism",
+          "text": "Invent a plausible molecular chain so the learner has an answer",
+          "correct": false,
+          "feedback": "This lab does not invent mechanism beyond its two sources."
+        },
+        {
+          "id": "no-evidence-at-all",
+          "text": "Say the dependence was never observed",
+          "correct": false,
+          "feedback": "The sources do report the glucose-dependent insulin response; the limit is the deeper why."
+        }
+      ],
+      "explanation": "Name what the sources support and where they stop; flag deeper mechanism for quoted, reviewed sourcing. [2]",
+      "hint_ladder": [
+        "Does the lesson claim to give a full molecular mechanism?",
+        "No — it calls its mechanism layer an entry point and limits its visuals."
+      ],
+      "source_ids": [2],
+      "needs_review": true,
+      "review_note": "Pending clinical review: any deeper molecular why would have to be quoted from a fetched primary source and separately flagged.",
+      "worked_example": "Answer with the observed dependence, then point to the source shelf and say a deeper mechanism needs its own reviewed source.",
+      "data": {
+        "dial": "glucose",
+        "setting": "mid",
+        "observation": "The glucose level is set to mid.",
+        "answer": "source-limited",
+        "invariant": "clearance",
+        "missing_evidence": "A fetched primary-source quotation for the deeper molecular cause, flagged for review.",
+        "dials": {
+          "clearance": ["quick"],
+          "glucose": ["low", "mid", "high"]
+        }
+      }
+    },
+    {
+      "id": "t3-critique-quantitative-demand",
+      "concept": "evidence-limits",
+      "tier": 3,
+      "misconception": "A qualitative lab cannot support a separation claim",
+      "prompt": "Claim to critique: 'Without numeric axes and time scales, you cannot say the two readouts are separate.' How should the assistant respond?",
+      "choices": [
+        {
+          "id": "separation-not-magnitude",
+          "text": "Separation is a structural claim about which dial moves which gauge; the qualitative comparison tests that without needing numeric axes",
+          "correct": true
+        },
+        {
+          "id": "numbers-required",
+          "text": "Agreed — only a numeric curve could show separation",
+          "correct": false,
+          "feedback": "The lesson deliberately uses qualitative visuals; its point is independence of observations, not magnitude."
+        },
+        {
+          "id": "no-claim-possible",
+          "text": "Agreed — nothing at all can be concluded without numbers",
+          "correct": false,
+          "feedback": "Too strong: the lesson's check question itself makes the separation qualitatively."
+        }
+      ],
+      "explanation": "The lab tests which dial moves which readout, not magnitudes; numbers are deliberately out of scope. [1][2]",
+      "hint_ladder": [
+        "Is the claim about size of an effect or about which dial affects which gauge?",
+        "It is about which dial moves which gauge — a qualitative separation."
+      ],
+      "source_ids": [1, 2],
+      "needs_review": true,
+      "review_note": "Pending clinical review of the evidence-limits wording; no numeric physiology values are used.",
+      "worked_example": "Say that a qualitative dial comparison settles independence of readouts; magnitude would be a different, numeric question.",
+      "data": {
+        "dial": "clearance",
+        "setting": "quick",
+        "observation": "The signal is cleared quickly.",
+        "answer": "separation-not-magnitude",
+        "invariant": "glucose-dependence",
+        "missing_evidence": "Numeric measurements would be needed only for a magnitude question, not for this separation claim.",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["low", "mid", "high"]
+        }
+      }
+    },
+    {
+      "id": "t3-critique-metaphor-limit",
+      "concept": "evidence-limits",
+      "tier": 3,
+      "misconception": "The dial cartoon is a molecular mechanism diagram",
+      "prompt": "Claim to critique: 'The two-dial cartoon shows the molecular steps that clear the signal and make the insulin effect glucose-dependent.' What is the right critique?",
+      "choices": [
+        {
+          "id": "cartoon-not-mechanism",
+          "text": "The cartoon separates two observations; it does not depict molecular steps. Mechanism detail needs a quoted, reviewed source",
+          "correct": true
+        },
+        {
+          "id": "cartoon-is-diagram",
+          "text": "It is a precise diagram, so the steps shown are established",
+          "correct": false,
+          "feedback": "The lesson's metaphor note says the images are symbolic and do not encode molecular structure or kinetics."
+        },
+        {
+          "id": "no-observations-either",
+          "text": "If it is only a cartoon, it cannot even separate observations",
+          "correct": false,
+          "feedback": "Too strong: the cartoon is a teaching device for a separation the sources themselves report."
+        }
+      ],
+      "explanation": "The visuals are qualitative teaching aids, not molecular diagrams; deeper mechanism stays source-bound and flagged. [2]",
+      "hint_ladder": [
+        "Reread the lesson's metaphor-limit note.",
+        "It says the images do not encode molecular structure or quantitative response curves."
+      ],
+      "source_ids": [2],
+      "needs_review": true,
+      "review_note": "Pending clinical review: any deeper mechanism would require a fetched primary-source quote and a separate flag.",
+      "worked_example": "Say what the cartoon does show — which dial moved which gauge — and stop there unless a quoted source supports more.",
+      "data": {
+        "dial": "clearance",
+        "setting": "slow",
+        "observation": "The signal is cleared slowly.",
+        "answer": "cartoon-not-mechanism",
+        "invariant": "glucose-dependence",
+        "missing_evidence": "Quoted, reviewed primary-source detail before making any molecular-step claim.",
+        "dials": {
+          "clearance": ["quick", "slow"],
+          "glucose": ["mid"]
+        }
+      }
+    }
+  ]
+}
