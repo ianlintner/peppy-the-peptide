@@ -138,13 +138,13 @@ export function selectQueue(pool, state, { now, seed = 'daily', seen = [], size 
   const queue = [];
   const usedConcepts = new Set();
   let ri = 0, ni = 0, newUsed = 0;
-  const push = (c) => { if (!usedConcepts.has(c.concept)) { queue.push(c); usedConcepts.add(c.concept); } };
+  const push = (c) => { if (!usedConcepts.has(c.concept)) { queue.push(c); usedConcepts.add(c.concept); return true; } return false; };
   while (queue.length < target && (ri < orderedReviews.length || (ni < orderedFresh.length && newUsed < newCap))) {
     if (ni < orderedFresh.length && newUsed < newCap && (ri >= orderedReviews.length || queue.length % 2 === 1)) {
       const c = orderedFresh[ni++];
-      push(c); newUsed++;
+      if (push(c)) newUsed++;
     } else if (ri < orderedReviews.length) push(orderedReviews[ri++]);
-    else { const c = orderedFresh[ni++]; push(c); newUsed++; }
+    else { const c = orderedFresh[ni++]; if (push(c)) newUsed++; }
   }
   // Fill remaining capacity from the interleaved fresh order (beyond the new cap)
   // so a session still reaches SESSION_MIN and lesson round-robin is preserved.

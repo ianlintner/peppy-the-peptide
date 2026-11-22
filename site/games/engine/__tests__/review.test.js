@@ -108,6 +108,20 @@ test('queue: unseen items capped, due items fill the rest, seen excluded', () =>
   assert.equal(again.length, 0, 'items seen this session are not repeated');
 });
 
+test('a duplicate fresh concept does not consume a new-card slot', () => {
+  // The interleaved fresh pool may repeat a concept; a skipped duplicate must still
+  // leave room for a genuinely new concept within the NEW_CAP budget.
+  const pool = [
+    card('r1', 'r1', 'l1'),
+    card('dup1', 'shared', 'l1'), card('dup2', 'shared', 'l2'),
+    card('fresh1', 'fresh1', 'l2'), card('fresh2', 'fresh2', 'l1'),
+  ];
+  const state = { concepts: { r1: { box: 2, due: T0 - DAY_MS, seen: 1, correct: 1, bestTier: 1, recent: [1] } } };
+  const q = selectQueue(pool, state, { now: T0, seed: 0 });
+  assert.equal(new Set(q.map((c) => c.concept)).size, q.length);
+  assert.ok(q.some((c) => c.id === 'fresh1'), 'a distinct concept after the duplicate still gets a slot');
+});
+
 test('queue: new-only pool interleaves, fills to SESSION_MIN and empty pool yields empty queue', () => {
   const pool = [card('n1', 'n1', 'l1'), card('n2', 'n2', 'l1'), card('n3', 'n3', 'l2'), card('n4', 'n4', 'l2')];
   const q = selectQueue(pool, emptyState(), { now: T0, size: 5, seed: 0 });

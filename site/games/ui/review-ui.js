@@ -9,6 +9,14 @@ const html = htm.bind(h);
 
 const SOURCE_NAMES = { 1: 'Curious', 2: 'College', 3: 'Mechanism' };
 
+/** Pure guard: one question may be recorded once per card. Used by grade() and its tests. */
+export const gradeAllowed = ({ card, revealed, confident, graded }) =>
+  !!card && revealed === true && confident !== null && graded !== true;
+
+/** Pure guard: revealing without a confidence traps the learner on an ungradable card. */
+export const revealAllowed = ({ card, revealed, confident, graded }) =>
+  !!card && revealed !== true && confident !== null && graded !== true;
+
 /** Empty state: nothing due yet. */
 function Empty({ hasHistory }) {
   return html`<div class="rv-empty">
@@ -27,6 +35,7 @@ export function ReviewUI({ cards, store, now = () => Date.now(), seed = 'daily' 
   const [index, setIndex] = useState(0);
   const [confident, setConfident] = useState(null);
   const [revealed, setRevealed] = useState(false);
+  const [graded, setGraded] = useState(false); // one Leitner record per card
   const [note, setNote] = useState('');
   const [refresh, setRefresh] = useState(0); // new session after "again" or new import
   const group = useRef('rv-confidence');
@@ -38,26 +47,26 @@ export function ReviewUI({ cards, store, now = () => Date.now(), seed = 'daily' 
 
   const start = (s = store.get()) => {
     setQueue(selectQueue(cards, s, { now: now(), seed, seen: [] }));
-    setIndex(0); setConfident(null); setRevealed(false); setNote('');
+    setIndex(0); setConfident(null); setRevealed(false); setGraded(false); setNote('');
   };
 
   const grade = (correct) => {
-    if (!card || !revealed || confident === null) return;
+    if (!gradeAllowed({ card, revealed, confident, graded })) return;
     const t = now();
     const next = record(store.get(), card.concept, {
       tier: card.tier,
       correct,
       confidence: confident ? 'sure' : 'unsure',
     }, t);
-    store.set(next); setState(next);
+    store.set(next); setState(next); setGraded(true);
     setNote(`${confident ? 'Sure' : 'Unsure'} · ${correct ? 'Marked correct. Scheduled for a later review.' : 'Marked as a miss. This one will come back soon.'}`);
   };
 
   const next = () => {
     if (index + 1 < queue.length) {
-      setIndex(index + 1); setConfident(null); setRevealed(false); setNote('');
+      setIndex(index + 1); setConfident(null); setRevealed(false); setGraded(false); setNote('');
     } else {
-      setIndex(queue.length); setRevealed(false); setNote('Session complete.');
+      setIndex(queue.length); setRevealed(false); setGraded(false); setNote('Session complete.');
     }
   };
 
@@ -96,12 +105,12 @@ export function ReviewUI({ cards, store, now = () => Date.now(), seed = 'daily' 
         <label><input type="radio" name=${group.current} checked=${confident === false} onChange=${() => setConfident(false)} /> Unsure</label>
       </fieldset>`}
       ${!revealed && html`<div class="rv-actions">
-        <button type="button" class="rv-btn rv-primary" aria-disabled=${confident === null} onClick=${() => { setRevealed(true); setNote('Answer shown. Now mark how you did; the schedule changes only when you grade.'); }}>Show answer</button>
+        <button type="button" class="rv-btn rv-primary" aria-disabled=${confident === null} onClick=${() => { if (!revealAllowed({ card, revealed, confident, graded })) return; setRevealed(true); setNote('Answer shown. Now mark how you did; the schedule changes only when you grade.'); }}>Show answer</button>
       </div>`}
       ${!revealed && confident === null && html`<p class="rv-small">Choose Sure or Unsure, then reveal the answer.</p>`}
       ${revealed && html`<div class="rv-actions rv-grade">
-        <button type="button" class="rv-btn rv-primary" disabled=${confident === null} onClick=${() => grade(true)}>I was right</button>
-        <button type="button" class="rv-btn rv-primary" disabled=${confident === null} onClick=${() => grade(false)}>I missed it</button>
+        <button type="button" class="rv-btn rv-primary" disabled=${confident === null || graded} onClick=${() => grade(true)}>I was right</button>
+        <button type="button" class="rv-btn rv-primary" disabled=${confident === null || graded} onClick=${() => grade(false)}>I missed it</button>
         <button type="button" class="rv-btn" onClick=${next}>${index + 1 < queue.length ? 'Next question' : 'Finish session'}</button>
       </div>`}
       <div class="rv-feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" ref=${feedback}>
