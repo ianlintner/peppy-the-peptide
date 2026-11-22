@@ -10,6 +10,7 @@ export const LANE = Object.freeze({ MAIN: 'main', BRANCH: 'branch', DISTRACTOR: 
 
 export const OUTCOME = Object.freeze({
   CORRECT: 'correct',
+  WRONG_REPLY: 'wrong-reply',
   WRONG_ORDER: 'wrong-order',
   BRANCH_IN_MAIN: 'branch-in-main',
   MAIN_IN_BRANCH: 'main-in-branch',
@@ -31,6 +32,12 @@ export const MISCONCEPTION_TEXT = Object.freeze({
 export function markedCorrectId(item) {
   const right = (item?.choices || []).filter((c) => c && c.correct === true);
   return right.length === 1 ? (right[0].id ?? null) : null;
+}
+
+/** Id of the single authored careful reply for a critique item. */
+export function critiqueCorrectId(item) {
+  if (item?.data?.mode !== 'critique') return null;
+  return markedCorrectId(item);
 }
 
 /** The board shape the runner starts from, derived entirely from item data. */
@@ -156,10 +163,17 @@ export function validateItems(items) {
     }
     if (d.mode === 'critique') {
       if (item.tier !== 3 || !d.gap) errors.push(`${where}.data: critique mode requires tier 3 and a gap`);
-    } else if (item.tier !== 3 && startsSolved(item)) {
-      errors.push(`${where}.data: board starts solved; learners must have a move to make`);
+      if (!critiqueCorrectId(item)) errors.push(`${where}.choices: critique needs one authored careful reply`);
+      const texts = new Set((item.choices || []).map((c) => c?.text));
+      if (texts.size !== (item.choices || []).length) {
+        errors.push(`${where}.choices: critique replies must be item-specific and distinct`);
+      }
+    } else {
+      if (item.tier !== 3 && startsSolved(item)) {
+        errors.push(`${where}.data: board starts solved; learners must have a move to make`);
+      }
+      if (markedCorrectId(item) !== 'main-branch') errors.push(`${where}.choices: only main-branch may be correct`);
     }
-    if (markedCorrectId(item) !== 'main-branch') errors.push(`${where}.choices: only main-branch may be correct`);
     if (item.needs_review === true && typeof item.review_note !== 'string') {
       errors.push(`${where}.review_note: required for flagged items`);
     }

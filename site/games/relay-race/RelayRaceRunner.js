@@ -8,12 +8,24 @@ import { h } from '../../vendor/preact/preact.mjs';
 import htm from '../../vendor/htm/htm.mjs';
 import { useState } from '../../vendor/preact/hooks.mjs';
 import { Peppy } from '../ui/peppy.js';
-import { OUTCOME, boardFromSelection, evaluateBoard, initialBoard, moveStep } from './evaluator.js';
+import { OUTCOME, boardFromSelection, critiqueCorrectId, evaluateBoard, initialBoard, moveStep } from './evaluator.js';
 
 const html = htm.bind(h);
 const isCritique = (item) => item?.data?.mode === 'critique';
 
 export function answer(item) {
+  if (isCritique(item)) {
+    const reply = (item.choices || []).find((c) => c.id === critiqueCorrectId(item));
+    return {
+      correct: false,
+      outcome: OUTCOME.CORRECT,
+      choiceId: critiqueCorrectId(item),
+      feedback: reply ? `Answer shown: ${reply.text}` : 'Answer shown: check the item data.',
+      expected: item.data.main_answer,
+      branch: item.data.branch_answer,
+      shownAnswer: true,
+    };
+  }
   const result = evaluateBoard(item, { main: item.data.main_answer, branch: item.data.branch_answer });
   return {
     correct: false,
@@ -68,7 +80,7 @@ function CritiqueChoices({ item, locked, onSelect }) {
     setPicked(choice.id);
     onSelect({
       correct: choice.correct === true,
-      outcome: choice.correct === true ? OUTCOME.CORRECT : OUTCOME.INCONSISTENT_ITEM,
+      outcome: choice.correct === true ? OUTCOME.CORRECT : OUTCOME.WRONG_REPLY,
       choiceId: choice.id,
       feedback: choice.correct ? '' : (choice.feedback || 'Check the sourced relay and the evidence gap.'),
     });

@@ -127,10 +127,13 @@ and every step needs a text label. They describe the **starting board**: every n
 item must start unsolved (`startsSolved(item)` is false in the browser evaluator), so the
 learner always has a move to make before Check answer becomes available. Canonical scoring
 stays in `main_answer` / `branch_answer`. Tier 3 items whose prompt is a critique set
-`data.mode: "critique"`; the runner then asks the learner to choose from the sourced
-`choices` (so the choices and their feedback are actually tested) and shows the canonical
-board only as context. Critique mode requires a non-empty `gap`. Optional `gap` (non-empty
-when present) records what extra evidence would be needed for a Tier 3 critique. A
+`data.mode: "critique"`; the runner then asks the learner to choose the careful
+reply from that item's own `choices` (so the choices and their misconception
+feedback are actually tested) and shows the canonical board only as context.
+Critique mode requires a non-empty `gap` and exactly one authored correct reply;
+its reply texts must be item-specific and distinct across items. The board-rule
+`main-branch` correct id applies only to non-critique items. Optional `gap`
+(non-empty when present) records what extra evidence would be needed for a Tier 3 critique.
 `distractor` step is a plausible but unsupported card the learner must keep off the main
 lane. Optional `cue` names the item's board scenario.
 

@@ -322,6 +322,27 @@ class RelayRaceRules(unittest.TestCase):
             other['correct'] = True
         self.assertRelay(flip, 't1-relay-order', 'main-branch')
 
+    def test_critique_uses_mode_specific_rules(self):
+        item = next(i for i in RELAY['items'] if i['id'] == 't3-causal-claim')
+        self.assertEqual(item['data']['mode'], 'critique')
+        self.assertEqual(self.relay_errors(lambda i: None, 't3-causal-claim'), [])
+        # A critique reply is legitimately not "main-branch".
+        self.assertNotIn('main-branch', [c['id'] for c in item['choices']])
+
+        def drop_gap(i):
+            i['data'].pop('gap')
+        self.assertRelay(drop_gap, 't3-causal-claim', 'critique mode requires')
+
+        def duplicate(i):
+            i['choices'][1]['text'] = i['choices'][0]['text']
+        self.assertRelay(duplicate, 't3-causal-claim', 'item-specific')
+
+    def test_board_items_cannot_start_solved(self):
+        def solve(i):
+            i['data']['main_order'] = i['data']['main_answer'][:]
+            i['data']['branch_ids'] = i['data']['branch_answer'][:]
+        self.assertRelay(solve, 't1-relay-order', 'starts solved')
+
 
 if __name__ == '__main__':
     unittest.main()

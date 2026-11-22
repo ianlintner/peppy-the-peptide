@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  LANE, OUTCOME, boardFromSelection, evaluateBoard, initialBoard, markedCorrectId, moveStep, startsSolved, validateItems,
+  LANE, OUTCOME, boardFromSelection, critiqueCorrectId, evaluateBoard, initialBoard, markedCorrectId, moveStep, startsSolved, validateItems,
 } from '../evaluator.js';
 
 const content = JSON.parse(
@@ -28,7 +28,11 @@ test('every item has tier, misconception, sourced ids, and no numeric physiology
 
 test('board items never start solved; tier 3 critique items use choices instead', () => {
   for (const item of items) {
-    assert.equal(markedCorrectId(item), 'main-branch', item.id);
+    if (item.tier === 3) {
+      assert.equal(critiqueCorrectId(item), markedCorrectId(item), item.id);
+    } else {
+      assert.equal(markedCorrectId(item), 'main-branch', item.id);
+    }
     const board = initialBoard(item);
     assert.deepEqual(board.main, item.data.main_order, item.id);
     assert.deepEqual(board.branch, item.data.branch_ids, item.id);
@@ -140,6 +144,21 @@ test('tier 3 critique items are flagged with a review note, evidence gap, and sh
   }
 });
 
+test('tier 3 critique replies are item-specific and answer the critique, not the relay order', () => {
+  const critiques = items.filter((i) => i.tier === 3);
+  const texts = critiques.map((i) => i.choices.map((c) => c.text).join('|'));
+  assert.equal(new Set(texts).size, critiques.length, 'critique choice sets must differ per item');
+  for (const item of critiques) {
+    const right = item.choices.find((c) => c.correct === true);
+    assert.ok(right, item.id);
+    assert.ok(!/→/.test(right.text), `${item.id}: correct reply is an ordering, not a critique`);
+    assert.ok(right.text.trim().length > 20, item.id);
+    for (const wrong of item.choices.filter((c) => !c.correct)) {
+      assert.ok(wrong.feedback?.trim(), item.id);
+    }
+  }
+});
+
 test('validator rejects lane overlap, bad lane labels, non-main-branch choices, solved boards, and malformed critique', () => {
   const overlap = structuredClone(items);
   overlap[0].data.branch_ids.push('meal');
@@ -163,4 +182,8 @@ test('validator rejects lane overlap, bad lane labels, non-main-branch choices, 
   const critique = structuredClone(items);
   delete critique[12].data.gap;
   assert.ok(validateItems(critique).some((e) => e.includes('critique mode requires')));
+
+  const duplicate = structuredClone(items);
+  duplicate[12].choices[1].text = duplicate[12].choices[0].text;
+  assert.ok(validateItems(duplicate).some((e) => e.includes('item-specific')));
 });

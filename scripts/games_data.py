@@ -274,13 +274,24 @@ def _validate_relay_item(item, where):
             and canonical_main == ['meal', 'lcell', 'receptor', 'insulin']
             and canonical_branch == ['dpp4']):
         errs.append(f'{w}: main_answer/branch_answer must be the sourced relay and degradation branch')
-    if 'gap' in d and not _nonblank(d['gap']):
-        errs.append(f'{w}.gap: when present, must be non-empty text')
     cs = [c for c in item.get('choices', []) if isinstance(c, dict)]
     ids = [c.get('id') for c in cs]
     right = [c.get('id') for c in cs if c.get('correct') is True]
-    if right != ['main-branch'] or 'main-branch' not in ids:
-        errs.append(f'{where}.choices: exactly the "main-branch" choice may be correct')
+    if d.get('mode') == 'critique':
+        if item.get('tier') != 3 or not _nonblank(d.get('gap')):
+            errs.append(f'{w}: critique mode requires tier 3 and a non-empty gap')
+        if len(right) != 1 or not right[0]:
+            errs.append(f'{where}.choices: critique needs exactly one authored careful reply')
+        texts = [c.get('text') for c in cs]
+        if len(texts) != len(set(texts)):
+            errs.append(f'{where}.choices: critique replies must be item-specific and distinct')
+    else:
+        if item.get('tier') != 3 and main == canonical_main and branch == canonical_branch:
+            errs.append(f'{w}: board starts solved; learners must have a move to make')
+        if right != ['main-branch'] or 'main-branch' not in ids:
+            errs.append(f'{where}.choices: exactly the "main-branch" choice may be correct')
+    if 'gap' in d and not _nonblank(d['gap']):
+        errs.append(f'{w}.gap: when present, must be non-empty text')
     return errs
 
 
