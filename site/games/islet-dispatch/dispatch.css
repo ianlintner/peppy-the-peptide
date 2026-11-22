@@ -1,0 +1,27 @@
+/* Islet Dispatch — qualitative dispatch board. Meaning never rests on colour alone. */
+.id-item { display: grid; gap: .8rem; }
+.id-review, .rr-review { border: 2px dashed #8a5a00; background: #fff8e6; padding: .5rem .7rem; }
+.id-stage, .rr-stage { display: grid; grid-template-columns: minmax(0, 3fr) minmax(7rem, 1fr); gap: 1rem; align-items: start; }
+.id-card, .rr-board, .id-mascot, .rr-mascot { border: 1px solid #c8c2b6; border-radius: .5rem; padding: .7rem; background: #fffdf8; }
+.id-eyebrow, .rr-eyebrow { margin: 0 0 .3rem; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: #555; }
+.id-state { display: inline-flex; align-items: center; gap: .4rem; border: 1px solid #777; border-radius: 999px; padding: .2rem .6rem; font-weight: 600; }
+.id-prompt, .rr-prompt { margin: .6rem 0; padding-left: .8rem; border-left: 3px solid #556; font-size: 1rem; }
+.id-cue, .id-contrast, .id-hintline, .rr-hintline { margin: .3rem 0; font-size: .85rem; color: #444; }
+.id-mascot, .rr-mascot { text-align: center; }
+.id-say, .rr-say { font-size: .85rem; font-style: italic; }
+.id-choices { border: 0; padding: 0; margin: 0; }
+.id-choices legend { font-weight: 600; margin-bottom: .4rem; }
+.id-grid { display: grid; gap: .45rem; }
+.id-choice { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .5rem;
+  border: 1px solid #999; border-radius: .4rem; padding: .5rem .6rem; background: #fff; cursor: pointer; }
+.id-choice[data-selected="true"] { border-width: 3px; border-style: solid; }
+.id-choice[data-marked="true"] { outline: 3px double #333; }
+.id-plan { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+.id-cell, .id-signal, .id-target { padding: .1rem .4rem; border-radius: .3rem; background: #f0eee9; }
+.id-arrow { font-weight: 700; }
+.id-key, .rr-pos { font-size: .75rem; color: #555; }
+.id-verdict { font-size: .8rem; font-weight: 700; }
+.id-receipt, .id-expected, .rr-receipt, .rr-expected { margin: .2rem 0; font-size: .9rem; }
+.id-choice:focus-within, .rr-move:focus-visible { outline: 3px solid #1b4f8a; outline-offset: 2px; }
+@media (max-width: 44rem) { .id-stage, .rr-stage { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .id-item *, .rr-item * { animation: none !important; transition: none !important; } }

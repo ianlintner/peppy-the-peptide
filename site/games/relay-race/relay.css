@@ -1,0 +1,34 @@
+/* Relay Race — two-lane relay board. Lane and position are written in text. */
+.rr-item { display: grid; gap: .8rem; }
+.rr-review { border: 2px dashed #8a5a00; background: #fff8e6; padding: .5rem .7rem; }
+.rr-stage { display: grid; grid-template-columns: minmax(0, 3fr) minmax(7rem, 1fr); gap: 1rem; align-items: start; }
+.rr-board, .rr-mascot, .id-card, .id-mascot { border: 1px solid #c8c2b6; border-radius: .5rem; padding: .7rem; background: #fffdf8; }
+.rr-eyebrow { margin: 0 0 .3rem; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: #555; }
+.rr-prompt { margin: .6rem 0; padding-left: .8rem; border-left: 3px solid #556; font-size: 1rem; }
+.rr-lane { margin: .6rem 0; }
+.rr-lane h4 { margin: 0 0 .3rem; font-size: .9rem; }
+.rr-track { list-style: none; padding: 0; margin: 0; display: grid; gap: .35rem; }
+.rr-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .5rem;
+  border: 1px solid #999; border-radius: .4rem; padding: .4rem .5rem; background: #fff; }
+.rr-card[data-lane="branch"] { border-left: 6px solid #444; }
+.rr-card[data-lane="tray"] { border-style: dashed; }
+.rr-card-text { font-weight: 600; }
+.rr-empty { color: #666; font-style: italic; font-size: .85rem; }
+.rr-moves { display: flex; flex-wrap: wrap; gap: .25rem; }
+.rr-move { font: inherit; font-size: .78rem; padding: .2rem .45rem; border: 1px solid #777;
+  border-radius: .3rem; background: #f6f4ef; cursor: pointer; }
+.rr-move:disabled { opacity: .45; cursor: not-allowed; }
+.rr-mascot { text-align: center; }
+.rr-say { font-size: .85rem; font-style: italic; }
+.rr-receipt, .rr-expected { margin: .2rem 0; font-size: .9rem; }
+.rr-context { font-size: .85rem; background: #f6f4ef; border-left: 3px solid #556; padding: .4rem .6rem; }
+.rr-pos { color: #444; font-size: .8rem; font-weight: 700; }
+.rr-critique { border: 2px solid #c8c2b6; border-radius: .4rem; margin: .7rem 0 0; }
+.rr-critique legend { font-weight: 700; padding: 0 .3rem; }
+.rr-choice { display: flex; gap: .55rem; align-items: flex-start; padding: .4rem .55rem; margin: .3rem;
+  border: 1px solid #999; border-radius: .3rem; background: #fff; }
+.rr-choice.is-picked { border-width: 3px; background: #f6f4ef; }
+.rr-choice input { width: 1.15rem; height: 1.15rem; margin-top: .1rem; flex: none; }
+.rr-move:focus-visible { outline: 3px solid #1b4f8a; outline-offset: 2px; }
+@media (max-width: 44rem) { .rr-stage { grid-template-columns: 1fr; } .rr-moves { flex-direction: column; } }
+@media (prefers-reduced-motion: reduce) { .rr-item *, .id-item * { animation: none !important; transition: none !important; } }

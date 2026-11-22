@@ -23,7 +23,7 @@ Files whose name starts with `_` are **test fixtures**: validated like any other
 | `tier` | integer | **required**, 1, 2 or 3 = Curious / College / Mechanism (booleans, floats and strings rejected) |
 | `misconception` | string | **required**, non-blank: the named misconception this item targets |
 | `prompt` | string | non-empty |
-| `choices` | array | at least 2; each `{id, text, correct, feedback?}`; `id` slug unique in the item; `text` non-empty; `correct` boolean; **exactly one** `correct: true` |
+| `choices` | array | at least 2; each `{id, text, correct, feedback?}`; `id` slug unique in the item; `text` non-empty; `correct` boolean; **exactly one** `correct: true`. Authoring order is not display order: runners render choices in a deterministic seeded order keyed by item id and assign display letters after shuffling, so the correct choice is not always first. Scoring is always by id. |
 | `choices[].feedback` | string | **required and non-blank on every distractor** (`correct: false`): says why this particular wrong answer is tempting and what it misses |
 | `explanation` | string | non-empty; shown after answering |
 | `hint_ladder` | array of strings | non-blank strings, ordered gentle to strong; **at least 2 for tier 1 and 2**; may be empty or absent at tier 3 |
@@ -91,6 +91,51 @@ The lint is deliberately blunt. Rewrite the text, or, if a legitimate case exist
   "needs_review": false
 }
 ```
+
+## Game-specific `data` contracts
+
+### `islet-dispatch` (Lesson 2)
+
+Each item's `data` must carry:
+
+- `state`: `"low"` or `"elevated"` — the qualitative glucose state on the scenario card;
+- `cue`: short text naming the scenario cue (no numbers);
+- `options`: an object mapping each choice id to `{cell, signal, target}` (all non-empty);
+- `answer`: the choice id matching the sourced triple for the state — `low` →
+  `Alpha cell / glucagon / liver`, `elevated` → `Beta cell / insulin / many cell types`.
+
+`choices` must contain exactly one option per `data.options` key, with the single correct
+choice equal to `data.answer`. DPP-4, concentrations and timing are out of scope. Optional
+`contrast` names the other state for paired scenario cards.
+
+### `relay-race` (Lesson 3)
+
+Each item's `data` must carry:
+
+- `steps`: object mapping step ids to `{label, lane}`, where `lane` is `main`, `branch` or
+  `distractor`;
+- `main_order`: ordered array of main-lane step ids (the sourced relay sequence);
+- `branch_ids`: array of step ids on the separate degradation branch (empty is allowed for
+  repair items whose branch card starts in the distractor tray);
+- `answer`: always `"main-branch"`, the only permitted correct choice id;
+- `main_answer` / `branch_answer`: the canonical sourced sequence and degradation branch.
+  These stay constant even when `main_order` / `branch_ids` describe a scrambled starting board
+  for a repair item.
+
+`main_order` and `branch_ids` must be disjoint, each step's `lane` must match its arrays,
+and every step needs a text label. They describe the **starting board**: every non-critique
+item must start unsolved (`startsSolved(item)` is false in the browser evaluator), so the
+learner always has a move to make before Check answer becomes available. Canonical scoring
+stays in `main_answer` / `branch_answer`. Tier 3 items whose prompt is a critique set
+`data.mode: "critique"`; the runner then asks the learner to choose the careful
+reply from that item's own `choices` (so the choices and their misconception
+feedback are actually tested) and shows the canonical board only as context.
+Critique mode requires a non-empty `gap` and exactly one authored correct reply;
+its reply texts must be item-specific and distinct across items. The board-rule
+`main-branch` correct id applies only to non-critique items. Optional `gap`
+(non-empty when present) records what extra evidence would be needed for a Tier 3 critique.
+`distractor` step is a plausible but unsupported card the learner must keep off the main
+lane. Optional `cue` names the item's board scenario.
 
 ## Changing the schema
 
