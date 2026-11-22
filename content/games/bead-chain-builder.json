@@ -1,0 +1,875 @@
+{
+  "game": "bead-chain-builder",
+  "lesson": "foundations",
+  "title": "Bead Chain Builder",
+  "summary": "Build Peppy's bead chain in the right order, tell composition from sequence, then switch to the one-letter view and see what the cartoon leaves out.",
+  "items": [
+    {
+      "id": "build-glp1-start",
+      "concept": "sequence-vs-composition",
+      "tier": 1,
+      "misconception": "The order of the beads does not matter, only that they are all there",
+      "prompt": "Build Peppy's chain to match the target order (N end first). Pick a bead, then pick a slot.",
+      "choices": [
+        {
+          "id": "matches",
+          "text": "Peppy's chain matches the target order",
+          "correct": true
+        },
+        {
+          "id": "differs",
+          "text": "Peppy's chain does not match the target order",
+          "correct": false,
+          "feedback": "A chain only matches when every bead sits in the same position as the target, reading from the N end."
+        }
+      ],
+      "explanation": "The target is the real fragment: GLP-1(7-36) (P01275) starts at residue 98 (H); residues 98-104 are HAEGTFT. Each position holds one specific bead, and the order is the sequence. [2]",
+      "hint_ladder": [
+        "Start from the N end: the first slot is the head bead.",
+        "The target begins with H, then A, then E."
+      ],
+      "source_ids": [
+        2
+      ],
+      "data": {
+        "mode": "build",
+        "view": "cartoon",
+        "target": "HAEGTFT",
+        "accession": "P01275",
+        "residues": "98-104",
+        "source_label": "UniProt P01275 (GLP-1(7-36), residues 98-127)"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "build-insulin-b-start",
+      "concept": "sequence-vs-composition",
+      "tier": 1,
+      "misconception": "The order of the beads does not matter, only that they are all there",
+      "prompt": "Build Peppy's chain to match the target order (N end first). Pick a bead, then pick a slot.",
+      "choices": [
+        {
+          "id": "matches",
+          "text": "Peppy's chain matches the target order",
+          "correct": true
+        },
+        {
+          "id": "differs",
+          "text": "Peppy's chain does not match the target order",
+          "correct": false,
+          "feedback": "A chain only matches when every bead sits in the same position as the target, reading from the N end."
+        }
+      ],
+      "explanation": "The target is the real fragment: insulin B chain (P01308) starts at residue 25 (F); residues 25-31 are FVNQHLC. Each position holds one specific bead, and the order is the sequence. [3]",
+      "hint_ladder": [
+        "Match the target one slot at a time, first slot first.",
+        "Two beads in this chain look very different from the rest: check where F and C sit."
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "build",
+        "view": "cartoon",
+        "target": "FVNQHLC",
+        "accession": "P01308",
+        "residues": "25-31",
+        "source_label": "UniProt P01308 (insulin B chain, residues 25-54)"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "build-insulin-a-start",
+      "concept": "sequence-vs-composition",
+      "tier": 1,
+      "misconception": "Beads with the same letter are interchangeable in every position",
+      "prompt": "Build Peppy's chain to match the target order (N end first). Pick a bead, then pick a slot.",
+      "choices": [
+        {
+          "id": "matches",
+          "text": "Peppy's chain matches the target order",
+          "correct": true
+        },
+        {
+          "id": "differs",
+          "text": "Peppy's chain does not match the target order",
+          "correct": false,
+          "feedback": "A chain only matches when every bead sits in the same position as the target, reading from the N end."
+        }
+      ],
+      "explanation": "The target is the real fragment: insulin A chain (P01308) starts at residue 90 (G); residues 90-96 are GIVEQCC. Each position holds one specific bead, and the order is the sequence. [3]",
+      "hint_ladder": [
+        "Two beads in this target share the same letter. Either one can fill either C slot.",
+        "The target begins G, I, V."
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "build",
+        "view": "cartoon",
+        "target": "GIVEQCC",
+        "accession": "P01308",
+        "residues": "90-96",
+        "source_label": "UniProt P01308 (insulin A chain, residues 90-110)"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "build-glucagon-start",
+      "concept": "sequence-vs-composition",
+      "tier": 1,
+      "misconception": "The order of the beads does not matter, only that they are all there",
+      "prompt": "Build Peppy's chain to match the target order (N end first). Pick a bead, then pick a slot.",
+      "choices": [
+        {
+          "id": "matches",
+          "text": "Peppy's chain matches the target order",
+          "correct": true
+        },
+        {
+          "id": "differs",
+          "text": "Peppy's chain does not match the target order",
+          "correct": false,
+          "feedback": "A chain only matches when every bead sits in the same position as the target, reading from the N end."
+        }
+      ],
+      "explanation": "The target is the real fragment: glucagon (P01275) starts at residue 53 (H); residues 53-59 are HSQGTFT. Each position holds one specific bead, and the order is the sequence. [2]",
+      "hint_ladder": [
+        "Work from the first slot. Read the target N to C.",
+        "The target begins H, S, Q."
+      ],
+      "source_ids": [
+        2
+      ],
+      "data": {
+        "mode": "build",
+        "view": "cartoon",
+        "target": "HSQGTFT",
+        "accession": "P01275",
+        "residues": "53-59",
+        "source_label": "UniProt P01275 (glucagon, residues 53-81)"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "build-glp1-letters",
+      "concept": "sequence-vs-composition",
+      "tier": 1,
+      "misconception": "A one-letter-code string is a different thing from the bead chain",
+      "prompt": "Build Peppy's chain to match the target order (N end first). Pick a bead, then pick a slot.",
+      "choices": [
+        {
+          "id": "matches",
+          "text": "Peppy's chain matches the target order",
+          "correct": true
+        },
+        {
+          "id": "differs",
+          "text": "Peppy's chain does not match the target order",
+          "correct": false,
+          "feedback": "A chain only matches when every bead sits in the same position as the target, reading from the N end."
+        }
+      ],
+      "explanation": "The target is the real fragment: GLP-1(7-36) (P01275) starts at residue 98 (H); residues 98-104 are HAEGTFT. Each position holds one specific bead, and the order is the sequence. [2]",
+      "hint_ladder": [
+        "In the one-letter view the chain still runs N to C, left to right.",
+        "The first letter is H."
+      ],
+      "source_ids": [
+        2
+      ],
+      "data": {
+        "mode": "build",
+        "view": "chemistry",
+        "target": "HAEGTFT",
+        "accession": "P01275",
+        "residues": "98-104",
+        "source_label": "UniProt P01275 (GLP-1(7-36), residues 98-127)"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "build-insulin-b-letters",
+      "concept": "sequence-vs-composition",
+      "tier": 1,
+      "misconception": "A one-letter-code string is a different thing from the bead chain",
+      "prompt": "Build Peppy's chain to match the target order (N end first). Pick a bead, then pick a slot.",
+      "choices": [
+        {
+          "id": "matches",
+          "text": "Peppy's chain matches the target order",
+          "correct": true
+        },
+        {
+          "id": "differs",
+          "text": "Peppy's chain does not match the target order",
+          "correct": false,
+          "feedback": "A chain only matches when every bead sits in the same position as the target, reading from the N end."
+        }
+      ],
+      "explanation": "The target is the real fragment: insulin B chain (P01308) starts at residue 25 (F); residues 25-31 are FVNQHLC. Each position holds one specific bead, and the order is the sequence. [3]",
+      "hint_ladder": [
+        "Read the labelled N end first: that is the first slot.",
+        "The first letter is F."
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "build",
+        "view": "chemistry",
+        "target": "FVNQHLC",
+        "accession": "P01308",
+        "residues": "25-31",
+        "source_label": "UniProt P01308 (insulin B chain, residues 25-54)"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "spot-glp1-swap",
+      "concept": "sequence-vs-composition",
+      "tier": 2,
+      "misconception": "If the beads are the same, the chains are the same",
+      "prompt": "One chain below has the same beads as the target but in a different order. Which one?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Chain A",
+          "correct": false,
+          "feedback": "Chain A is an exact copy of the target: nothing moved."
+        },
+        {
+          "id": "b",
+          "text": "Chain B",
+          "correct": true
+        },
+        {
+          "id": "c",
+          "text": "Chain C",
+          "correct": false,
+          "feedback": "Chain C has a different bead (S where the target has T). A new bead changes the composition, not just the order."
+        }
+      ],
+      "explanation": "Chain B swaps the last two beads: same composition, different sequence. Target is the real fragment: GLP-1(7-36) (P01275) starts at residue 98 (H); residues 98-104 are HAEGTFT; the other chains are practice edits. [2]",
+      "hint_ladder": [
+        "Count the beads first: which chains use exactly the same set as the target?",
+        "Then read both chains left to right and look for the position that differs."
+      ],
+      "source_ids": [
+        2
+      ],
+      "data": {
+        "mode": "spot",
+        "view": "cartoon",
+        "target": "HAEGTFT",
+        "accession": "P01275",
+        "residues": "98-104",
+        "source_label": "UniProt P01275 (GLP-1(7-36), residues 98-127)",
+        "chains": {
+          "a": "HAEGTFT",
+          "b": "HAEGTTF",
+          "c": "HAEGTFS"
+        }
+      },
+      "needs_review": false
+    },
+    {
+      "id": "spot-insulin-b-swap",
+      "concept": "sequence-vs-composition",
+      "tier": 2,
+      "misconception": "If the beads are the same, the chains are the same",
+      "prompt": "One chain below has the same beads as the target but in a different order. Which one?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Chain A",
+          "correct": false,
+          "feedback": "Chain A is identical to the target."
+        },
+        {
+          "id": "b",
+          "text": "Chain B",
+          "correct": false,
+          "feedback": "Chain B swaps a bead for a different one (G where the target has C): composition changed."
+        },
+        {
+          "id": "c",
+          "text": "Chain C",
+          "correct": true
+        }
+      ],
+      "explanation": "Chain C swaps two neighbouring beads (L and H): same beads, different order. Target is the real fragment: insulin B chain (P01308) starts at residue 25 (F); residues 25-31 are FVNQHLC; other chains are practice edits. [3]",
+      "hint_ladder": [
+        "Which chain has exactly the same beads, no more and no fewer?",
+        "Compare each chain to the target position by position."
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "spot",
+        "view": "cartoon",
+        "target": "FVNQHLC",
+        "accession": "P01308",
+        "residues": "25-31",
+        "source_label": "UniProt P01308 (insulin B chain, residues 25-54)",
+        "chains": {
+          "a": "FVNQHLC",
+          "b": "FVNQHLG",
+          "c": "FVNQLHC"
+        }
+      },
+      "needs_review": false
+    },
+    {
+      "id": "spot-glucagon-reversed",
+      "concept": "sequence-vs-composition",
+      "tier": 2,
+      "misconception": "A chain read backwards is the same chain",
+      "prompt": "One chain below has the same beads as the target but in a different order. Which one?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Chain A",
+          "correct": true
+        },
+        {
+          "id": "b",
+          "text": "Chain B",
+          "correct": false,
+          "feedback": "Chain B is identical to the target."
+        },
+        {
+          "id": "c",
+          "text": "Chain C",
+          "correct": false,
+          "feedback": "Chain C has V where the target has T: a different bead, so a different composition."
+        }
+      ],
+      "explanation": "Chain A is the target read backwards: same beads, opposite order, so a different sequence. Target is the real fragment: glucagon (P01275) starts at residue 53 (H); residues 53-59 are HSQGTFT; other chains are practice edits. [2]",
+      "hint_ladder": [
+        "Reading direction matters: chains are read from the N end.",
+        "One chain is the target written back to front."
+      ],
+      "source_ids": [
+        2
+      ],
+      "data": {
+        "mode": "spot",
+        "view": "cartoon",
+        "target": "HSQGTFT",
+        "accession": "P01275",
+        "residues": "53-59",
+        "source_label": "UniProt P01275 (glucagon, residues 53-81)",
+        "chains": {
+          "a": "TFTGQSH",
+          "b": "HSQGTFT",
+          "c": "HSQGTFV"
+        }
+      },
+      "needs_review": false
+    },
+    {
+      "id": "compare-same",
+      "concept": "sequence-vs-composition",
+      "tier": 2,
+      "misconception": "Composition and sequence are the same thing",
+      "prompt": "Compare chain 1 (the target) with chain 2. Which statement names what is different, if anything?",
+      "choices": [
+        {
+          "id": "same-sequence",
+          "text": "Same beads in the same order: the same sequence",
+          "correct": true
+        },
+        {
+          "id": "same-beads-new-order",
+          "text": "Same beads in a different order: same composition, different sequence",
+          "correct": false,
+          "feedback": "The beads are in the same positions, so the order did not change."
+        },
+        {
+          "id": "different-beads",
+          "text": "Different beads: the composition differs",
+          "correct": false,
+          "feedback": "Every bead matches, so the composition is unchanged too."
+        }
+      ],
+      "explanation": "Both chains read GIVEQCC: the same composition and the same sequence. Target is the real fragment: insulin A chain (P01308) starts at residue 90 (G); residues 90-96 are GIVEQCC. [3]",
+      "hint_ladder": [
+        "Check the beads, then check the order.",
+        "Read both chains left to right, position by position."
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "compare",
+        "view": "cartoon",
+        "target": "GIVEQCC",
+        "accession": "P01308",
+        "residues": "90-96",
+        "source_label": "UniProt P01308 (insulin A chain, residues 90-110)",
+        "other": "GIVEQCC"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "compare-reordered",
+      "concept": "sequence-vs-composition",
+      "tier": 2,
+      "misconception": "Composition and sequence are the same thing",
+      "prompt": "Compare chain 1 (the target) with chain 2. Which statement names what is different, if anything?",
+      "choices": [
+        {
+          "id": "same-sequence",
+          "text": "Same beads in the same order: the same sequence",
+          "correct": false,
+          "feedback": "The beads are the same but not in the same positions: reading N to C they differ."
+        },
+        {
+          "id": "same-beads-new-order",
+          "text": "Same beads in a different order: same composition, different sequence",
+          "correct": true
+        },
+        {
+          "id": "different-beads",
+          "text": "Different beads: the composition differs",
+          "correct": false,
+          "feedback": "Count each letter: both chains use F, V, N, Q, H, L and C once."
+        }
+      ],
+      "explanation": "CLHQNVF is the target FVNQHLC written back to front: same composition, different sequence. Target is the real fragment: insulin B chain (P01308) starts at residue 25 (F); residues 25-31 are FVNQHLC. [3]",
+      "hint_ladder": [
+        "List the beads in each chain. Do the two lists match?",
+        "If they match, compare the order."
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "compare",
+        "view": "cartoon",
+        "target": "FVNQHLC",
+        "accession": "P01308",
+        "residues": "25-31",
+        "source_label": "UniProt P01308 (insulin B chain, residues 25-54)",
+        "other": "CLHQNVF"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "compare-different",
+      "concept": "sequence-vs-composition",
+      "tier": 2,
+      "misconception": "Composition and sequence are the same thing",
+      "prompt": "Compare chain 1 (the target) with chain 2. Which statement names what is different, if anything?",
+      "choices": [
+        {
+          "id": "same-sequence",
+          "text": "Same beads in the same order: the same sequence",
+          "correct": false,
+          "feedback": "The last bead differs (S instead of C), so the sequences are not the same."
+        },
+        {
+          "id": "same-beads-new-order",
+          "text": "Same beads in a different order: same composition, different sequence",
+          "correct": false,
+          "feedback": "No reordering gets you there: chain 2 has an S, and the target has no S."
+        },
+        {
+          "id": "different-beads",
+          "text": "Different beads: the composition differs",
+          "correct": true
+        }
+      ],
+      "explanation": "Chain 2 swaps the last C for an S, so the composition changed (and so the sequence). Target is the real fragment: insulin A chain (P01308) starts at residue 90 (G); residues 90-96 are GIVEQCC. [3]",
+      "hint_ladder": [
+        "List the beads in each chain.",
+        "One letter appears in only one chain."
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "compare",
+        "view": "cartoon",
+        "target": "GIVEQCC",
+        "accession": "P01308",
+        "residues": "90-96",
+        "source_label": "UniProt P01308 (insulin A chain, residues 90-110)",
+        "other": "GIVEQCS"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "cc-beads-round",
+      "concept": "cartoon-vs-chemistry",
+      "tier": 2,
+      "misconception": "The bead cartoon shows everything that matters about a real peptide",
+      "prompt": "Bonus round: Cartoon vs Chemistry. Sort the statement.",
+      "choices": [
+        {
+          "id": "cartoon",
+          "text": "True of the cartoon, not of real peptides",
+          "correct": true
+        },
+        {
+          "id": "real",
+          "text": "True of real peptides; the cartoon leaves it out",
+          "correct": false,
+          "feedback": "Real residues have side chains with different shapes and chemistry; they are not identical smooth balls."
+        },
+        {
+          "id": "both",
+          "text": "True of both the cartoon and real peptides",
+          "correct": false,
+          "feedback": "Real peptides are not made of smooth round balls: that is how the cartoon draws them."
+        }
+      ],
+      "explanation": "The round beads are a drawing choice. Real residues differ in side-chain structure, which the cartoon leaves out. [1]",
+      "hint_ladder": [
+        "Is this describing how the cartoon looks, or what a molecule is like?",
+        "Real residues are not smooth identical balls."
+      ],
+      "source_ids": [
+        1
+      ],
+      "data": {
+        "mode": "sorter",
+        "view": "cartoon",
+        "bonus": true,
+        "statement": "Each residue is drawn as a smooth round bead of similar size.",
+        "bucket": "cartoon"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "cc-side-chains",
+      "concept": "cartoon-vs-chemistry",
+      "tier": 2,
+      "misconception": "The bead cartoon shows everything that matters about a real peptide",
+      "prompt": "Bonus round: Cartoon vs Chemistry. Sort the statement.",
+      "choices": [
+        {
+          "id": "cartoon",
+          "text": "True of the cartoon, not of real peptides",
+          "correct": false,
+          "feedback": "The cartoon beads carry only a letter and a colour; side chains are not drawn."
+        },
+        {
+          "id": "real",
+          "text": "True of real peptides; the cartoon leaves it out",
+          "correct": true
+        },
+        {
+          "id": "both",
+          "text": "True of both the cartoon and real peptides",
+          "correct": false,
+          "feedback": "The cartoon leaves side chains out, so the statement is not true of it."
+        }
+      ],
+      "explanation": "Side chains are real chemistry that the bead cartoon omits. Bead colours do not encode them. [1]",
+      "hint_ladder": [
+        "Does the cartoon draw anything extra attached to each bead?",
+        "Side chains are part of the real chemistry."
+      ],
+      "source_ids": [
+        1
+      ],
+      "data": {
+        "mode": "sorter",
+        "view": "cartoon",
+        "bonus": true,
+        "statement": "Each residue carries its own side chain, which differs from residue to residue.",
+        "bucket": "real"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "cc-drag-swap",
+      "concept": "cartoon-vs-chemistry",
+      "tier": 2,
+      "misconception": "The bead cartoon shows everything that matters about a real peptide",
+      "prompt": "Bonus round: Cartoon vs Chemistry. Sort the statement.",
+      "choices": [
+        {
+          "id": "cartoon",
+          "text": "True of the cartoon, not of real peptides",
+          "correct": true
+        },
+        {
+          "id": "real",
+          "text": "True of real peptides; the cartoon leaves it out",
+          "correct": false,
+          "feedback": "A real chain cannot be rearranged like movable beads; its order is fixed by how it was made."
+        },
+        {
+          "id": "both",
+          "text": "True of both the cartoon and real peptides",
+          "correct": false,
+          "feedback": "Rearranging beads is something you can do in the cartoon: real chains are not rearranged this way."
+        }
+      ],
+      "explanation": "Swapping beads is a feature of the cartoon game. A real peptide sequence is fixed by how that peptide was made. [1]",
+      "hint_ladder": [
+        "Where can you actually move beads?",
+        "Real chains are not shuffled by clicking."
+      ],
+      "source_ids": [
+        1
+      ],
+      "data": {
+        "mode": "sorter",
+        "view": "cartoon",
+        "bonus": true,
+        "statement": "Any two beads can be picked up and swapped with a click, drag or key press.",
+        "bucket": "cartoon"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "cc-bond-geometry",
+      "concept": "cartoon-vs-chemistry",
+      "tier": 3,
+      "misconception": "The bead cartoon shows everything that matters about a real peptide",
+      "prompt": "Bonus round: Cartoon vs Chemistry. Sort the statement.",
+      "choices": [
+        {
+          "id": "cartoon",
+          "text": "True of the cartoon, not of real peptides",
+          "correct": false,
+          "feedback": "The cartoon joins beads with a plain line: it does not show bond geometry."
+        },
+        {
+          "id": "real",
+          "text": "True of real peptides; the cartoon leaves it out",
+          "correct": true
+        },
+        {
+          "id": "both",
+          "text": "True of both the cartoon and real peptides",
+          "correct": false,
+          "feedback": "The cartoon shows that beads are linked, but not the bond geometry."
+        }
+      ],
+      "explanation": "Bond geometry is real chemistry; the cartoon only shows that neighbours are linked. [1]",
+      "hint_ladder": [
+        "What does a line between beads actually tell you?",
+        "Which version shows how the bonds are arranged in space?"
+      ],
+      "source_ids": [
+        1
+      ],
+      "data": {
+        "mode": "sorter",
+        "view": "cartoon",
+        "bonus": true,
+        "statement": "Neighbouring residues are joined by peptide bonds that have a particular geometry.",
+        "bucket": "real"
+      },
+      "needs_review": false
+    },
+    {
+      "id": "cc-direction-readout",
+      "concept": "cartoon-vs-chemistry",
+      "tier": 3,
+      "misconception": "The bead cartoon shows everything that matters about a real peptide",
+      "prompt": "Bonus round: Cartoon vs Chemistry. Sort the statement.",
+      "choices": [
+        {
+          "id": "cartoon",
+          "text": "True of the cartoon, not of real peptides",
+          "correct": false,
+          "feedback": "Real peptides also have an N end and a C end: this is not just a feature of the drawing."
+        },
+        {
+          "id": "real",
+          "text": "True of real peptides; the cartoon leaves it out",
+          "correct": false,
+          "feedback": "The cartoon keeps the direction too: the head bead is the N end."
+        },
+        {
+          "id": "both",
+          "text": "True of both the cartoon and real peptides",
+          "correct": true
+        }
+      ],
+      "explanation": "Direction is kept in both. The chemistry view shows it with letters and an N-to-C arrow. Full GLP-1(7-36) is HAEGTFTSDVSSYLEGQAAKEFIAWLVKGR (UniProt P01275 residues 98-127). [1][2]",
+      "hint_ladder": [
+        "Does the cartoon have a head bead and a tail?",
+        "Which end does the readout label N?"
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "data": {
+        "mode": "sorter",
+        "view": "cartoon",
+        "bonus": true,
+        "statement": "The chain has a direction, from an N end to a C end, and that direction is part of reading the sequence.",
+        "bucket": "both",
+        "readout": {
+          "sequence": "HAEGTFTSDVSSYLEGQAAKEFIAWLVKGR",
+          "accession": "P01275",
+          "residues": "98-127",
+          "source_label": "UniProt P01275 (GLP-1(7-36), residues 98-127)"
+        }
+      },
+      "needs_review": false
+    },
+    {
+      "id": "inf-glp1-ends",
+      "concept": "sequence-limits",
+      "tier": 3,
+      "misconception": "A sequence alone tells you what a peptide does",
+      "prompt": "Does this conclusion follow from the written sequence alone?",
+      "choices": [
+        {
+          "id": "follows",
+          "text": "Yes, this follows from the sequence alone",
+          "correct": true
+        },
+        {
+          "id": "does-not-follow",
+          "text": "No, this needs more than the sequence",
+          "correct": false,
+          "feedback": "This is just reading the string HAEGTFT in order, which the sequence gives directly."
+        }
+      ],
+      "explanation": "Reading the sequence gives the order directly: GLP-1(7-36) (P01275) starts at residue 98 (H); residues 98-104 are HAEGTFT. [2]",
+      "hint_ladder": [
+        "Is this a statement about the order of letters?"
+      ],
+      "source_ids": [
+        2
+      ],
+      "data": {
+        "mode": "inference",
+        "view": "cartoon",
+        "target": "HAEGTFT",
+        "accession": "P01275",
+        "residues": "98-104",
+        "source_label": "UniProt P01275 (GLP-1(7-36), residues 98-127)",
+        "statement": "Reading N to C, the chain begins with H and ends with T.",
+        "follows": true
+      },
+      "needs_review": false
+    },
+    {
+      "id": "inf-glp1-activity",
+      "concept": "sequence-limits",
+      "tier": 3,
+      "misconception": "A sequence alone tells you what a peptide does",
+      "prompt": "Does this conclusion follow from the written sequence alone?",
+      "choices": [
+        {
+          "id": "follows",
+          "text": "Yes, this follows from the sequence alone",
+          "correct": false,
+          "feedback": "Whether a peptide acts on a receptor depends on testing it, not on reading its letters."
+        },
+        {
+          "id": "does-not-follow",
+          "text": "No, this needs more than the sequence",
+          "correct": true
+        }
+      ],
+      "explanation": "A sequence is a list of residues. Activity needs evidence from experiments; HAEGTFT (GLP-1(7-36) (P01275) starts at residue 98 (H); residues 98-104 are HAEGTFT) cannot show it alone. [2]",
+      "hint_ladder": [
+        "Does the letter string say anything about what happens in a cell?"
+      ],
+      "source_ids": [
+        2
+      ],
+      "data": {
+        "mode": "inference",
+        "view": "cartoon",
+        "target": "HAEGTFT",
+        "accession": "P01275",
+        "residues": "98-104",
+        "source_label": "UniProt P01275 (GLP-1(7-36), residues 98-127)",
+        "statement": "This chain will switch on a cellular receptor.",
+        "follows": false
+      },
+      "needs_review": false
+    },
+    {
+      "id": "inf-insulin-count",
+      "concept": "sequence-limits",
+      "tier": 3,
+      "misconception": "A sequence alone tells you what a peptide does",
+      "prompt": "Does this conclusion follow from the written sequence alone?",
+      "choices": [
+        {
+          "id": "follows",
+          "text": "Yes, this follows from the sequence alone",
+          "correct": true
+        },
+        {
+          "id": "does-not-follow",
+          "text": "No, this needs more than the sequence",
+          "correct": false,
+          "feedback": "Counting residues and naming the first one is reading the string."
+        }
+      ],
+      "explanation": "Counting letters and reading the N end follow from the string itself: insulin B chain (P01308) starts at residue 25 (F); residues 25-31 are FVNQHLC. [3]",
+      "hint_ladder": [
+        "Could you check this with a pencil and the letters?"
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "inference",
+        "view": "cartoon",
+        "target": "FVNQHLC",
+        "accession": "P01308",
+        "residues": "25-31",
+        "source_label": "UniProt P01308 (insulin B chain, residues 25-54)",
+        "statement": "This fragment has seven residues, and the first one is F.",
+        "follows": true
+      },
+      "needs_review": false
+    },
+    {
+      "id": "inf-insulin-reorder",
+      "concept": "sequence-limits",
+      "tier": 3,
+      "misconception": "A sequence alone tells you what a peptide does",
+      "prompt": "Does this conclusion follow from the written sequence alone?",
+      "choices": [
+        {
+          "id": "follows",
+          "text": "Yes, this follows from the sequence alone",
+          "correct": false,
+          "feedback": "Same composition does not mean same sequence, and neither tells you how a chain behaves."
+        },
+        {
+          "id": "does-not-follow",
+          "text": "No, this needs more than the sequence",
+          "correct": true
+        }
+      ],
+      "explanation": "Reordering changes the sequence, and behaviour is a separate question from either. Target is the real fragment: insulin A chain (P01308) starts at residue 90 (G); residues 90-96 are GIVEQCC. [3]",
+      "hint_ladder": [
+        "Composition equal is not the same as sequence equal."
+      ],
+      "source_ids": [
+        3
+      ],
+      "data": {
+        "mode": "inference",
+        "view": "cartoon",
+        "target": "GIVEQCC",
+        "accession": "P01308",
+        "residues": "90-96",
+        "source_label": "UniProt P01308 (insulin A chain, residues 90-110)",
+        "statement": "Because a rearranged chain uses the same beads as GIVEQCC, it must behave the same way.",
+        "follows": false
+      },
+      "needs_review": false
+    }
+  ]
+}

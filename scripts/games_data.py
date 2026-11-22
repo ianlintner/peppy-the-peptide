@@ -116,6 +116,103 @@ def _validate_item(item, i, source_count):
     return errs
 
 
+# --- bead-chain-builder: game-specific `data` rules (documented in content/games/SCHEMA.md) ---
+RESIDUE = re.compile(r'^[ACDEFGHIKLMNPQRSTVWY]+$')
+# UniProt segments fetched 2026-11-21 (rest.uniprot.org). Key: (accession, first residue number).
+# A sequence-bearing item must quote a slice of one of these exactly; extend only after re-fetching.
+VERIFIED_SEGMENTS = {
+    ('P01275', 98): 'HAEGTFTSDVSSYLEGQAAKEFIAWLVKGR',   # GLP-1(7-36), 98-127
+    ('P01275', 53): 'HSQGTFTSDYSKYLDSRRAQDFVQWLMNT',     # glucagon, 53-81
+    ('P01308', 25): 'FVNQHLCGSHLVEALYLVCGERGFFYTPKT',    # insulin B chain, 25-54
+    ('P01308', 90): 'GIVEQCCTSICSLYQLENYCN',             # insulin A chain, 90-110
+}
+BEAD_MODES = ('build', 'spot', 'compare', 'sorter', 'inference')
+SORTER_BUCKETS = ('cartoon', 'real', 'both')
+
+
+def _relation(a: str, b: str) -> str:
+    if a == b:
+        return 'same-sequence'
+    return 'same-beads-new-order' if sorted(a) == sorted(b) else 'different-beads'
+
+
+def _check_fragment(d, key, where, max_len, errs):
+    """Validate a real-sequence block: residues string + accession + span, matched to VERIFIED_SEGMENTS."""
+    seq = d.get(key)
+    if not (isinstance(seq, str) and RESIDUE.match(seq) and 3 <= len(seq) <= max_len):
+        errs.append(f'{where}.{key}: one-letter residue string of 3..{max_len} standard residues')
+        return
+    acc, span = d.get('accession'), d.get('residues')
+    m = re.match(r'^(\d+)-(\d+)$', span) if isinstance(span, str) else None
+    if not (isinstance(acc, str) and m) or not _nonblank(d.get('source_label')):
+        errs.append(f'{where}: real sequences need accession, residues "start-end" and source_label')
+        return
+    start, end = int(m.group(1)), int(m.group(2))
+    if end - start + 1 != len(seq):
+        errs.append(f'{where}.residues: span {span} does not match the length of {seq!r}')
+        return
+    ok = any(a == acc and s <= start and end <= s + len(v) - 1 and v[start - s:end - s + 1] == seq
+             for (a, s), v in VERIFIED_SEGMENTS.items())
+    if not ok:
+        errs.append(f'{where}: {seq!r} is not a verified UniProt {acc} slice at {span}')
+
+
+def _validate_bead_item(item, where):
+    d = item.get('data')
+    if not isinstance(d, dict):
+        return [f'{where}.data: bead-chain items need a data object']
+    errs, w = [], f'{where}.data'
+    mode = d.get('mode')
+    if mode not in BEAD_MODES:
+        return [f'{w}.mode: must be one of {", ".join(BEAD_MODES)}']
+    if d.get('view', 'cartoon') not in ('cartoon', 'chemistry'):
+        errs.append(f'{w}.view: must be "cartoon" or "chemistry"')
+    cs = [c for c in item.get('choices', []) if isinstance(c, dict)]
+    ids = [c.get('id') for c in cs]
+    right = [c.get('id') for c in cs if c.get('correct') is True]
+    if mode in ('build', 'spot', 'compare') or 'target' in d:
+        _check_fragment(d, 'target', w, 7, errs)  # 7 = Peppy has seven spheres
+    if mode == 'build':
+        if sorted(ids) != ['differs', 'matches'] or right != ['matches']:
+            errs.append(f'{where}.choices: build items use exactly the ids "matches" (correct) and "differs"')
+    elif mode == 'spot':
+        chains = d.get('chains')
+        if not (isinstance(chains, dict) and sorted(chains) == sorted(ids) and all(
+                isinstance(v, str) and RESIDUE.match(v) and len(v) <= 7 for v in chains.values())):
+            errs.append(f'{w}.chains: one residue string per choice id')
+        elif isinstance(d.get('target'), str):
+            kinds = {c: _relation(d['target'], v) for c, v in chains.items()}
+            only = [c for c, k in kinds.items() if k == 'same-beads-new-order']
+            if len(only) != 1 or right != only:
+                errs.append(f'{where}.choices: the correct chain must be the only same-beads-new-order chain')
+    elif mode == 'compare':
+        other = d.get('other')
+        if not (isinstance(other, str) and RESIDUE.match(other) and len(other) <= 7):
+            errs.append(f'{w}.other: residue string up to 7 residues')
+        elif sorted(ids) != ['different-beads', 'same-beads-new-order', 'same-sequence'] \
+                or right != [_relation(d.get('target', ''), other)]:
+            errs.append(f'{where}.choices: ids same-sequence / same-beads-new-order / different-beads, the correct one matching the chains')
+    elif mode == 'sorter':
+        if d.get('bucket') not in SORTER_BUCKETS or not _nonblank(d.get('statement')):
+            errs.append(f'{w}: sorter items need a statement and bucket {"/".join(SORTER_BUCKETS)}')
+        elif sorted(ids) != sorted(SORTER_BUCKETS) or right != [d['bucket']]:
+            errs.append(f'{where}.choices: ids cartoon/real/both, the correct one equal to data.bucket')
+        if 'readout' in d:
+            if isinstance(d['readout'], dict):
+                _check_fragment(d['readout'], 'sequence', f'{w}.readout', 30, errs)
+            else:
+                errs.append(f'{w}.readout: must be an object')
+    elif mode == 'inference':
+        if not isinstance(d.get('follows'), bool) or not _nonblank(d.get('statement')):
+            errs.append(f'{w}: inference items need a statement and boolean follows')
+        elif sorted(ids) != ['does-not-follow', 'follows'] or right != ['follows' if d['follows'] else 'does-not-follow']:
+            errs.append(f'{where}.choices: ids follows / does-not-follow, the correct one matching data.follows')
+    return errs
+
+
+ITEM_VALIDATORS = {'bead-chain-builder': _validate_bead_item}
+
+
 def validate_game(game, lessons_by_slug: dict, stem: str | None = None) -> list[str]:
     """Return a list of human-readable problems; empty means valid."""
     if not isinstance(game, dict):
@@ -145,6 +242,9 @@ def validate_game(game, lessons_by_slug: dict, stem: str | None = None) -> list[
     seen = set()
     for i, item in enumerate(items):
         errs += _validate_item(item, i, len(lesson['sources']) if lesson else 0)
+        extra = ITEM_VALIDATORS.get(slug) if isinstance(slug, str) else None
+        if extra and isinstance(item, dict):
+            errs += extra(item, f'items[{i}]')
         iid = item.get('id') if isinstance(item, dict) else None
         if isinstance(iid, str):
             if iid in seen:

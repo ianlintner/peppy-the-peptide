@@ -191,5 +191,60 @@ class BuildMountPoint(unittest.TestCase):
         self.assertEqual(self.build.render_games_section(BY_SLUG['signal-cast'], [game]), ('', ''))
 
 
+BEAD = json.loads((ROOT / 'content' / 'games' / 'bead-chain-builder.json').read_text(encoding='utf-8'))
+
+
+class BeadChainRules(unittest.TestCase):
+    def bead_errors(self, fn, item_id):
+        game = copy.deepcopy(BEAD)
+        fn(next(i for i in game['items'] if i['id'] == item_id))
+        return gd.validate_game(game, BY_SLUG, 'bead-chain-builder')
+
+    def assertBead(self, fn, item_id, fragment):
+        errs = self.bead_errors(fn, item_id)
+        self.assertTrue(any(fragment in e for e in errs), f'expected {fragment!r} in {errs}')
+
+    def test_shipped_game_is_valid_and_public(self):
+        self.assertEqual(gd.validate_game(BEAD, BY_SLUG, 'bead-chain-builder'), [])
+        self.assertIn('bead-chain-builder', [g['game'] for g in gd.public_games(ROOT / 'content' / 'games', LESSONS)])
+        tiers = [i['tier'] for i in BEAD['items']]
+        self.assertTrue(all(tiers.count(t) >= 6 for t in (1, 2, 3)))
+
+    def test_lesson_sources_list_uniprot_records(self):
+        urls = [s['url'] for s in BY_SLUG['foundations']['sources']]
+        self.assertIn('https://www.uniprot.org/uniprotkb/P01275/entry', urls)
+        self.assertIn('https://www.uniprot.org/uniprotkb/P01308/entry', urls)
+        self.assertEqual(urls[0], 'https://www.genome.gov/genetics-glossary/Peptide')
+
+    def test_unverified_or_mismatched_residues_rejected(self):
+        self.assertBead(lambda i: i['data'].__setitem__('target', 'HAEGTFS'), 'build-glp1-start', 'not a verified UniProt')
+        self.assertBead(lambda i: i['data'].__setitem__('residues', '98-103'), 'build-glp1-start', 'does not match the length')
+        self.assertBead(lambda i: i['data'].__setitem__('accession', 'P01308'), 'build-glp1-start', 'not a verified UniProt')
+
+    def test_missing_provenance_or_bad_residue_letters_rejected(self):
+        self.assertBead(lambda i: i['data'].pop('accession'), 'build-glp1-start', 'accession')
+        self.assertBead(lambda i: i['data'].__setitem__('target', 'HAEGTFB'), 'build-glp1-start', 'standard residues')
+
+    def test_unknown_mode_or_view_rejected(self):
+        self.assertBead(lambda i: i['data'].__setitem__('mode', 'dance'), 'build-glp1-start', 'data.mode')
+        self.assertBead(lambda i: i['data'].__setitem__('view', 'x-ray'), 'build-glp1-start', 'data.view')
+        self.assertBead(lambda i: i.pop('data'), 'build-glp1-start', 'data object')
+
+    def test_spot_correct_chain_must_be_the_reordered_one(self):
+        def swap(i):
+            for c in i['choices']:
+                c['correct'] = c['id'] == 'a'
+                c.setdefault('feedback', 'x')
+        self.assertBead(swap, 'spot-glp1-swap', 'only same-beads-new-order')
+
+    def test_compare_inference_sorter_answers_must_match_data(self):
+        self.assertBead(lambda i: i['data'].__setitem__('other', 'GIVEQCS'), 'compare-reordered', 'matching the chains')
+        self.assertBead(lambda i: i['data'].__setitem__('follows', True), 'inf-glp1-activity', 'matching data.follows')
+        self.assertBead(lambda i: i['data'].__setitem__('bucket', 'real'), 'cc-beads-round', 'equal to data.bucket')
+
+    def test_readout_must_be_verified(self):
+        self.assertBead(lambda i: i['data']['readout'].__setitem__('sequence', 'HAEGTFTSDVSSYLEGQAAKEFIAWLVKGG'), 'cc-direction-readout', 'readout')
+
+
 if __name__ == '__main__':
     unittest.main()
