@@ -2,7 +2,10 @@
 // A session never locks a tier: `offer` is a suggestion the learner may take or ignore.
 import { suggest, MIN_TIER, MAX_TIER } from './adapt.js';
 
-export const newSession = (tier = MIN_TIER) => ({ tier: clampTier(tier), attempts: [], seen: [], offer: { kind: 'none', tier } });
+export const newSession = (tier = MIN_TIER) => {
+  const t = clampTier(tier);
+  return { tier: t, attempts: [], seen: [], offer: { kind: 'none', tier: t } };
+};
 
 export const clampTier = (t) => Math.min(MAX_TIER, Math.max(MIN_TIER, Math.trunc(Number(t)) || MIN_TIER));
 

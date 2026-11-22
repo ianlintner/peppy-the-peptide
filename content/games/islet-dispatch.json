@@ -1,0 +1,1375 @@
+{
+  "game": "islet-dispatch",
+  "lesson": "signal-cast",
+  "title": "Islet Dispatch: Who Sends What",
+  "summary": "Match a qualitative glucose state to the releasing islet cell, its peptide signal, and the general responding tissue.",
+  "review_mode": "flagged",
+  "items": [
+    {
+      "id": "t1-after-meal",
+      "concept": "islet-source-and-signal",
+      "tier": 1,
+      "misconception": "Insulin and glucagon come from the same islet cell",
+      "prompt": "A meal has just raised blood glucose. Peppy holds a scenario card that says “glucose elevated”. Which dispatch fits?",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        }
+      ],
+      "explanation": "Rising glucose stimulates beta cells to release insulin, which helps many cell types use or store fuel. [1][2]",
+      "hint_ladder": [
+        "Which islet cell responds to rising glucose?",
+        "Beta cells release insulin; alpha cells release glucagon."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "after a meal"
+      }
+    },
+    {
+      "id": "t1-between-meals",
+      "concept": "islet-source-and-signal",
+      "tier": 1,
+      "misconception": "Low glucose makes beta cells release insulin",
+      "prompt": "Peppy draws a scenario card that says “glucose low”. Which dispatch fits the lesson?",
+      "choices": [
+        {
+          "id": "alpha-glucagon-liver",
+          "text": "Alpha cell → glucagon → liver",
+          "correct": true
+        },
+        {
+          "id": "beta-glucagon-liver",
+          "text": "Beta cell → glucagon → liver",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "alpha-insulin-liver",
+          "text": "Alpha cell → insulin → liver",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "alpha-glucagon-many-cells",
+          "text": "Alpha cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Glucagon acts prominently on the liver in the lesson, not on every responding tissue equally. This makes the target too broad."
+        }
+      ],
+      "explanation": "Low glucose stimulates alpha cells to release glucagon, which supports glucose output from the liver. [1][2]",
+      "hint_ladder": [
+        "Which islet cell is stimulated when glucose is low?",
+        "Alpha cells release glucagon; the liver is its prominent target."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "low",
+        "options": {
+          "alpha-glucagon-liver": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-glucagon-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-glucagon-liver": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-insulin-liver": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "alpha-glucagon-liver",
+        "cue": "between meals"
+      }
+    },
+    {
+      "id": "t1-partners",
+      "concept": "partners-not-opponents",
+      "tier": 1,
+      "misconception": "One messenger is good and the other is bad",
+      "prompt": "Which dispatch plan shows both islet cells as partners rather than naming one good and one bad?",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        },
+        {
+          "id": "same-both",
+          "text": "Either cell → one signal for both states → many cell types",
+          "correct": false,
+          "feedback": "One signal cannot do both jobs here; the lesson contrasts the two messengers by source and context."
+        }
+      ],
+      "explanation": "The elevated-state plan pairs beta-cell insulin with insulin action on many cell types; the low-state plan pairs alpha-cell glucagon with the liver. Neither cell is good or bad. Answer: the elevated-state plan.",
+      "hint_ladder": [
+        "Name the cell and the context for each signal.",
+        "They are different signals with different roles, not a moral ranking."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          },
+          "same-both": {
+            "cell": "Either cell",
+            "signal": "one signal for both states",
+            "target": "many cell types"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "partners"
+      }
+    },
+    {
+      "id": "t1-signal-name",
+      "concept": "islet-source-and-signal",
+      "tier": 1,
+      "misconception": "The signal name can be swapped between islet cells",
+      "prompt": "The dispatch slip has the cell name blanked out: “____ cells release glucagon.” Fill the blank.",
+      "choices": [
+        {
+          "id": "alpha-glucagon-liver",
+          "text": "Alpha cell → glucagon → liver",
+          "correct": true
+        },
+        {
+          "id": "beta-glucagon-liver",
+          "text": "Beta cell → glucagon → liver",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "alpha-insulin-liver",
+          "text": "Alpha cell → insulin → liver",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "alpha-glucagon-many-cells",
+          "text": "Alpha cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Glucagon acts prominently on the liver in the lesson, not on every responding tissue equally. This makes the target too broad."
+        }
+      ],
+      "explanation": "Alpha cells release glucagon; beta cells release insulin. [1]",
+      "hint_ladder": [
+        "Which cell was named in the lesson for glucagon?",
+        "Alpha cells."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "low",
+        "options": {
+          "alpha-glucagon-liver": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-glucagon-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-glucagon-liver": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-insulin-liver": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "alpha-glucagon-liver",
+        "cue": "label check"
+      }
+    },
+    {
+      "id": "t1-target-breadth",
+      "concept": "general-target-tissue",
+      "tier": 1,
+      "misconception": "Glucagon acts on every responding tissue in the same way",
+      "prompt": "Which dispatch states the lesson’s general target for glucagon, without making it universal?",
+      "choices": [
+        {
+          "id": "alpha-glucagon-liver",
+          "text": "Alpha cell → glucagon → liver",
+          "correct": true
+        },
+        {
+          "id": "beta-glucagon-liver",
+          "text": "Beta cell → glucagon → liver",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "alpha-insulin-liver",
+          "text": "Alpha cell → insulin → liver",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "alpha-glucagon-many-cells",
+          "text": "Alpha cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Glucagon acts prominently on the liver in the lesson, not on every responding tissue equally. This makes the target too broad."
+        }
+      ],
+      "explanation": "Glucagon acts prominently on the liver to support glucose output; target tissues are not interchangeable. [2]",
+      "hint_ladder": [
+        "The lesson names one tissue prominently for glucagon.",
+        "That tissue is the liver."
+      ],
+      "source_ids": [
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "low",
+        "options": {
+          "alpha-glucagon-liver": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-glucagon-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-glucagon-liver": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-insulin-liver": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "alpha-glucagon-liver",
+        "cue": "target check"
+      }
+    },
+    {
+      "id": "t1-qualitative",
+      "concept": "qualitative-only",
+      "tier": 1,
+      "misconception": "A scenario card needs a measured concentration to be playable",
+      "prompt": "The cards say only “glucose low” or “glucose elevated”, with no numbers. Can you still dispatch correctly?",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        },
+        {
+          "id": "none",
+          "text": "No signal → none → no target",
+          "correct": false,
+          "feedback": "No dispatch is a step beyond the lesson: both signals have a described source and a described context."
+        }
+      ],
+      "explanation": "Yes. The lesson uses qualitative states; this game adds no concentrations or timing. [1][2]",
+      "hint_ladder": [
+        "The lesson itself names the states with words.",
+        "Words are enough; no numeric state is used here."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          },
+          "none": {
+            "cell": "No signal",
+            "signal": "none",
+            "target": "no target"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "qualitative"
+      }
+    },
+    {
+      "id": "t2-contrast-pair",
+      "concept": "contrasting-cases",
+      "tier": 2,
+      "misconception": "A scenario swap leaves the whole dispatch unchanged",
+      "prompt": "Two cards differ only in glucose state: one elevated, one low. What changes in the dispatch?",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        },
+        {
+          "id": "same-both",
+          "text": "Either cell → one signal for both states → many cell types",
+          "correct": false,
+          "feedback": "One signal cannot do both jobs here; the lesson contrasts the two messengers by source and context."
+        }
+      ],
+      "explanation": "The cell, the signal and the general target all change with the state; that contrast is the point. [1][2]",
+      "hint_ladder": [
+        "Start from the glucose state on each card.",
+        "The low-glucose card dispatches alpha → glucagon → liver."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          },
+          "same-both": {
+            "cell": "Either cell",
+            "signal": "one signal for both states",
+            "target": "many cell types"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "contrast pair",
+        "contrast": "low"
+      }
+    },
+    {
+      "id": "t2-swapped-signal",
+      "concept": "islet-source-and-signal",
+      "tier": 2,
+      "misconception": "A beta cell could send glucagon if the context were right",
+      "prompt": "Peppy’s draft reads “beta cell → glucagon → liver” for a low-glucose card. What is wrong?",
+      "choices": [
+        {
+          "id": "alpha-glucagon-liver",
+          "text": "Alpha cell → glucagon → liver",
+          "correct": true
+        },
+        {
+          "id": "beta-glucagon-liver",
+          "text": "Beta cell → glucagon → liver",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "alpha-insulin-liver",
+          "text": "Alpha cell → insulin → liver",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "alpha-glucagon-many-cells",
+          "text": "Alpha cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Glucagon acts prominently on the liver in the lesson, not on every responding tissue equally. This makes the target too broad."
+        }
+      ],
+      "explanation": "The low-glucose state fits glucagon and the liver, but the releasing cell is alpha, not beta. [1][2]",
+      "hint_ladder": [
+        "Keep the state and the signal; check only the cell.",
+        "Alpha cells release glucagon."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "low",
+        "options": {
+          "alpha-glucagon-liver": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-glucagon-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-glucagon-liver": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-insulin-liver": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "alpha-glucagon-liver",
+        "cue": "draft correction"
+      }
+    },
+    {
+      "id": "t2-too-narrow",
+      "concept": "general-target-tissue",
+      "tier": 2,
+      "misconception": "Insulin has only one responding tissue",
+      "prompt": "A card reads “elevated glucose → beta cell → insulin → liver only”. Repair the target.",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        }
+      ],
+      "explanation": "Insulin helps many cell types take up or store fuel; the liver-only target is too narrow. [1]",
+      "hint_ladder": [
+        "Which tissue does the lesson say insulin helps?",
+        "Many cell types, not a single tissue."
+      ],
+      "source_ids": [
+        1
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "target repair"
+      }
+    },
+    {
+      "id": "t2-too-broad",
+      "concept": "general-target-tissue",
+      "tier": 2,
+      "misconception": "A signal acts everywhere unless told otherwise",
+      "prompt": "A card reads “low glucose → alpha cell → glucagon → many cell types”. Repair the target.",
+      "choices": [
+        {
+          "id": "alpha-glucagon-liver",
+          "text": "Alpha cell → glucagon → liver",
+          "correct": true
+        },
+        {
+          "id": "beta-glucagon-liver",
+          "text": "Beta cell → glucagon → liver",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "alpha-insulin-liver",
+          "text": "Alpha cell → insulin → liver",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "alpha-glucagon-many-cells",
+          "text": "Alpha cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Glucagon acts prominently on the liver in the lesson, not on every responding tissue equally. This makes the target too broad."
+        }
+      ],
+      "explanation": "The lesson describes glucagon as acting prominently on the liver; “many cell types” belongs to the insulin description. [1][2]",
+      "hint_ladder": [
+        "Which target phrase belongs to glucagon in the lesson?",
+        "The liver."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "low",
+        "options": {
+          "alpha-glucagon-liver": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-glucagon-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-glucagon-liver": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-insulin-liver": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "alpha-glucagon-liver",
+        "cue": "target repair"
+      }
+    },
+    {
+      "id": "t2-cell-swap",
+      "concept": "islet-source-and-signal",
+      "tier": 2,
+      "misconception": "The cell name is decorative and can be swapped freely",
+      "prompt": "For an elevated-glucose card, a learner writes “alpha cell → insulin → many cell types”. What should change?",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        }
+      ],
+      "explanation": "The signal and target are right for elevated glucose, but the cell must be beta. [1][2]",
+      "hint_ladder": [
+        "Two of the three slots are already right.",
+        "Only the releasing cell is wrong: beta cells release insulin."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "cell repair"
+      }
+    },
+    {
+      "id": "t2-explain-pair",
+      "concept": "partners-not-opponents",
+      "tier": 2,
+      "misconception": "Context does not matter for signal identity",
+      "prompt": "Pick the best explanation for why the same lesson can dispatch two different signals.",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        },
+        {
+          "id": "same-both",
+          "text": "Either cell → one signal for both states → many cell types",
+          "correct": false,
+          "feedback": "One signal cannot do both jobs here; the lesson contrasts the two messengers by source and context."
+        }
+      ],
+      "explanation": "The islet has different cell types that release different peptides in different nutrient contexts. [1][2]",
+      "hint_ladder": [
+        "Name both the cell type and the glucose state.",
+        "Different cells, different signals, different contexts."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": false,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          },
+          "same-both": {
+            "cell": "Either cell",
+            "signal": "one signal for both states",
+            "target": "many cell types"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "explanation"
+      }
+    },
+    {
+      "id": "t3-hidden-state",
+      "concept": "source-limits",
+      "tier": 3,
+      "misconception": "A scenario card can imply a treatment decision",
+      "prompt": "A learner says: “For this low-glucose card, the lesson tells us what a person should do.” What is the right response?",
+      "choices": [
+        {
+          "id": "alpha-glucagon-liver",
+          "text": "Alpha cell → glucagon → liver",
+          "correct": true
+        },
+        {
+          "id": "beta-glucagon-liver",
+          "text": "Beta cell → glucagon → liver",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "alpha-insulin-liver",
+          "text": "Alpha cell → insulin → liver",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "alpha-glucagon-many-cells",
+          "text": "Alpha cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Glucagon acts prominently on the liver in the lesson, not on every responding tissue equally. This makes the target too broad."
+        },
+        {
+          "id": "none",
+          "text": "No signal → none → no target",
+          "correct": false,
+          "feedback": "No dispatch is a step beyond the lesson: both signals have a described source and a described context."
+        }
+      ],
+      "explanation": "The sources describe signals and general roles; they do not give personal treatment guidance. [1][2]",
+      "hint_ladder": [
+        "What kind of claim does the lesson actually make?",
+        "A mechanism-and-role claim, not a treatment plan."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "state": "low",
+        "options": {
+          "alpha-glucagon-liver": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-glucagon-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "none": {
+            "cell": "No signal",
+            "signal": "none",
+            "target": "no target"
+          },
+          "beta-glucagon-liver": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-insulin-liver": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "alpha-glucagon-liver",
+        "cue": "scope",
+        "gap": "A qualified clinical source would be needed for any decision about a person."
+      },
+      "review_note": "Pending qualified review: treated as an evidence-boundary question, not clinical advice.",
+      "worked_example": "Say what the source supports — different islet signals in different contexts — then stop before any personal recommendation."
+    },
+    {
+      "id": "t3-analogy-limit",
+      "concept": "source-limits",
+      "tier": 3,
+      "misconception": "The envelope cartoon is a molecular diagram",
+      "prompt": "Claim to critique: “The colored envelopes show exactly where insulin and glucagon go in the body.” What is the strongest critique?",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        },
+        {
+          "id": "none",
+          "text": "No signal → none → no target",
+          "correct": false,
+          "feedback": "No dispatch is a step beyond the lesson: both signals have a described source and a described context."
+        }
+      ],
+      "explanation": "The lesson says the envelopes are symbolic and the trajectories carry no measured direction, timing or complete pathway. [1][2]",
+      "hint_ladder": [
+        "Reread the lesson’s metaphor-limit note.",
+        "The envelopes are teaching symbols, not anatomy or tracking data."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          },
+          "none": {
+            "cell": "No signal",
+            "signal": "none",
+            "target": "no target"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "metaphor",
+        "gap": "Measured distribution data would be needed for any route claim."
+      },
+      "review_note": "Pending qualified review: metaphor-boundary critique only; no new physiological claim.",
+      "worked_example": "Name the supported idea — different signals from different cells — and say the cartoon does not depict measured routes."
+    },
+    {
+      "id": "t3-causal-jump",
+      "concept": "source-limits",
+      "tier": 3,
+      "misconception": "Both signals appearing in one lesson proves they cause each other",
+      "prompt": "Claim to critique: “Because alpha and beta signals are in the same lesson, one must switch the other on.” What evidence is missing?",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        },
+        {
+          "id": "same-both",
+          "text": "Either cell → one signal for both states → many cell types",
+          "correct": false,
+          "feedback": "One signal cannot do both jobs here; the lesson contrasts the two messengers by source and context."
+        }
+      ],
+      "explanation": "The sources describe different cell sources and contexts, not a causal link between the two signals. [1][2]",
+      "hint_ladder": [
+        "Is this a reported observation or a causal assertion?",
+        "A causal claim would need an experiment that varies one signal and observes the other."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          },
+          "same-both": {
+            "cell": "Either cell",
+            "signal": "one signal for both states",
+            "target": "many cell types"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "causality",
+        "gap": "An observation that varies one signal while watching the other."
+      },
+      "review_note": "Pending qualified review: epistemic critique only; no unreviewed mechanism beyond the lesson.",
+      "worked_example": "Ask what would have to be varied and measured before joining the two observations into a cause."
+    },
+    {
+      "id": "t3-universal-target",
+      "concept": "general-target-tissue",
+      "tier": 3,
+      "misconception": "“Generally” means “only and everywhere”",
+      "prompt": "Claim to critique: “Glucagon acts only on the liver and nowhere else.” What is the careful correction?",
+      "choices": [
+        {
+          "id": "alpha-glucagon-liver",
+          "text": "Alpha cell → glucagon → liver",
+          "correct": true
+        },
+        {
+          "id": "beta-glucagon-liver",
+          "text": "Beta cell → glucagon → liver",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "alpha-insulin-liver",
+          "text": "Alpha cell → insulin → liver",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "alpha-glucagon-many-cells",
+          "text": "Alpha cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Glucagon acts prominently on the liver in the lesson, not on every responding tissue equally. This makes the target too broad."
+        },
+        {
+          "id": "none",
+          "text": "No signal → none → no target",
+          "correct": false,
+          "feedback": "No dispatch is a step beyond the lesson: both signals have a described source and a described context."
+        }
+      ],
+      "explanation": "The source describes the liver as a prominent target; it does not say “only”. A stronger claim needs its own quoted source. [2]",
+      "hint_ladder": [
+        "Compare “prominently” with “only”.",
+        "Keep the source’s wording: prominent liver action, not exclusivity."
+      ],
+      "source_ids": [
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "state": "low",
+        "options": {
+          "alpha-glucagon-liver": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-glucagon-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "none": {
+            "cell": "No signal",
+            "signal": "none",
+            "target": "no target"
+          },
+          "beta-glucagon-liver": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-insulin-liver": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "alpha-glucagon-liver",
+        "cue": "wording",
+        "gap": "A source explicitly testing and excluding other target tissues."
+      },
+      "review_note": "Pending qualified review: wording of a source-strength critique; no new biological claim.",
+      "worked_example": "Say the source supports a prominent liver action, then ask for a source before making an exclusivity claim."
+    },
+    {
+      "id": "t3-quantitative-demand",
+      "concept": "qualitative-only",
+      "tier": 3,
+      "misconception": "Qualitative states cannot support the partner contrast",
+      "prompt": "Claim to critique: “Without concentration values, the cards cannot show that the messengers are different.” How should Peppy reply?",
+      "choices": [
+        {
+          "id": "beta-insulin-many-cells",
+          "text": "Beta cell → insulin → many cell types",
+          "correct": true
+        },
+        {
+          "id": "alpha-insulin-many-cells",
+          "text": "Alpha cell → insulin → many cell types",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "beta-glucagon-many-cells",
+          "text": "Beta cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "beta-insulin-liver-only",
+          "text": "Beta cell → insulin → liver",
+          "correct": false,
+          "feedback": "Insulin acts on many tissues in the lesson, not on the liver alone. This makes the target too narrow."
+        },
+        {
+          "id": "same-both",
+          "text": "Either cell → one signal for both states → many cell types",
+          "correct": false,
+          "feedback": "One signal cannot do both jobs here; the lesson contrasts the two messengers by source and context."
+        }
+      ],
+      "explanation": "The contrast is about which cell releases which peptide in which context, not about magnitudes; the sources support it qualitatively. [1][2]",
+      "hint_ladder": [
+        "Is the claim about size or about identity and source?",
+        "Identity and source; no numeric scale is needed for that."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "state": "elevated",
+        "options": {
+          "beta-insulin-many-cells": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "alpha-insulin-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "many cell types"
+          },
+          "beta-glucagon-many-cells": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "beta-insulin-liver-only": {
+            "cell": "Beta cell",
+            "signal": "insulin",
+            "target": "liver"
+          },
+          "same-both": {
+            "cell": "Either cell",
+            "signal": "one signal for both states",
+            "target": "many cell types"
+          }
+        },
+        "answer": "beta-insulin-many-cells",
+        "cue": "scale",
+        "gap": "Numbers would be needed only for a magnitude question, not for this identity contrast."
+      },
+      "review_note": "Pending qualified review: qualitative-versus-quantitative distinction only.",
+      "worked_example": "Point to the sourced cell/signal pairing and say numbers would answer a different question."
+    },
+    {
+      "id": "t3-moral-reading",
+      "concept": "partners-not-opponents",
+      "tier": 3,
+      "misconception": "Regulation is a moral contest between hormones",
+      "prompt": "Claim to critique: “Insulin is the helpful hormone and glucagon is the harmful one.” What is the strongest reply?",
+      "choices": [
+        {
+          "id": "alpha-glucagon-liver",
+          "text": "Alpha cell → glucagon → liver",
+          "correct": true
+        },
+        {
+          "id": "beta-glucagon-liver",
+          "text": "Beta cell → glucagon → liver",
+          "correct": false,
+          "feedback": "Beta cells release insulin, not glucagon. The cell and signal belong together here."
+        },
+        {
+          "id": "alpha-insulin-liver",
+          "text": "Alpha cell → insulin → liver",
+          "correct": false,
+          "feedback": "Alpha cells release glucagon, not insulin. This swaps the signal onto the wrong cell."
+        },
+        {
+          "id": "alpha-glucagon-many-cells",
+          "text": "Alpha cell → glucagon → many cell types",
+          "correct": false,
+          "feedback": "Glucagon acts prominently on the liver in the lesson, not on every responding tissue equally. This makes the target too broad."
+        },
+        {
+          "id": "same-both",
+          "text": "Either cell → one signal for both states → liver",
+          "correct": false,
+          "feedback": "One signal cannot do both jobs here; the lesson contrasts the two messengers by source and context."
+        }
+      ],
+      "explanation": "Both are normal peptide signals from different islet cells acting in different glucose contexts; “good versus bad” is not a source-supported description. [1][2]",
+      "hint_ladder": [
+        "The lesson has a check answer about this exact wording.",
+        "They are partners in regulation, not heroes and villains."
+      ],
+      "source_ids": [
+        1,
+        2
+      ],
+      "needs_review": true,
+      "data": {
+        "state": "low",
+        "options": {
+          "alpha-glucagon-liver": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-glucagon-many-cells": {
+            "cell": "Alpha cell",
+            "signal": "glucagon",
+            "target": "many cell types"
+          },
+          "same-both": {
+            "cell": "Either cell",
+            "signal": "one signal for both states",
+            "target": "liver"
+          },
+          "beta-glucagon-liver": {
+            "cell": "Beta cell",
+            "signal": "glucagon",
+            "target": "liver"
+          },
+          "alpha-insulin-liver": {
+            "cell": "Alpha cell",
+            "signal": "insulin",
+            "target": "liver"
+          }
+        },
+        "answer": "alpha-glucagon-liver",
+        "cue": "language",
+        "gap": "A scale of helpful versus harmful would need evidence the lesson does not provide."
+      },
+      "review_note": "Pending qualified review: language critique only; no clinical or product claim.",
+      "worked_example": "Replace the moral framing with the sourced description: two different signals, two cell sources, two contexts."
+    }
+  ]
+}

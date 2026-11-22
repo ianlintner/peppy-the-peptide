@@ -13,6 +13,34 @@
   },
   {
    "concepts": [
+    "contrasting-cases",
+    "general-target-tissue",
+    "islet-source-and-signal",
+    "partners-not-opponents",
+    "qualitative-only",
+    "source-limits"
+   ],
+   "game": "islet-dispatch",
+   "lesson": "signal-cast",
+   "summary": "Match a qualitative glucose state to the releasing islet cell, its peptide signal, and the general responding tissue.",
+   "title": "Islet Dispatch: Who Sends What"
+  },
+  {
+   "concepts": [
+    "glucose-dependence",
+    "multi-branch-ordering",
+    "qualitative-only",
+    "receptor-location",
+    "relay-sequence",
+    "source-limits"
+   ],
+   "game": "relay-race",
+   "lesson": "endogenous-glp1",
+   "summary": "Order the main relay from meal to glucose-dependent effect and place DPP-4 degradation on its own branch.",
+   "title": "Relay Race: The GLP-1 Message"
+  },
+  {
+   "concepts": [
     "evidence-gaps",
     "receptor-target",
     "receptor-vs-identity",
