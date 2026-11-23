@@ -36,13 +36,14 @@ HAS_GAMES = False  # set by main(): the nav shows "Games" only once a game is pu
 
 def shell(title, root, body):
     games_link = f'<a href="{root}games/index.html">Games</a>' if HAS_GAMES else ''
-    nav = f'<a href="{root}index.html#course">Course</a>{games_link}<a href="{root}index.html#approach">Approach</a><a href="{root}index.html#safety">Safety</a>'
+    review_link = f'<a href="{root}games/review.html">Daily Review</a>' if HAS_GAMES else ''
+    nav = f'<a href="{root}index.html#course">Course</a>{games_link}{review_link}<a href="{root}index.html#approach">Approach</a><a href="{root}index.html#safety">Safety</a>'
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Peppy the Peptide: sourced, comic-first science lessons from amino-acid sequence to molecular signaling."><title>{E(title)} · Peppy the Peptide</title><link rel="stylesheet" href="{root}styles.css"></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="wrap nav"><a class="brand" href="{root}index.html">PEPPY <span>the peptide</span></a><nav aria-label="Main navigation">{nav}</nav></div></header><main id="main">{body}</main><footer class="site-footer">Peppy the Peptide · Educational satire, not medical advice · Original mascot supplied by Ian Lintner · <a href="{root}rights.html">Art rights and disclosure</a></footer></body></html>'''
 
 def render_index(lessons):
-    rows=''.join(f'''<li><span class="number">{E(l['number'])}</span><div><h3>{E(l['title'])}</h3><p>{E(l['subtitle'])}</p></div><a href="lessons/{E(l['slug'])}.html">Read lesson →</a></li>''' for l in lessons)
+    rows=''.join(f'''<li data-course-lesson="{E(l['slug'])}"><span class="number">{E(l['number'])}</span><div><h3>{E(l['title'])}</h3><p>{E(l['subtitle'])}</p><p class="course-game-progress" data-game-progress="{E(l['slug'])}" aria-live="polite"></p></div><a href="lessons/{E(l['slug'])}.html">Read lesson →</a></li>''' for l in lessons)
     body=f'''<section class="wrap hero"><div><div class="eyebrow">A comic-first molecular biology classroom</div><h1>Small chain.<br><em>Big character.</em></h1><p class="lede">Follow Peppy from amino-acid chains through hormone signaling and GLP-1. The joke opens the door; sourced explanations carry the lesson.</p><div class="catchphrase">“My personality is sequence-dependent!”</div><div class="actions"><a class="button" href="lessons/{E(lessons[0]['slug'])}.html">Start at lesson 01 ↓</a><a class="button light" href="#course">View course map</a></div></div><div class="cover"><img src="assets/peppy-original.jpg" alt="Peppy, a smiling blue-headed seven-sphere chain in a white lab coat and red sneakers" width="1254" height="1254"></div></section><div class="stripe" aria-hidden="true">SEQUENCE ✦ SHAPE ✦ SIGNAL ✦ EVIDENCE ✦ LIMITS</div><section class="wrap section" id="course"><div class="section-title"><div class="eyebrow">The course</div><h2>One question at a time</h2><p>Each lesson pairs original comic panels with three depths of explanation, a misconception check, and primary sources.</p></div><ol class="course-list">{rows}</ol></section><section class="learning" id="approach"><div class="wrap learning-grid"><div><div class="eyebrow">How to read Peppy</div><h2>Laugh first.<br>Look closer.</h2></div><div><p>At <strong>Curious</strong> depth, learn the central idea. At <strong>College</strong> depth, name the components. At <strong>Mechanism</strong> depth, test where the analogy stops and what evidence a professional would need.</p><p>The images are AI-generated with a consistent Peppy reference. Dialogue, citations, labels and corrections are editable text outside the art. No image on this site is a molecular-structure diagram.</p></div></div></section><section class="science" id="safety"><div class="wrap learning-grid"><div><div class="eyebrow" style="color:var(--gold)">A boundary worth keeping</div><h2>Peppy is not your prescriber.</h2></div><div><p>This is science education and satire, not medical advice, a drug recommendation or a place to buy peptides. Endogenous hormones and manufactured medicines are different subjects. Specific clinical decisions belong with qualified professionals and official drug labeling.</p><p>Detailed treatment comparisons, dosing and claims of efficacy are deliberately out of scope for this MVP. <a href="rights.html">About the art and its rights →</a></p></div></div></section>'''
-    (SITE/'index.html').write_text(shell('Course', '', body),encoding='utf-8')
+    (SITE/'index.html').write_text(shell('Course', '', body).replace('</body>', '<script type="module" src="games/hub.js"></script></body>'),encoding='utf-8')
 
 def render_games_section(lesson, games, root='../'):
     """Mount points for the public games of one lesson, plus their module scripts.
@@ -67,22 +68,66 @@ def render_games_hub(lessons, games):
     by_slug = {l['slug']: l for l in lessons}
     if games:
         rows = ''.join(
-            f'<li><span class="number">{E(by_slug[g["lesson"]]["number"])}</span><div><h3>{E(g["title"])}</h3><p>{E(g["summary"])}</p></div>'
+            f'<li><span class="number">{E(by_slug[g["lesson"]]["number"])}</span><div><h3>{E(g["title"])}</h3><p>{E(g["summary"])}</p>'
+            f'<p class="game-mastery" data-mastery="{E(g["game"])}"></p></div>'
             f'<a href="../lessons/{E(g["lesson"])}.html#game-{E(g["game"])}">Play in lesson →</a></li>' for g in games)
         listing = f'<ol class="course-list">{rows}</ol>'
     else:
         listing = '<p>Practice games are on the way. Each one will sit inside the lesson it practices, and every question will carry sources and a named misconception.</p>'
     body = (f'<section class="wrap section" id="games-hub"><div class="eyebrow">Practice</div><h1>Peppy games</h1>'
             f'<p class="lede">Short, source-linked practice for the misconceptions each lesson names. Nothing is timed or locked, and your progress stays in this browser.</p>'
-            f'{listing}<p class="small">Educational practice, not medical advice. <a href="../index.html#course">Back to the course map</a></p></section>')
+            f'<p><a class="button" href="review.html">Start Daily Review →</a></p>'
+            f'{listing}<p class="small">Educational practice, not medical advice. <a href="../index.html#course">Back to the course map</a></p></section>'
+            f'<div id="hub-status" role="status" aria-live="polite" class="sr-only"></div>')
     (SITE/'games').mkdir(exist_ok=True)
-    (SITE/'games'/'index.html').write_text(shell('Games', '../', body), encoding='utf-8')
+    (SITE/'games'/'index.html').write_text(
+        shell('Games', '../', body).replace('</body>', '<script type="module" src="hub.js"></script></body>'), encoding='utf-8')
+    render_review_page(lessons, games)
+    write_manifest(lessons, games)
+
+
+def render_review_page(lessons, games):
+    """Static shell for Daily Review. Queue and progress are hydrated from localStorage in review.js."""
+    body = (f'<section class="wrap section" id="review"><div class="eyebrow">Spaced retrieval</div><h1>Daily Review</h1>'
+            f'<p class="lede">A few questions drawn from the games you have played and each lesson’s own check. Mixed across lessons, never timed. '
+            f'Answer, say how sure you are, and the next review date follows how well you did.</p>'
+            f'<div id="review-mount" aria-live="polite"><p>Loading your review queue…</p></div>'
+            f'<div id="review-status" role="status" aria-live="polite" class="sr-only"></div>'
+            f'<section class="review-tools" aria-label="Progress controls"><h2>Your progress</h2>'
+            f'<p class="small">Everything stays in this browser. No account, no network, no analytics.</p>'
+            f'<div class="review-buttons">'
+            f'<button type="button" id="review-export">Export progress (JSON)</button>'
+            f'<label class="button light" for="review-import">Import progress (JSON)'
+            f'<input type="file" id="review-import" accept="application/json,.json" hidden></label>'
+            f'<button type="button" id="review-reset">Reset progress</button>'
+            f'</div><p id="review-tools-status" role="status" aria-live="polite"></p></section>'
+            f'<p class="small"><a href="index.html">← Back to games</a></p></section>')
+    (SITE/'games'/'review.html').write_text(
+        shell('Daily Review', '../', body)
+        .replace('</head>', '<link rel="stylesheet" href="../review.css"></head>')
+        .replace('</body>', '<script type="module" src="review.js"></script></body>'), encoding='utf-8')
+
+
+def write_manifest(lessons, games):
+    """Offline manifest so hub/review/course map can compute mastery without extra network calls."""
+    manifest = {
+        'lessons': [{'slug': l['slug'], 'number': l['number'], 'title': l['title'],
+                     'check_question': l.get('check_question', ''), 'check_answer': l.get('check_answer', ''),
+                     'sources': l.get('sources', [])} for l in lessons],
+        'games': [{'game': g['game'], 'lesson': g['lesson'], 'title': g['title'], 'summary': g['summary'],
+                   'concepts': sorted({i['concept'] for i in g['items']})} for g in games],
+    }
+    out = SITE/'games'/'data'/'manifest.json'
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True) + '\n', encoding='utf-8')
 
 def write_game_data(games):
     """Publish only reviewed items as JSON for the game modules; clears stale copies."""
     out = SITE/'games'/'data'
     if out.is_dir():
         for stale in out.glob('*.json'):
+            if stale.name == 'manifest.json':
+                continue
             stale.unlink()
     for g in games:
         out.mkdir(parents=True, exist_ok=True)

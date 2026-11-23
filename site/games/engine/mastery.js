@@ -17,6 +17,7 @@ function cleanConcept(c, now) {
     correct: Math.max(0, Math.trunc(num(c && c.correct, 0))),
     bestTier: Math.min(3, Math.max(0, Math.trunc(num(c && c.bestTier, 0)))),
     recent: Array.isArray(c && c.recent) ? c.recent.filter((x) => x === 0 || x === 1).slice(-RECENT_CAP) : [],
+    confidence: (c && c.confidence === 'sure') || (c && c.confidence === 'unsure') ? c.confidence : '',
   };
 }
 
@@ -38,12 +39,14 @@ export function migrate(raw, now) {
 }
 
 /** Record one attempt for a concept; returns a new state. `correct` must be a real correct answer (show-answer = false). */
-export function record(state, concept, { tier, correct }, now) {
+export function record(state, concept, { tier, correct, confidence }, now) {
   const prev = cleanConcept(state.concepts[concept], now);
   const card = review(state.concepts[concept] ? prev : null, correct, now);
+  const tag = confidence === 'sure' || confidence === 'unsure' ? confidence : '';
   const next = {
     ...prev,
     ...card,
+    confidence: tag,
     seen: prev.seen + 1,
     correct: prev.correct + (correct ? 1 : 0),
     bestTier: correct ? Math.max(prev.bestTier, tier) : prev.bestTier,

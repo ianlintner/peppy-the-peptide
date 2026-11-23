@@ -47,7 +47,7 @@ if problems:
     raise SystemExit(f'{sum(map(len,problems.values()))} game content problem(s)')
 public=games_data.public_games(root/'content'/'games',lessons)
 assert (site/'games'/'index.html').is_file()
-published=[p.name for p in (site/'games'/'data').glob('*')] if (site/'games'/'data').is_dir() else []
+published=[p.name for p in (site/'games'/'data').glob('*.json') if p.name!='manifest.json'] if (site/'games'/'data').is_dir() else []
 assert sorted(published)==sorted(f"{g['game']}.json" for g in public),f'unexpected published game data: {published}'
 for game in public:
     page=(site/'lessons'/f"{game['lesson']}.html").read_text()
@@ -66,6 +66,22 @@ for game in public:
 for lesson in lessons:  # a lesson with no public game must not carry a mount section
     if not any(g['lesson']==lesson['slug'] for g in public):
         assert 'id="games"' not in (site/'lessons'/f"{lesson['slug']}.html").read_text()
+# --- games hub + Daily Review: nav, manifest, progress mount points, module entries ---
+for page in htmls:
+    text=page.read_text()
+    if page.name != 'review.html':
+        assert 'href="../games/review.html"' in text or 'href="games/review.html"' in text or 'href="review.html"' in text, f'{page}: missing Daily Review nav'
+assert 'data-game-progress=' in (site/'index.html').read_text(), 'course map lacks per-lesson game progress mount'
+hub=(site/'games'/'index.html').read_text()
+assert 'href="review.html"' in hub and 'data-mastery=' in hub and 'src="hub.js"' in hub
+review=(site/'games'/'review.html').read_text()
+for needed in ('id="review-mount"','id="review-export"','id="review-import"','id="review-reset"','src="review.js"','aria-live="polite"'):
+    assert needed in review, f'review.html missing {needed}'
+manifest=json.loads((site/'games'/'data'/'manifest.json').read_text())
+assert {l['slug'] for l in manifest['lessons']}=={l['slug'] for l in lessons}
+assert {g['game'] for g in manifest['games']}=={g['game'] for g in public}
+for rel in ('hub.js','review.js','ui/review-ui.js'):
+    assert (site/'games'/rel).is_file(),f'missing {rel}'
 # vendored Preact/hooks/htm: hashes pinned in ARCHITECTURE.md, license files kept
 arch=(root/'ARCHITECTURE.md').read_text()
 for rel in ('preact/preact.mjs','preact/hooks.mjs','htm/htm.mjs'):
