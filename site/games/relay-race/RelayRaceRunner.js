@@ -54,19 +54,19 @@ function Lane({ title, ids, steps, lane, onMove, locked }) {
             <button type="button" class="rr-move" disabled=${!!locked || idx === ids.length - 1}
               aria-label=${`Move ${steps[id]?.label || id} later`} onClick=${() => onMove(id, 'down', idx)}>↓ Later</button>
             <button type="button" class="rr-move" disabled=${!!locked}
-              aria-label=${`Move ${steps[id]?.label || id} off the main lane to the tray`}
+              aria-label=${`Move ${steps[id]?.label || id} to tray, off the main lane`}
               onClick=${() => onMove(id, 'to-tray')}>To tray</button>`}
           ${lane !== 'main' && html`<button type="button" class="rr-move rr-to-main" disabled=${!!locked}
-            aria-label=${`Move ${steps[id]?.label || id} back onto the main lane`}
+            aria-label=${`Move ${steps[id]?.label || id} to main lane`}
             onClick=${() => onMove(id, 'to-main', 0)}>To main</button>`}
           ${lane === 'branch' && html`<button type="button" class="rr-move" disabled=${!!locked}
-            aria-label=${`Move ${steps[id]?.label || id} to the tray`}
+            aria-label=${`Move ${steps[id]?.label || id} to tray`}
             onClick=${() => onMove(id, 'to-tray')}>To tray</button>`}
           ${lane === 'main' && html`<button type="button" class="rr-move" disabled=${!!locked}
-            aria-label=${`Move ${steps[id]?.label || id} to the branch`}
+            aria-label=${`Move ${steps[id]?.label || id} to branch`}
             onClick=${() => onMove(id, 'to-branch')}>To branch</button>`}
           ${lane === 'tray' && html`<button type="button" class="rr-move" disabled=${!!locked}
-            aria-label=${`Move ${steps[id]?.label || id} to the branch`}
+            aria-label=${`Move ${steps[id]?.label || id} to branch`}
             onClick=${() => onMove(id, 'to-branch')}>To branch</button>`}
         </span>
       </li>`)}

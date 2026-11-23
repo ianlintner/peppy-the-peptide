@@ -32,6 +32,7 @@ async function main() {
   try { cards = await loadData(); }
   catch { mount.textContent = 'The review questions could not load from this site. The lessons still work.'; return; }
   const store = browserStore();
+  mount.replaceChildren(); // drop the static "Loading…" placeholder; Preact keeps unmatched children
   render(html`<${ReviewUI} cards=${cards} store=${store} />`, mount);
 
   document.getElementById('review-export').addEventListener('click', () => {

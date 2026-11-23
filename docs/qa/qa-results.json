@@ -1,0 +1,435 @@
+{
+ "base": "http://127.0.0.1:8799",
+ "date": "2026-11-23",
+ "axeTags": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa",
+  "wcag22aa"
+ ],
+ "axeVersion": "4.14.1",
+ "pages": [
+  {
+   "page": "course-map",
+   "width": 390,
+   "games": [],
+   "axe": [],
+   "keyboard": [],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 0,
+    "notice": null
+   }
+  },
+  {
+   "page": "foundations",
+   "width": 390,
+   "games": [
+    "game-bead-chain-builder"
+   ],
+   "axe": [],
+   "keyboard": [
+    {
+     "mount": "game-bead-chain-builder",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    }
+   ],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 1,
+    "notice": 1
+   }
+  },
+  {
+   "page": "signal-cast",
+   "width": 390,
+   "games": [
+    "game-islet-dispatch"
+   ],
+   "axe": [],
+   "keyboard": [
+    {
+     "mount": "game-islet-dispatch",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    }
+   ],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 1,
+    "notice": 1
+   }
+  },
+  {
+   "page": "endogenous-glp1",
+   "width": 390,
+   "games": [
+    "game-relay-race",
+    "game-two-dials"
+   ],
+   "axe": [],
+   "keyboard": [
+    {
+     "mount": "game-relay-race",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    },
+    {
+     "mount": "game-two-dials",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    }
+   ],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 2,
+    "notice": 2
+   }
+  },
+  {
+   "page": "hormone-and-medicine",
+   "width": 390,
+   "games": [
+    "game-claim-detective",
+    "game-three-axis-sorter"
+   ],
+   "axe": [],
+   "keyboard": [
+    {
+     "mount": "game-claim-detective",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    },
+    {
+     "mount": "game-three-axis-sorter",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    }
+   ],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 2,
+    "notice": 2
+   }
+  },
+  {
+   "page": "games-hub",
+   "width": 390,
+   "games": [],
+   "axe": [],
+   "keyboard": [],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 0,
+    "notice": null
+   }
+  },
+  {
+   "page": "daily-review",
+   "width": 390,
+   "games": [],
+   "axe": [],
+   "keyboard": [],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 0,
+    "notice": null,
+    "reviewRendered": true,
+    "reviewText": "This browser is not saving progress. Today’s answers last only until you leave the page.\n\nQuestion 1 of 5 · no timer\n\nLesson 03 · The GLP-1 message · lesson che"
+   }
+  },
+  {
+   "page": "course-map",
+   "width": 1280,
+   "games": [],
+   "axe": [],
+   "keyboard": [],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 0,
+    "notice": null
+   }
+  },
+  {
+   "page": "foundations",
+   "width": 1280,
+   "games": [
+    "game-bead-chain-builder"
+   ],
+   "axe": [],
+   "keyboard": [
+    {
+     "mount": "game-bead-chain-builder",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    }
+   ],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 1,
+    "notice": 1
+   }
+  },
+  {
+   "page": "signal-cast",
+   "width": 1280,
+   "games": [
+    "game-islet-dispatch"
+   ],
+   "axe": [],
+   "keyboard": [
+    {
+     "mount": "game-islet-dispatch",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    }
+   ],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 1,
+    "notice": 1
+   }
+  },
+  {
+   "page": "endogenous-glp1",
+   "width": 1280,
+   "games": [
+    "game-relay-race",
+    "game-two-dials"
+   ],
+   "axe": [],
+   "keyboard": [
+    {
+     "mount": "game-relay-race",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    },
+    {
+     "mount": "game-two-dials",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    }
+   ],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 2,
+    "notice": 2
+   }
+  },
+  {
+   "page": "hormone-and-medicine",
+   "width": 1280,
+   "games": [
+    "game-claim-detective",
+    "game-three-axis-sorter"
+   ],
+   "axe": [],
+   "keyboard": [
+    {
+     "mount": "game-claim-detective",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    },
+    {
+     "mount": "game-three-axis-sorter",
+     "reachedAll": true,
+     "missing": [],
+     "noFocusRing": [],
+     "showAnswer": true,
+     "announced": true,
+     "next": true
+    }
+   ],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 2,
+    "notice": 2
+   }
+  },
+  {
+   "page": "games-hub",
+   "width": 1280,
+   "games": [],
+   "axe": [],
+   "keyboard": [],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 0,
+    "notice": null
+   }
+  },
+  {
+   "page": "daily-review",
+   "width": 1280,
+   "games": [],
+   "axe": [],
+   "keyboard": [],
+   "log": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "external": [],
+    "failed": []
+   },
+   "reducedMotionMoving": [],
+   "reducedMotionErrors": [],
+   "storageBlocked": {
+    "errors": [],
+    "mounted": 0,
+    "notice": null,
+    "reviewRendered": true,
+    "reviewText": "This browser is not saving progress. Today’s answers last only until you leave the page.\n\nQuestion 1 of 5 · no timer\n\nLesson 03 · The GLP-1 message · lesson che"
+   }
+  }
+ ],
+ "failures": []
+}
