@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { selectQueue, allCards, completedCards, lessonCards, toCard, withSources, dueCount, SESSION_MIN, SESSION_MAX, boxDays } from '../review.js';
+import { selectQueue, allCards, completedCards, lessonCards, toCard, withSources, reviewEligible, dueCount, SESSION_MIN, SESSION_MAX, boxDays } from '../review.js';
 import { record, emptyState, migrate } from '../mastery.js';
 import { INTERVAL_DAYS, DAY_MS } from '../leitner.js';
 
@@ -63,6 +63,31 @@ test('source lookup resolves by lesson slug for game cards and lesson checks', (
     assert.equal(c.lesson, 'chains');
     assert.deepEqual(c.sources, lessons[0].sources);
   }
+});
+
+test('flagged preview items and span-based prompts never enter the review pool', () => {
+  const lesson = { slug: 'l', sources: [] };
+  const cleared = { id: 'ok', concept: 'ok', prompt: 'P', explanation: 'A', needs_review: false };
+  const flagged = { ...cleared, id: 'flagged', concept: 'flagged', needs_review: true, review_note: 'preview' };
+  const interactive = { ...cleared, id: 'span', concept: 'span', data: { post: 'Highlight the claim', answer_span: 'claim' } };
+  assert.equal(reviewEligible(cleared), true);
+  assert.equal(reviewEligible(flagged), false);
+  assert.equal(reviewEligible(interactive), false);
+  assert.equal(toCard(flagged, lesson), null);
+  assert.equal(toCard(interactive, lesson), null);
+  const cards = allCards([{ game: 'g', lesson: 'l', items: [cleared, flagged, interactive] }], [lesson]);
+  assert.deepEqual(cards.map((c) => c.id), ['ok']);
+});
+
+test('real published Claim Detective items are all excluded from Daily Review', async () => {
+  const { readFileSync } = await import('node:fs');
+  const path = new URL('../../data/claim-detective.json', import.meta.url);
+  const game = JSON.parse(readFileSync(path, 'utf8'));
+  const lesson = { slug: 'hormone-and-medicine', sources: [{ title: 'S' }] };
+  assert.equal(game.items.length, 15);
+  assert.ok(game.items.every((i) => i.needs_review === true && i.review_note), 'preview rule holds');
+  const cards = allCards([{ game: game.game, lesson: lesson.slug, items: game.items }], [lesson]);
+  assert.deepEqual(cards, [], 'no unreviewed or interactive-only items in the text-only pool');
 });
 
 test('selectQueue contains no repeated concept even when many items share one', () => {

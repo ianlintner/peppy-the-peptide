@@ -7,10 +7,19 @@ export const SESSION_MIN = 3;
 export const SESSION_MAX = 5;
 export const NEW_CAP = 2; // at most two unseen items per session
 
+/** A game item is eligible for text-only Daily Review only when it is cleared for
+ *  practice and its prompt can actually be answered as a retrieval card. Flagged
+ *  (needs_review) items stay preview-only, and span-based prompts need the game's
+ *  interactive post to answer, so neither belongs in this text-only pool. */
+export function reviewEligible(item) {
+  return !!(item && item.needs_review !== true
+    && !(item.data && typeof item.data.post === 'string'));
+}
+
 /** Normalise a raw item into a review card. Returns null when the data is unusable.
  *  `lesson` must be the lesson slug (string); lesson display fields live alongside it. */
 export function toCard(raw, lesson, sourceCount = 0) {
-  if (!raw || typeof raw !== 'object') return null;
+  if (!reviewEligible(raw)) return null;
   const id = typeof raw.id === 'string' ? raw.id.trim() : '';
   const concept = typeof raw.concept === 'string' ? raw.concept.trim() : '';
   const prompt = typeof raw.prompt === 'string' ? raw.prompt.trim() : '';
