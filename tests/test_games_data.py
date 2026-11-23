@@ -344,5 +344,59 @@ class RelayRaceRules(unittest.TestCase):
         self.assertRelay(solve, 't1-relay-order', 'starts solved')
 
 
+CLAIMS = json.loads((ROOT / 'content' / 'games' / 'claim-detective.json').read_text(encoding='utf-8'))
+
+
+class ClaimDetectiveRules(unittest.TestCase):
+    def claim_errors(self, fn, item_id):
+        game = copy.deepcopy(CLAIMS)
+        fn(next(i for i in game['items'] if i['id'] == item_id))
+        return gd.validate_game(game, BY_SLUG, 'claim-detective')
+
+    def assertClaim(self, fn, item_id, fragment):
+        errs = self.claim_errors(fn, item_id)
+        self.assertTrue(any(fragment in e for e in errs), f'expected {fragment!r} in {errs}')
+
+    def test_shipped_game_is_valid_and_preview_only(self):
+        self.assertEqual(gd.validate_game(CLAIMS, BY_SLUG, 'claim-detective'), [])
+        published = [g for g in gd.public_games(ROOT / 'content' / 'games', LESSONS)
+                     if g['game'] == 'claim-detective']
+        self.assertEqual(len(published), 1)
+        self.assertTrue(all(i['needs_review'] is True for i in published[0]['items']))
+        tiers = [i['tier'] for i in CLAIMS['items']]
+        self.assertTrue(all(tiers.count(t) >= 4 for t in (1, 2, 3)))
+        self.assertTrue(any(i['data'].get('boss') for i in CLAIMS['items']))
+
+    def test_clearing_one_item_is_rejected(self):
+        self.assertClaim(lambda i: i.__setitem__('needs_review', False), 't1-cited-source',
+                         'preview only')
+        self.assertClaim(lambda i: i.pop('review_note'), 't1-cited-source', 'review note')
+
+    def test_strict_mode_is_rejected(self):
+        game = copy.deepcopy(CLAIMS)
+        game['review_mode'] = 'strict'
+        self.assertTrue(any('preview only' in e for e in gd.validate_game(game, BY_SLUG, 'claim-detective')))
+
+    def test_spans_and_classification_must_agree(self):
+        self.assertClaim(lambda i: i['data']['spans'][0].__setitem__('end', 99), 't1-same-receptor', 'end')
+        self.assertClaim(lambda i: i['data'].__setitem__('answer_span', 'missing'), 't1-same-receptor',
+                         'answer_span')
+        self.assertClaim(lambda i: i['data'].__setitem__('answer', 'not-a-class'), 't1-same-receptor',
+                         'correct choice')
+        self.assertClaim(lambda i: i['data'].__setitem__('technique', 'made-up'), 't1-same-receptor',
+                         'technique')
+
+    def test_split_posts_need_both_roles(self):
+        self.assertClaim(lambda i: i['data']['spans'][0].__setitem__('role', 'claim'),
+                         't3-partly-right-origin', 'supported and one unsupported')
+        self.assertEqual(self.claim_errors(lambda i: None, 't3-partly-right-origin'), [])
+
+    def test_posts_stay_safe_and_short(self):
+        self.assertClaim(lambda i: i['data'].__setitem__('post', 'word ' * 61), 't1-cited-source',
+                         'at most 60 words')
+        self.assertClaim(lambda i: i['data'].__setitem__('post', ''), 't1-cited-source',
+                         'fictional post')
+
+
 if __name__ == '__main__':
     unittest.main()

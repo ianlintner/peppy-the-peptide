@@ -13,6 +13,19 @@
   },
   {
    "concepts": [
+    "claim-evidence",
+    "receptor-sameness",
+    "regulatory-status",
+    "scope-boundary",
+    "three-axes"
+   ],
+   "game": "claim-detective",
+   "lesson": "hormone-and-medicine",
+   "summary": "Highlight the claim, check it against the cited sources and name the technique. Preview only: every post is awaiting clinical review.",
+   "title": "Claim Detective"
+  },
+  {
+   "concepts": [
     "contrasting-cases",
     "general-target-tissue",
     "islet-source-and-signal",
