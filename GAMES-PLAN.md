@@ -25,7 +25,7 @@ Add small, accessible, source-bound learning games to the four lessons, featurin
 
 ## What shipped (status at card 10)
 All six games, the hub and Daily Review are built and public in `site/` (deployment still manual). Differences from the plan above:
-- Reviewed-only publishing became two modes: `review_mode: "strict"` (default; flagged items dropped) and `"flagged"` (flagged items ship behind a visible "Pending clinical review" notice with a required `review_note`). All six games use `"flagged"`; 39 items (the Tier-3 critique items in five games and all of Claim Detective) remain in preview until a qualified clinical reviewer signs off [docs/game-content-review.md](docs/game-content-review.md).
+- Reviewed-only publishing became two modes: `review_mode: "strict"` (default; flagged items dropped) and `"flagged"` (flagged items ship behind a visible "Pending clinical review" notice with a required `review_note`). Five games use `"flagged"`; Bead Chain Builder stays on the strict default and has no flagged items. 39 items (the six Tier-3 critique items in each of four games — Islet Dispatch, Relay Race, Two Dials, Three-Axis Sorter — and all 15 Claim Detective posts) remain in preview until a qualified clinical reviewer signs off [docs/game-content-review.md](docs/game-content-review.md).
 - Claim Detective is preview-only by validator rule: every post is fictional and flagged, and the page shows a preview banner.
 - Peppy SVG shipped as `site/games/ui/peppy-svg.js` (seven spheres, six states, <12 KB, no network refs; `check.py` enforces).
 - Fonts are self-hosted (`site/fonts/`, SIL OFL texts kept), so no page makes a third-party request.

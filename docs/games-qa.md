@@ -34,7 +34,7 @@ games hub, Daily Review.
 ## Items left in preview
 
 39 items ship as flagged preview behind a "Pending clinical review" notice, awaiting a qualified
-clinical reviewer: all 11 Claim Detective posts (preview-only by rule: fictional social posts), and
+clinical reviewer: all 15 Claim Detective posts (preview-only by rule: fictional social posts), and
 the six Tier-3 critique/evidence-gap items in each of Islet Dispatch, Relay Race, Two Dials and
 Three-Axis Sorter. Bead Chain Builder has none. Reason and sources per item:
 [game-content-review.md](game-content-review.md).
