@@ -3,11 +3,10 @@
  * Usage: node tests/keyboard-walkthrough.cjs [base-url]
  * Default base url: http://127.0.0.1:8765 — serve the built site with:
  *   python3 -m http.server 8765 --bind 127.0.0.1 --directory site
- * Playwright is resolved from the machine's existing mise install; no repo dependency is added.
+ * Playwright comes from a local install (PLAYWRIGHT_MODULE); no repo dependency is added.
  */
-// Override on another machine: PLAYWRIGHT_MODULE=/path/to/playwright CHROMIUM_PATH=/path/to/chromium
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE
-  || '/home/ilintner/.local/share/mise/installs/playwright/1.65.1/node_modules/.mise/playwright@1.65.1/node_modules/playwright');
+// Set PLAYWRIGHT_MODULE=/path/to/playwright (and optionally CHROMIUM_PATH) when it is not resolvable.
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 
 const BASE = process.argv[2] || 'http://127.0.0.1:8765';
 const URL = `${BASE}/lessons/hormone-and-medicine.html#game-three-axis-sorter`;

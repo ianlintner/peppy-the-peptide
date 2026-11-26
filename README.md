@@ -9,12 +9,19 @@ A comic-first, source-linked course about peptides and molecular signaling. Four
 ```sh
 python scripts/build.py
 python scripts/check.py
+python scripts/content_review.py              # regenerate the clinical review pack
 python -m unittest discover -s tests          # game-item validator tests
 node --test "site/games/**/__tests__/*.test.js"   # engine tests (Node 22+, no package.json)
 python -m http.server 8000 --directory site
 ```
 
 Open http://localhost:8000/. The site is static HTML/CSS/JS; no client API calls or runtime image generation. `content/*.json` is the editorial source, `scripts/build.py` renders pages to `site/`, and CI fails if generated pages differ from committed output. `site/assets/` contains only selected optimized images; rejected experiments and private production manifests never go in Git.
+
+## Games
+
+Each lesson ends with a practice game; `/games/` lists them and `/games/review.html` runs a short Daily Review (spaced retrieval across lessons). Pick Curious, College or Mechanism at any time; nothing is locked, there are no timers or scores, and every game is fully keyboard-playable. Progress stays in this browser's `localStorage` (export/import/reset on the Daily Review page); there is no login, analytics or network call. Items marked **Pending clinical review** are a preview awaiting a qualified reviewer ([review pack](docs/game-content-review.md)).
+
+Authoring: items live in `content/games/<game>.json` (schema: [content/games/SCHEMA.md](content/games/SCHEMA.md)); code layout and where new work belongs: [ARCHITECTURE.md](ARCHITECTURE.md); plan and what shipped: [GAMES-PLAN.md](GAMES-PLAN.md). After changing a flagged item, run `python scripts/content_review.py` (`check.py` fails on a stale pack). Browser QA results and how to rerun them: [docs/games-qa.md](docs/games-qa.md).
 
 ## Production workflow and costs
 
@@ -24,6 +31,6 @@ GitHub Actions runs the deterministic course check on PRs and `main`. Deployment
 
 ## Rights and safety
 
-Site software is [MIT licensed](LICENSE). Peppy mascot art and derivative visual assets are **excluded** from the software license and reserved by their rights holder; see the site's [art disclosure](site/rights.html). AI-generated material may have limits on copyright protection under applicable law. Public visibility and the MIT code license are not permission to reuse the art.
+Site software is [MIT licensed](LICENSE). The self-hosted DM Sans and Fredoka fonts are under the SIL Open Font License (texts in `site/fonts/`). Peppy mascot art and derivative visual assets are **excluded** from the software license and reserved by their rights holder; see the site's [art disclosure](site/rights.html). AI-generated material may have limits on copyright protection under applicable law. Public visibility and the MIT code license are not permission to reuse the art.
 
 This is educational satire, **not medical advice** or a product recommendation. Cartoon beads and props are analogies, not molecular diagrams. Detailed clinical claims, dose guidance, comparative efficacy and treatment decisions are out of scope until qualified clinical review. Mechanism-depth notes are an entry point, not a complete graduate curriculum.

@@ -104,4 +104,18 @@ assert gallery.is_file()
 for page in site.rglob('*.html'):
     if page!=gallery:assert 'peppy-gallery' not in page.read_text(),f'{page} links the dev gallery'
 assert not list(site.glob('sitemap*')),'dev gallery must not appear in a sitemap'
+# --- no runtime network: only <a href> may point off-site; CSS/JS reference no URL but XML namespaces ---
+XMLNS=re.compile(r'http://www\.w3\.org/[0-9]{4}/[A-Za-z/]+')
+for page in site.rglob('*.html'):
+    parser=Links();parser.feed(page.read_text())
+    for tag,key,url in parser.urls:
+        assert tag=='a' or not re.match(r'(https?:)?//',url),f'{page.relative_to(root)}: <{tag} {key}> loads {url} at runtime'
+for p in site.rglob('*'):
+    if p.suffix in ('.css','.js','.mjs') and '__tests__' not in p.parts:
+        code=XMLNS.sub('',p.read_text())
+        assert not re.search(r'https?://\w|url\(\s*["\']?//|@import\s+(url|["\'])',code),f'{p.relative_to(root)} references a network URL'
+assert all((site/'fonts'/f).is_file() for f in ('dm-sans-latin.woff2','fredoka-latin.woff2','OFL-DMSans.txt','OFL-Fredoka.txt')),'self-hosted fonts or their OFL texts missing'
+# --- clinical content-review pack stays in lockstep with every needs_review item ---
+import content_review
+assert content_review.OUT.read_text(encoding='utf-8')==content_review.render(),'docs/game-content-review.md is stale: run python scripts/content_review.py'
 print(f'PASS: {len(htmls)} pages, {len(lessons)} lesson(s), {len(public)} public game(s), all local links/assets and editorial checks')

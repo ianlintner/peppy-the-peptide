@@ -22,7 +22,17 @@ Add small, accessible, source-bound learning games to the four lessons, featurin
 4. Games hub + Daily Review (spaced Leitner retrieval across lessons).
 5. Islet Dispatch (L2) + Relay Race (L3).
 6. Claim Detective (L4 capstone, prebunking).
-Later (not on board): Molecule Explorer (3Dmol.js + verified PDB IDs), Cartoon vs Chemistry standalone, audio, custom domain, auto-deploy.
+
+## What shipped (status at card 10)
+All six games, the hub and Daily Review are built and public in `site/` (deployment still manual). Differences from the plan above:
+- Reviewed-only publishing became two modes: `review_mode: "strict"` (default; flagged items dropped) and `"flagged"` (flagged items ship behind a visible "Pending clinical review" notice with a required `review_note`). Five games use `"flagged"`; Bead Chain Builder stays on the strict default and has no flagged items. 39 items (the six Tier-3 critique items in each of four games — Islet Dispatch, Relay Race, Two Dials, Three-Axis Sorter — and all 15 Claim Detective posts) remain in preview until a qualified clinical reviewer signs off [docs/game-content-review.md](docs/game-content-review.md).
+- Claim Detective is preview-only by validator rule: every post is fictional and flagged, and the page shows a preview banner.
+- Peppy SVG shipped as `site/games/ui/peppy-svg.js` (seven spheres, six states, <12 KB, no network refs; `check.py` enforces).
+- Fonts are self-hosted (`site/fonts/`, SIL OFL texts kept), so no page makes a third-party request.
+- Entry plumbing is shared in `site/games/ui/mount.js`; each game's `main.js` is one call.
+- Real-browser QA (axe-core, keyboard, reduced motion, storage blocked, network) is a local script, recorded in [docs/games-qa.md](docs/games-qa.md).
+
+Later (not on board): Molecule Explorer (3Dmol.js + verified PDB IDs, self-hosted), Cartoon vs Chemistry standalone, audio, custom domain, auto-deploy, browser QA in CI (needs a pinned Playwright/axe toolchain), lifting items out of preview after clinical sign-off.
 
 ## Release rule
 Each card = one PR. Deployment stays manual (`scripts/deploy.sh production` from clean origin/main) and is NOT part of these cards.

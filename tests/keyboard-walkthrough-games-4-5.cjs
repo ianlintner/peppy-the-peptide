@@ -96,9 +96,9 @@ async function solveRelay(page, slug) {
   const step = (id) => item.data.steps[id].label;
   const move = async (id, action, extra = '') => {
     const label = action === 'up' ? `${step(id)} earlier`
-      : action === 'to-tray' ? `${step(id)} off the main lane to the tray`
-        : action === 'to-branch' ? `${step(id)} to the branch`
-          : `${step(id)} back onto the main lane`;
+      : action === 'to-tray' ? `${step(id)} to tray, off the main lane`
+        : action === 'to-branch' ? `${step(id)} to branch`
+          : `${step(id)} to main lane`;
     await press(page, `#game-${slug} ${aria(`Move ${label}`)}${extra}`);
   };
 

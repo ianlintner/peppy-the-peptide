@@ -51,14 +51,22 @@ Live discovery: Azure CLI access works to subscription `Azure subscription 1`; f
 | 7 | Azure Static Web Apps Free deployment + CI/CD | 3,6 | coder-claude / smart-v2 | New isolated resource; exact public HTTPS URL, live route/image/source checks, no API key in client/repo, rollback tested. |
 | 8 | MVP integration check, architecture consolidation and README usage | all | planner-claude / smart-planner | Re-read live and repo artifacts; accessibility/link/content checklist, actual image count and fal spend estimate, release caveats and ownership documented. |
 
-Card 1 is the baseline; later cards are linked/blocked until their code is merged into `main`, not merely marked done. Feature PRs go to Ian for review after agent review and CI; routine fixes may follow the standing low-risk policy. The actual Azure create and public push occur only after this plan is approved. If clinical reviewer availability delays lesson 04, publish its clearly non-clinical class-level explanation and mark detailed clinical sections “coming later,” rather than quietly lowering review criteria.
+Card 1 is the baseline; later cards are linked/blocked until their code is merged into `main`, not merely marked done. Every PR, including routine fixes, goes to Ian for exact-head approval after Copilot/agent review and CI. The actual Azure create and public push occur only after this plan is approved. If clinical reviewer availability delays lesson 04, publish its clearly non-clinical class-level explanation and mark detailed clinical sections “coming later,” rather than quietly lowering review criteria.
 
 ## Decisions / risks
 
 - Confirm that Ian authorizes public distribution of the supplied GPT-generated mascot and derivatives, with rights reserved, before first public push. “All rights reserved” states intent but does not magically establish exclusive copyright in AI output.
 - Default Azure hostname now; custom domain and registration later. No paid Standard plan, Azure Functions, Key Vault or image-generation backend for MVP.
 - The fal production key has no Admin usage access; reconcile provider dashboard and stop generation on any uncertain bill. The $10 figure is an owner-approved **ceiling**, not an observed spend or an instruction to use the full amount.
-- Google Fonts is an external runtime dependency in the prototype; self-host or use a deliberate fallback if accessibility/privacy/performance testing warrants it.
+- Fonts are now self-hosted (`site/fonts/`, OFL); the earlier Google Fonts runtime dependency is gone and `check.py` rejects network URLs in shipped CSS/JS.
+
+## Later (not scheduled)
+
+- Interactive games layer: shipped; see [GAMES-PLAN.md](GAMES-PLAN.md). Remaining: clinical sign-off for 39 preview items ([docs/game-content-review.md](docs/game-content-review.md)).
+- Molecule Explorer: 3D structures via self-hosted 3Dmol.js with verified PDB IDs and source-bound captions.
+- Cartoon vs Chemistry as a standalone page; audio narration.
+- Custom domain and automatic deploy (needs App Actions-secret access); browser QA in CI.
+- Further lessons (GPCR pathways, pharmacokinetics, trial interpretation, other peptides) after source packs and clinical review.
 
 ## Sources
 
